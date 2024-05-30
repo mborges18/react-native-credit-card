@@ -5,11 +5,6 @@ const AppTheme = () => {
     return scheme === 'dark' ? ThemeDark  : ThemeLight 
 }
 
-
-// export default function GetTheme(): ThemeApp {
-//     return scheme === 'dark' ? ThemeDark  : ThemeLight
-// }
-
 type ThemeSchemeDefault = {
     dark: boolean;
     colors: {
@@ -49,7 +44,7 @@ const ThemeLight: ThemeSchemeDefault = {
         surfaceVariant: "#dfe2eb",
         onSurfaceVariant: "#a6a6a6",
         card: "#a6a6a6",
-        text: "#a6a6a6",
+        text: "#1f1e1d",
         border: "#a6a6a6",
         notification: "#a6a6a6",
 }

@@ -1,19 +1,21 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Home from '../screens/Home/Home.screen';
-import Profile from '../screens/Profile/Profile.screen';
-import Icon from 'react-native-vector-icons/Ionicons';
-import AntDesignIcon from 'react-native-vector-icons/AntDesign';
-import PagerView from 'react-native-pager-view';
-import {View, Text, TouchableOpacity } from 'react-native';
 import AuthenticatorScreen from '../screens/Authenticator/AuthenticatorScreen';
+import {
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
+import Theme from '../utils/AppTheme';
 
 const Stack = createNativeStackNavigator();
 
 const MainNavigation = () => {
+  const ThemeApp = Theme()
   return (
+    <>
+    <StatusBar barStyle={ThemeApp.dark ? "light-content" : "dark-content"} backgroundColor={ThemeApp.colors.background} />
+    <SafeAreaView style={{ flex: 1,}}>
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
@@ -24,6 +26,8 @@ const MainNavigation = () => {
         {/* add your another screen here using -> Stack.Screen */}
       </Stack.Navigator>
     </NavigationContainer>
+    </SafeAreaView>
+    </>
   );
 };
 
