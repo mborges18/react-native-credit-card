@@ -1,24 +1,10 @@
 import React, {useState} from 'react';
-import {View, Text, Animated, TextInput, InputModeOptions} from 'react-native';
+import { View, Text, Animated, TextInput } from 'react-native';
 import styles from './styles';
-import MASK from './mask';
+import Mask from './mask';
 import MaskType from './MaskType';
+import { TextFieldProps } from './TextFieldProps';
 import Icon from 'react-native-vector-icons/Fontisto';
-
-type TextFieldProps = {
-    label: string,
-    placeHolder: string,
-    inputMode: InputModeOptions,
-    messageError: string,
-    colorBorderEnabled: string,
-    colorBorderDisabled: string,
-    colorBorderError: string,
-    maskType?: MaskType,
-    listenerChangeText: ((text: string) => void);
-    colorContent: string,
-    colorText: string,
-    iconStart: string
-}
 
 export default function TextField(
   props: TextFieldProps
@@ -43,7 +29,7 @@ export default function TextField(
 
     Animated.timing(upperAnimation, {
       toValue: activated && digit == '' ? 0 : -28,
-      duration: 200,
+      duration: 100,
       useNativeDriver: false,
     }).start();
   };
@@ -63,23 +49,14 @@ export default function TextField(
 
   const handlerMaskType = (text: string) => {
     switch (props.maskType) {
-      case MaskType.CEP:
-        text = MASK.maskCep(text);
-        handlerLimitAndText(text, 10);
-        break;
 
       case MaskType.PHONE:
-        text = MASK.maskPhoneDDI2(text);
+        text = Mask.phoneDDI2(text);
         handlerLimitAndText(text, 19);
         break;
 
-      case MaskType.CPF:
-        text = MASK.maskCpf(text);
-        handlerLimitAndText(text, 15);
-        break;
-
       case MaskType.DATE:
-        text = MASK.maskDate(text);
+        text = Mask.date(text);
         handlerLimitAndText(text, 11);
         break;
 
@@ -134,16 +111,18 @@ export default function TextField(
         onChangeText={(text: string) => handlerMaskType(text)}
         value={digit}
         placeholder={activated ? props.placeHolder : ''}
-        inputMode={props.inputMode}/>
+        inputMode={props.inputMode}
+        secureTextEntry={props.isPassword}
+        />
 
-        <Icon style={{position:'absolute', marginTop: 16, marginStart: 10}} name={props.iconStart} size={18} color={handlerColorLabel()} />
+        <Icon style={{position:'absolute', top: 21, marginStart: 10}} name={props.iconStart} size={18} color={handlerColorLabel()} />
        
        <Animated.Text
           style={[
             animatedStyles.animeLabel,
             styles.label,
             {
-              zIndex: activated ? 2 : -1,
+              zIndex: activated || digit != '' ? 2 : -1,
               color: handlerColorLabel(),
               backgroundColor: props.colorContent != null ? props.colorContent : '#fff'
             },

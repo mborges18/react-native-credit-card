@@ -19,11 +19,10 @@ const MainNavigation = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
-          name="HomeBase"
+          name="AuthenticatorScreen"
           options={{ headerShown: false }}
           component={AuthenticatorScreen}
         />
-        {/* add your another screen here using -> Stack.Screen */}
       </Stack.Navigator>
     </NavigationContainer>
     </SafeAreaView>

@@ -4,14 +4,16 @@ import { View } from 'react-native';
 import TabTopComponent from './TabTopComponent';
 import SignInScreen from './SignIn/SignInScreen';
 import SignUpScreen from './SignUp/SignUpScreen';
+import Theme from '../../utils/AppTheme';
 
 const AuthenticatorScreen = () => {
     return <ViewPagerComponent />;
 }
   
 const ViewPagerComponent = () => {
+  const ThemeApp = Theme()
     return (
-      <View style={{ backgroundColor: '#FFF', flex: 1,}}>
+      <View style={{ backgroundColor: ThemeApp.colors.background, flex: 1,}}>
       <TabTopComponent />
       <View style={{flex: 1}}>
       <PagerView style={{flex: 1}} initialPage={0}>

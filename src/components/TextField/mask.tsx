@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 
-const MASK = {
+const Mask = {
   //Create your masks here
 
-  maskCep(text: string) {
+  cep(text: string) {
     text = text.replace(/\D/g, '');
     text = text.replace(/^(\d{5})(\d)/, '$1-$2');
     return text;
   },
 
-  maskPhoneDDI(text: string) {
+  phoneDDI(text: string) {
     text = text.replace(/\D/g, '');
     text = text.replace(/^(\d)/, '+$1');
     text = text.replace(/(.{3})(\d)/, '$1($2');
@@ -28,34 +28,28 @@ const MASK = {
     return text;
   },
 
-  maskPhoneDDI2(text: string) {
+  phoneDDI2(text: string) {
     text = text.replace(/\D/g, '');
     text = text.replace(/^(\d{2})(\d{2})(\d{4})(\d)/, '+$1 ($2) $3-$4');
     return text;
   },
 
-  maskPhone(text: string) {
+  phone(text: string) {
     text = text.replace(/\D/g, '');
     text = text.replace(/^(\d{2})(\d)/g, '($1) $2');
     text = text.replace(/(\d)(\d{4})$/, '$1-$2');
     return text;
   },
 
-  maskDate(text: string) {
+  date(text: string) {
     text = text.replace(/\D/g, '');
     text = text.replace(/^(\d{2})(\d{2})(\d)/g, '$1/$2/$3');
     return text;
   },
 
-  maskCpf(text: string) {
+  cpf(text: string) {
     text = text.replace(/\D/g, '');
     text = text.replace(/^(\d{3})(\d{3})(\d{3})(\d)/, '$1.$2.$3-$4');
-    return text;
-  },
-
-  maskCardHealth(text: string) {
-    text = text.replace(/\D/g, '');
-    text = text.replace(/^(\d{7})(\d)/, '$1.$2');
     return text;
   },
 
@@ -76,6 +70,19 @@ const MASK = {
     return filledMask.substring(0, lastReplaceIndex + 1);
   },
 
+   _maskCustom(maskCustom: string, text: string) {
+    let i = 0;
+    let lastReplaceIndex = -1;
+    const filledMask = maskCustom.replace(/#+/, (match) => {
+      if (i >= text.length) {
+        return match;
+      }
+      lastReplaceIndex = match.indexOf(text);
+      return text[i++];
+    });
+    return filledMask.substring(0, lastReplaceIndex + 1);
+  },
+
   //Create your mask types here
   PHONE: 'phone',
   CEP: 'cep',
@@ -85,4 +92,4 @@ const MASK = {
   
 };
 
-export default MASK;
+export default Mask;

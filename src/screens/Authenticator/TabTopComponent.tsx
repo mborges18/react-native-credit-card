@@ -3,14 +3,14 @@ import { View, Text, Animated, TouchableOpacity, StyleSheet, useWindowDimensions
 import Theme from '../../utils/AppTheme';
 
 export default function TabTopComponent() {
-  const [activated, setActivated] = useState(false);
+  const [isKeepConnected, setIsKeepConnected] = useState(false);
   const [lampAnimation, setLampAnimation] = useState(new Animated.Value(5));
   const {width} = useWindowDimensions();
 
   const startAnimation = () => {
-    setActivated(!activated);
+    setIsKeepConnected(!isKeepConnected);
     Animated.timing(lampAnimation, {
-      toValue: activated ? 5 : (width/2) - 21,
+      toValue: isKeepConnected ? 5 : (width/2) - 21,
       duration: 200,
       useNativeDriver: false,
     }).start();
@@ -30,11 +30,11 @@ export default function TabTopComponent() {
     
           <View style={{flexDirection: 'row', height: 70, }}>
           <TouchableOpacity style={{flex: 1, justifyContent: "center",}} onPress={()=>{ startAnimation() }}>
-            <Text style={{ textAlign: 'center', color: activated ? ThemeApp.colors.background : ThemeApp.colors.onBackground }}>ACESSAR</Text>
+            <Text style={{ textAlign: 'center', color: isKeepConnected ? ThemeApp.colors.background : ThemeApp.colors.onBackground }}>ACESSAR</Text>
           </TouchableOpacity>
     
           <TouchableOpacity style={{flex: 1, justifyContent: "center",}} onPress={()=>{ startAnimation() }}>
-            <Text style={{textAlign: 'center', color: activated ? ThemeApp.colors.onBackground : ThemeApp.colors.background }}>CADASTRAR</Text>
+            <Text style={{textAlign: 'center', color: isKeepConnected ? ThemeApp.colors.onBackground : ThemeApp.colors.background }}>CADASTRAR</Text>
           </TouchableOpacity>
           </View>
         </View>

@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
     input: {
-        height: 55, 
+        height: 60, 
         width: '100%', 
         borderRadius: 6, 
         paddingLeft: 36, 
@@ -12,7 +12,7 @@ export default StyleSheet.create({
     },
   label: {
     position: 'absolute',
-    top: 17,
+    top: 19,
     left: 35,
     fontSize: 14,
     paddingHorizontal: 5,
