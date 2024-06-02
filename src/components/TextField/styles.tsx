@@ -10,11 +10,16 @@ export default StyleSheet.create({
         borderWidth: 1,
         zIndex: 1,
     },
-  label: {
-    position: 'absolute',
-    top: 19,
-    left: 35,
-    fontSize: 14,
-    paddingHorizontal: 5,
-  },
+    label: {
+      position: 'absolute',
+      top: 19,
+      left: 35,
+      fontSize: 14,
+      paddingHorizontal: 5,
+    },
+    icon: {
+      position:'absolute', 
+      top: 19,
+      marginStart: 10
+    },
 });

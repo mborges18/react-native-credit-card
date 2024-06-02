@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Animated,
   Easing,
@@ -10,6 +10,7 @@ import {
 import Theme from '../../../utils/AppTheme'
 
 export default function SwitchButton(props: ToggleProps) {
+    const [isChecked, setIsChecked] = useState(props.isOn)
     const animatedValue = new Animated.Value(0);
 
     const moveToggle = animatedValue.interpolate({
@@ -17,12 +18,12 @@ export default function SwitchButton(props: ToggleProps) {
         outputRange: [1, 20],
     });
 
-    const color = props.isOn ? Theme().colors.primary : Theme().colors.onSurfaceVariant;
+    const color = isChecked ? Theme().colors.primary : Theme().colors.onSurfaceVariant;
 
-    animatedValue.setValue(props.isOn ? 0 : 1);
+    animatedValue.setValue(isChecked ? 0 : 1);
 
     Animated.timing(animatedValue, {
-        toValue: props.isOn ? 1 : 0,
+        toValue: isChecked ? 1 : 0,
         duration: 100,
         easing: Easing.linear,
         useNativeDriver: false,
@@ -33,6 +34,7 @@ export default function SwitchButton(props: ToggleProps) {
         <TouchableOpacity
          activeOpacity={.7}
          onPress={() => {
+          setIsChecked(!isChecked)
             props.onToggle()
         }}>
             <View style={[styles.toggleContainer, {backgroundColor: color}]}>
@@ -48,7 +50,7 @@ export default function SwitchButton(props: ToggleProps) {
         </TouchableOpacity>
         {!!props.label && <Text style={[
             styles.label,{
-                color: props.isOn? Theme().colors.text : Theme().colors.onSurfaceVariant
+                color: isChecked ? Theme().colors.text : Theme().colors.onSurfaceVariant
             }
             ]}>{props.label}</Text>}
         </View>

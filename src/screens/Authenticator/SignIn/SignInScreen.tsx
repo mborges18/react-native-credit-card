@@ -1,27 +1,28 @@
-import React, {useState} from 'react';
-import {View, Text, Switch, } from 'react-native';
-import TextFieldDefault from '../../../components/TextField/TextFieldDefault';
+import React, {useEffect } from 'react'
+import {View, Text } from 'react-native'
+import TextFieldDefault from '../../../components/TextField/TextFieldDefault'
 import Theme from '../../../utils/AppTheme';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import ButtonDefault from '../../../components/button/ButtonDefault';
-import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler';
-import SwitchButton from './SwitchButton';
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import ButtonDefault from '../../../components/button/ButtonDefault'
+import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler'
+import SwitchButton from './SwitchButton'
+import SignInViewModel from './SignInViewModel'
 
 const SignInScreen = () => {
-    const [activated, setActivated] = useState(false);
-    const ThemeApp = Theme();
+    const viewModel = SignInViewModel()
+
     return (
         <GestureHandlerRootView>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
         <View style={{padding: 16}}>
-        <Text style={{marginTop: 16, textAlign:'center', fontWeight:'bold', fontSize: 26, textTransform:'uppercase', color: ThemeApp.colors.text }}>
+        <Text style={{marginTop: 16, textAlign:'center', fontWeight:'bold', fontSize: 26, textTransform:'uppercase', color: Theme().colors.text }}>
             <Icon name="lock" size={24} color="#000" /> Acessos</Text>
 
-        <Text style={{marginTop: 16, fontWeight:'bold', fontSize: 20, color: ThemeApp.colors.text }}>
+        <Text style={{marginTop: 16, fontWeight:'bold', fontSize: 20, color: Theme().colors.text }}>
             Seja bem vindo!
         </Text>
 
-        <Text style={{marginTop: 8, fontWeight:'bold', fontSize: 16, color: ThemeApp.colors.text }}>
+        <Text style={{marginTop: 8, fontWeight:'bold', fontSize: 16, color: Theme().colors.text }}>
             Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.
         </Text>
 
@@ -29,11 +30,12 @@ const SignInScreen = () => {
             label={'E-mail'} 
             placeHolder={'Ex: nome@dominio.com'} 
             inputMode={'email'} 
-            iconStart={'at'} 
-            messageError={''} 
-            listenerChangeText={(text) => {
-            } }
+            iconStart={'alternate-email'} 
+            messageError={viewModel.state.errorEmail} 
             isPassword={false} 
+            listenerChangeText={(text) => {
+                viewModel.state.email = text
+            } }
         />
 
         <TextFieldDefault 
@@ -41,21 +43,27 @@ const SignInScreen = () => {
             placeHolder={'Ex: A@123'} 
             inputMode={'text'} 
             iconStart={'key'} 
-            messageError={''} 
-            listenerChangeText={(text) => {
-            } }
+            messageError={viewModel.state.errorPassword} 
             isPassword={true} 
+            listenerChangeText={(text) => {
+                viewModel.state.password = text
+            } }
         />
 
         <SwitchButton
             label={'Continuar conectado'}
-            isOn={activated} 
+            isOn={viewModel.state.isKeepConnected} 
             onToggle={() => {
-                setActivated(!activated)
+                viewModel.state.isKeepConnected = !viewModel.state.isKeepConnected
             }}        
         />
 
-        <ButtonDefault text={'ACESSAR'} isLoading={false} clickListener={ () => {} } />
+        <ButtonDefault text={'ACESSAR'} isLoading={viewModel.isLoading} isOutline={false} clickListener={() => {
+            viewModel.onSubmit()
+        } } isDisabled={viewModel.state.isDisabledButton} />
+
+        <ButtonDefault text={'ESQUECI A SENHA'} isLoading={false} isOutline={true} clickListener={() => {
+                    } } isDisabled={false} />
 
         </View>
         </ScrollView>
@@ -63,4 +71,4 @@ const SignInScreen = () => {
     );
 }
 
-export default SignInScreen;
+export default SignInScreen

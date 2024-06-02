@@ -45,7 +45,7 @@ const ThemeLight: ThemeSchemeDefault = {
         onSurfaceVariant: "#a6a6a6",
         card: "#a6a6a6",
         text: "#1f1e1d",
-        border: "#a6a6a6",
+        border: "#1b1b1b",
         notification: "#a6a6a6",
 }
 }
