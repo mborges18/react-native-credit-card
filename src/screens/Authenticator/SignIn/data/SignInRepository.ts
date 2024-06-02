@@ -19,7 +19,6 @@ export default function SignInRespository() {
       }
 
       const login = (email: string, password: string) => {
-
         return fetch('https://api-credit-card-792613245.development.catalystserverless.com/server/signin/', {
         method: 'POST',
         headers: {
