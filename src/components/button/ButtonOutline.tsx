@@ -1,21 +1,21 @@
-import { Text, Animated, TouchableOpacity, StyleSheet, ActivityIndicator} from 'react-native';
+import { Text, TouchableOpacity, StyleSheet, ActivityIndicator} from 'react-native';
 import Theme from '../../utils/AppTheme';
 
-export default function ButtonDefault(
-    props: ButtonDefaultProps
+export default function ButtonOutline(
+    props: ButtonOutlineProps
 ) {
     const HandlerLoading = () => {
         return(
             props.isLoading
             ? <ActivityIndicator size="large" color={ Theme().colors.onPrimary } /> 
-            : <Text style={ styles().text } >{ props.text }</Text>
+            : <Text style={ styles().textOutline } >{ props.text }</Text>
         );
     }
 
     return(
         <TouchableOpacity 
-            style={[styles().button, 
-                { backgroundColor: props.isDisabled ? Theme().colors.onSurfaceVariant : Theme().colors.primary} ]} 
+            style={[styles().buttonOutline, 
+                { borderColor: props.isDisabled ? Theme().colors.onSurfaceVariant : Theme().colors.primary} ]} 
             disabled={props.isDisabled || props.isLoading}
             onPress={()=>{ props.clickListener() }}
             activeOpacity={.7} >
@@ -28,14 +28,6 @@ const styles = () => {
     const ThemeApp = Theme()
 
     return StyleSheet.create({
-        button: { 
-            marginTop: 24,
-            width: '100%', 
-            height: 55,
-            justifyContent: "center",
-            borderRadius: 4,
-            backgroundColor: ThemeApp.colors.primary
-        },
         buttonOutline: {
             marginTop: 24,
             width: '100%', 
@@ -45,11 +37,6 @@ const styles = () => {
             backgroundColor: 'transparent',
             borderWidth: 1,
             borderColor: ThemeApp.colors.primary
-        },
-        text: { 
-            textAlign: 'center', 
-            color: ThemeApp.colors.onPrimary,
-            fontWeight: 'bold',
         },
         textOutline: { 
             textAlign: 'center', 
@@ -62,7 +49,7 @@ const styles = () => {
     })
 }
 
-type ButtonDefaultProps = {
+type ButtonOutlineProps = {
     text: string,
     isLoading: boolean,
     isDisabled: boolean,
