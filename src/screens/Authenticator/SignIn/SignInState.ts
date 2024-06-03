@@ -6,5 +6,4 @@ export default interface SignInState {
     errorEmail: string,
     errorPassword: string,
     isDisabledButton: boolean,
-    isLoading: boolean
 }

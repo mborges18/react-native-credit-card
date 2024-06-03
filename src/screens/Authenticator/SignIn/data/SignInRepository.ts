@@ -1,38 +1,26 @@
+import {Api} from '../../../../api/Api'
+import {Failure, Error, Success, Unauthorized } from '../../../../api/ResultRequest'
 
 export default function SignInRespository() {
+    const Servise = Api()
 
-    const signIn = (email: string, password: string) => {
-        return new Promise((resolve, reject) => {
-      
-            const request = new XMLHttpRequest()
-            request.open('POST', 'https://api-credit-card-792613245.development.catalystserverless.com/server/signin/');
-            request.send({email:email, password: password});
-    
-            request.onreadystatechange = (e) => {
-                if (request.status === 200) {
-                    console.log('success XMLHttpRequest ', request.response)
-                } else {
-                    console.warn('error XMLHttpRequest ', e)
-                }
+    const signIn = async (email: string, password: string) => {
+        return Servise.Post('signin', {email: email, password: password})
+        .then((response) => {
+            if (response.code===200) {
+                return new Success(response.body)
+            } else if(response.code===401){
+                return new Unauthorized
+            } else {
+                return new Error
             }
+        })
+        .catch((error) => {
+            return new Failure
         })
       }
 
-      const login = (email: string, password: string) => {
-        return fetch('https://api-credit-card-792613245.development.catalystserverless.com/server/signin/', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json','Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            email: email,
-            password: password,
-        }),
-        });
-      }
-
       return {
-        signIn,
-        login
+        signIn
       }
 }
