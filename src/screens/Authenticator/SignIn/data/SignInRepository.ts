@@ -12,11 +12,11 @@ export default function SignInRespository() {
             } else if(response.code===401){
                 return new Unauthorized
             } else {
-                return new Error
+                return new Error(response)
             }
         })
         .catch((error) => {
-            return new Failure
+            return new Failure(error)
         })
       }
 

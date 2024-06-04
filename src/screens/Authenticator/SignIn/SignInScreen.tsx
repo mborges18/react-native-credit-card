@@ -32,7 +32,7 @@ const SignInScreen = () => {
             placeHolder={'Ex: nome@dominio.com'} 
             inputMode={'email'} 
             iconStart={'alternate-email'} 
-            messageError={viewModel.errorEmail} 
+            messageError={viewModel.state.errorEmail} 
             isPassword={false} 
             listenerChangeText={(text) => {
                 viewModel.onEmail(text)
@@ -44,7 +44,7 @@ const SignInScreen = () => {
             placeHolder={'Ex: A@123'} 
             inputMode={'text'} 
             iconStart={'key'} 
-            messageError={viewModel.errorPassword} 
+            messageError={viewModel.state.errorPassword} 
             isPassword={true} 
             listenerChangeText={(text) => {
                 viewModel.onPassword(text)
@@ -53,15 +53,15 @@ const SignInScreen = () => {
 
         <SwitchButton
             label={'Continuar conectado'}
-            isOn={viewModel.isKeepConnected} 
+            isOn={viewModel.state.isKeepConnected} 
             onToggle={() => {
                 viewModel.onKeepConnected()
             }}        
         />
 
-        <ButtonDefault text={'ACESSAR'} isLoading={viewModel.isLoading} clickListener={() => {
+        <ButtonDefault text={'ACESSAR'} isLoading={viewModel.state.isLoading} clickListener={() => {
             viewModel.onSubmit()
-        } } isDisabled={viewModel.isDisabledButton || viewModel.isLoading} />
+        } } isDisabled={viewModel.state.isDisabledButton || viewModel.state.isLoading} />
 
         <ButtonOutline text={'ESQUECI A SENHA'} isLoading={false} clickListener={() => {
                     } } isDisabled={false} />
