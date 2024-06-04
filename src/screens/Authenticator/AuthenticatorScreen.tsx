@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PagerView from 'react-native-pager-view';
 import { View } from 'react-native';
 import TabTopComponent from './TabTopComponent';
@@ -11,12 +11,15 @@ const AuthenticatorScreen = () => {
 }
   
 const ViewPagerComponent = () => {
+  const pageRef = useRef<PagerView>(null)
   const ThemeApp = Theme()
     return (
       <View style={{ backgroundColor: ThemeApp.colors.background, flex: 1,}}>
-      <TabTopComponent />
+      <TabTopComponent onClick={ (page: number) => {
+        pageRef.current?.setPage(page)
+        } } />
       <View style={{flex: 1}}>
-      <PagerView style={{flex: 1}} initialPage={0}>
+      <PagerView style={{flex: 1}} initialPage={0} ref={pageRef}>
         <SignInScreen />
         <SignUpScreen />
       </PagerView>

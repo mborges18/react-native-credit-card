@@ -1,27 +1,61 @@
-import { useRef, useState } from 'react';
-import SignInState from './SignInState';
-import SignInModel from './model/SignInModel';
-import SignInRespository from './data/SignInRepository';
-import { Success, Error, Unauthorized } from '../../../api/ResultRequest';
-import Validation from '../../../utils/Validation';
+import { useState, useRef } from "react";
+import SignUpState from "./SignUpState";
+import SignUpModel from "./model/SignUpModel"
+import Validation from "../../../utils/Validation";
+import { Success, Unauthorized } from "../../../api/ResultRequest";
+import SignUpRespository from "./data/SignUpRepository";
 
-export default function SignInViewModel() {
-    const respository = SignInRespository();
+export default function  SignUpViewModel() {
+    const respository = SignUpRespository();
 
-    const [state, setState] = useState<SignInState>({
+    const [state, setState] = useState<SignUpState>({
+        errorName: '',
+        errorBirthDate: '',
+        errorPhone: '',
         errorEmail: '',
         errorPassword: '',
+        errorConfirmPassword: '',
         isDisabledButton: true,
         isLoading: false,
-        isKeepConnected: false,
     });
 
-    const modelRef = useRef<SignInModel>({
+    const modelRef = useRef<SignUpModel>({
+        name: '',
+        birthDate: '',
+        phone: '',
         email: '', 
         password: '', 
-        isKeepConnected: false
+        confirmPassword: '',
+        status: '', 
     });
     const model = modelRef.current
+
+    const onName = (value: string) => {
+        model.name = value
+        if(state.errorName != ""){
+            state.errorName = "",
+            setState({...state})
+        }
+        handlerEnabledButton()
+    }
+
+    const onBirthDate = (value: string) => {
+        model.birthDate = value
+        if(state.errorBirthDate != ""){
+            state.errorBirthDate = "",
+            setState({...state})
+        }
+        handlerEnabledButton()
+    }
+
+    const onPhone= (value: string) => {
+        model.phone = value
+        if(state.errorPhone != ""){
+            state.errorPhone= "",
+            setState({...state})
+        }
+        handlerEnabledButton()
+    }
 
     const onEmail = (value: string) => {
         model.email = value
@@ -41,9 +75,13 @@ export default function SignInViewModel() {
         handlerEnabledButton()
     }
 
-    const onKeepConnected = () => {
-        state.isKeepConnected = !state.isKeepConnected
-        setState({...state})
+    const onConfirmPassword = (value: string) => {
+        model.confirmPassword = value
+        if(state.errorConfirmPassword != "") {
+            state.errorConfirmPassword = ""
+            setState({...state})
+        }
+        handlerEnabledButton()
     }
 
     const handlerEnabledButton = () => {
@@ -73,10 +111,7 @@ export default function SignInViewModel() {
             state.isLoading = true
             setState({...state})
 
-            var response = await respository.signIn(
-                model.email, 
-                model.password
-            )
+            var response = await respository.signUp(model)
 
             if(response instanceof Success) {
                 console.log('Success ', response.data)
@@ -101,9 +136,12 @@ export default function SignInViewModel() {
 
     return {
         state,
+        onName,
+        onBirthDate,
+        onPhone,
         onEmail,
         onPassword,
-        onKeepConnected,
-        onSubmit,
+        onConfirmPassword,
+        onSubmit
     }
 }

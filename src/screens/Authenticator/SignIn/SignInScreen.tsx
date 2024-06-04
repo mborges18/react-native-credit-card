@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text } from 'react-native'
 import TextFieldDefault from '../../../components/TextField/TextFieldDefault'
 import Theme from '../../../utils/AppTheme';
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ButtonDefault from '../../../components/button/ButtonDefault'
 import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler'
 import SwitchButton from './SwitchButton'
@@ -17,7 +17,7 @@ const SignInScreen = () => {
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
         <View style={{padding: 16}}>
         <Text style={{marginTop: 16, textAlign:'center', fontWeight:'bold', fontSize: 26, textTransform:'uppercase', color: ThemeApp.colors.text }}>
-            <Icon name="lock" size={24} color={ThemeApp.colors.text} /> Acessos</Text>
+            <Icon name="lock" size={24} color={ThemeApp.colors.text} /> Acesso</Text>
 
         <Text style={{marginTop: 16, fontWeight:'bold', fontSize: 20, color: ThemeApp.colors.text }}>
             Seja bem vindo!
