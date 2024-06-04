@@ -1,13 +1,14 @@
-
-export class Success {
+abstract class ResultRequest {
     data: Object;
     constructor(data: Object) {
         this.data = data;
     }
 }
 
-export class Error {}
+export class Success extends ResultRequest{}
 
-export class Failure {}
+export class Error extends ResultRequest{}
+
+export class Failure extends ResultRequest{}
 
 export class Unauthorized {}
