@@ -1,9 +1,6 @@
- enum MaskType {
-    PHONE,
-    CEP,
-    CPF,
-    CNPJ ,
-    DATE,
+ export enum MaskType {
+    PHONE = "(##) #####-####",
+    DATE = "##/##/####",
   }
 
 export default MaskType;

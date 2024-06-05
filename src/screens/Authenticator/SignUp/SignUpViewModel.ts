@@ -15,7 +15,7 @@ export default function  SignUpViewModel() {
         errorEmail: '',
         errorPassword: '',
         errorConfirmPassword: '',
-        isDisabledButton: true,
+        isDisabledButton: false,
         isLoading: false,
     });
 
@@ -85,29 +85,71 @@ export default function  SignUpViewModel() {
     }
 
     const handlerEnabledButton = () => {
-        if(model.email.length > 5 && model.password.length > 5) {
-            if(state.isDisabledButton){
-                state.isDisabledButton = false
-                setState({...state})
-            }
-        } else {
-            if(!state.isDisabledButton){
-                state.isDisabledButton = true
-                setState({...state})
-            }
-        }
+        // if(model.email.length > 5 && model.password.length > 5) {
+        //     if(state.isDisabledButton){
+        //         state.isDisabledButton = false
+        //         setState({...state})
+        //     }
+        // } else {
+        //     if(!state.isDisabledButton){
+        //         state.isDisabledButton = true
+        //         setState({...state})
+        //     }
+        // }
     }
 
     const onSubmit = async () => {
+        var hasError = false
+
+        const fullname = model.name.split(" ")
+        if(fullname.length==1) {
+            state.errorName = "Informe o sobre nome"
+            hasError = true
+        }
+
+        const day = Number(model.birthDate.split('/')[0])
+        const month = Number(model.birthDate.split('/')[1])
+        const year = Number(model.birthDate.split('/')[2])
+
+        if(!Validation().isValidDay(day, month, year)) {
+            state.errorBirthDate = "Dia inválido"
+            hasError = true
+        } 
+        else if(month < 1 || month > 12){
+            state.errorBirthDate = "Mês inválido"
+            hasError = true
+        } 
+        else if(!Validation().isValidDateBefore(day, month, year)){
+            state.errorBirthDate = "Data inválida"
+            hasError = true
+        }
+        else if(!Validation().isValidDatePermission(day, month, year)){
+            state.errorBirthDate = "Proibido menores de 14 anos"
+            hasError = true
+        }
+
         if(!Validation().isValidEmail(model.email)) {
-            state.errorEmail = "Email inválido"
+            state.errorEmail = "E-mail inválido"
+            hasError = true
+        }
+
+        if(!Validation().isValidPhoneCell(model.phone)){
+            state.errorPhone = "Celular inválido"
+            hasError = true
+        }
+
+        if(hasError){
             setState({...state})
             return
         }
 
         try {
+            state.errorName = ""
+            state.errorBirthDate = ""
+            state.errorPhone = ""
             state.errorEmail = ""
             state.errorPassword = ""
+            state.errorConfirmPassword = ""
             state.isLoading = true
             setState({...state})
 

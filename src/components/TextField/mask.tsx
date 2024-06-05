@@ -53,34 +53,19 @@ const Mask = {
     return text;
   },
 
-  //This mask is in test. Don't use it
   maskCustom(maskCustom: string, text: string) {
     var i = 0;
     var lastReplaceIndex = -1;
+    text = text.replace(/\D/g, '');
 
-    const filledMask = maskCustom.replace(/#/g, (_, j) => {
+    const filledMask = maskCustom.replaceAll('#', (_,match) => {
       if (i >= text.length) {
         return '#';
       }
-      lastReplaceIndex = j;
-
+      lastReplaceIndex = match;
       return text[i++];
     });
-
-    return filledMask.substring(0, lastReplaceIndex + 1);
-  },
-
-   _maskCustom(maskCustom: string, text: string) {
-    let i = 0;
-    let lastReplaceIndex = -1;
-    const filledMask = maskCustom.replace(/#+/, (match) => {
-      if (i >= text.length) {
-        return match;
-      }
-      lastReplaceIndex = match.indexOf(text);
-      return text[i++];
-    });
-    return filledMask.substring(0, lastReplaceIndex + 1);
+    return filledMask.substring(0, lastReplaceIndex+1);
   },
 
   //Create your mask types here
