@@ -8,4 +8,6 @@ export default interface SignUpState {
     errorConfirmPassword: string,
     isDisabledButton: boolean,
     isLoading: boolean,
+    errorService: boolean,
+    successService: boolean,
 }

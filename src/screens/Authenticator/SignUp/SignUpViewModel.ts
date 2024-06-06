@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import SignUpState from "./SignUpState";
 import SignUpModel from "./model/SignUpModel"
 import Validation from "../../../utils/Validation";
-import { Success, Unauthorized } from "../../../api/ResultRequest";
+import { Exists, Success } from "../../../api/ResultRequest";
 import SignUpRespository from "./data/SignUpRepository";
 
 export default function  SignUpViewModel() {
@@ -15,8 +15,10 @@ export default function  SignUpViewModel() {
         errorEmail: '',
         errorPassword: '',
         errorConfirmPassword: '',
-        isDisabledButton: false,
+        isDisabledButton: true,
         isLoading: false,
+        errorService: false,
+        successService: false,
     });
 
     const modelRef = useRef<SignUpModel>({
@@ -85,20 +87,27 @@ export default function  SignUpViewModel() {
     }
 
     const handlerEnabledButton = () => {
-        // if(model.email.length > 5 && model.password.length > 5) {
-        //     if(state.isDisabledButton){
-        //         state.isDisabledButton = false
-        //         setState({...state})
-        //     }
-        // } else {
-        //     if(!state.isDisabledButton){
-        //         state.isDisabledButton = true
-        //         setState({...state})
-        //     }
-        // }
+        if(
+            model.name.length > 5 
+            && model.birthDate.length == 10 
+            && model.phone.length == 15
+            && model.email.length > 5 
+            && model.password.length > 5
+            && model.confirmPassword.length > 5
+        ) {
+            if(state.isDisabledButton){
+                state.isDisabledButton = false
+                setState({...state})
+            }
+        } else {
+            if(!state.isDisabledButton){
+                state.isDisabledButton = true
+                setState({...state})
+            }
+        }
     }
 
-    const onSubmit = async () => {
+    const validateHasError = () => {
         var hasError = false
 
         const fullname = model.name.split(" ")
@@ -138,7 +147,18 @@ export default function  SignUpViewModel() {
             hasError = true
         }
 
-        if(hasError){
+        if(model.password!=model.confirmPassword){
+            state.errorPassword = "As senhas precisam ser iguais"
+            state.errorConfirmPassword = "As senhas precisam ser iguais"
+            hasError = true
+        }
+
+        return hasError
+    }
+
+    const onSubmit = async () => {
+
+        if(validateHasError()){
             setState({...state})
             return
         }
@@ -156,15 +176,16 @@ export default function  SignUpViewModel() {
             var response = await respository.signUp(model)
 
             if(response instanceof Success) {
+                state.successService = true
                 console.log('Success ', response.data)
-            } else if(response instanceof Unauthorized) {
-                state.errorEmail = "Por favor, verifique seu e-mail"
-                state.errorPassword= "Por favor, verifique sua senha"
-                setState({...state})
-                console.log('Unauthorized ', response)
+            } else if(response instanceof Exists) {
+                state.errorEmail = "E-mail já registrado"
+                console.log('Exists ', response)
             } else if(response instanceof Error) {
+                state.errorService = true
                 console.log('Error ', response)
             } else {
+                state.errorService = true
                 console.log('Failure ', response)
             }
             state.isLoading = false
@@ -176,6 +197,11 @@ export default function  SignUpViewModel() {
         }
     }
 
+    const onCloseErrorService = () => {
+        state.errorService = false
+        setState({...state})
+    }
+
     return {
         state,
         onName,
@@ -184,6 +210,7 @@ export default function  SignUpViewModel() {
         onEmail,
         onPassword,
         onConfirmPassword,
-        onSubmit
+        onSubmit,
+        onCloseErrorService
     }
 }

@@ -7,6 +7,7 @@ import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler
 import SignUpViewModel from './SignUpViewModel'
 import MaskType from '../../../components/TextField/MaskType';
 import HeaderWellCome from '../../../components/Header/HeaderWellCome';
+import DialogError from '../../../components/Dialog/DialogError';
 
 const SignUpScreen = () => {
     const viewModel = SignUpViewModel()
@@ -15,6 +16,15 @@ const SignUpScreen = () => {
         <GestureHandlerRootView>
         <ScrollView showsVerticalScrollIndicator={false} keyboardShouldPersistTaps='handled'>
         <View style={{padding: 16}}>
+
+            <DialogError 
+                title={'Informação'}
+                description={'Ocorreu um erro inesperado. Por favor, tente novamente em alguns instantes'}
+                onClickOk={() => {
+                    viewModel.onCloseErrorService()
+                } } 
+                isVisible={viewModel.state.errorService}
+            />
 
             <HeaderWellCome 
                 title={'Cadastro'} 
@@ -104,7 +114,6 @@ const SignUpScreen = () => {
                     viewModel.onConfirmPassword(text)
                 } }
             />
-
 
             <ButtonDefault text={'CADASTRAR'} isLoading={viewModel.state.isLoading} clickListener={() => {
                 viewModel.onSubmit()

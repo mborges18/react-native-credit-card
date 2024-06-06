@@ -1,5 +1,5 @@
 import {Api} from '../../../../api/Api'
-import {Failure, Error, Success, Unauthorized } from '../../../../api/ResultRequest'
+import {Failure, Error, Success, Exists } from '../../../../api/ResultRequest'
 import SignUpModel from '../model/SignUpModel'
 
 export default function SignUpRespository() {
@@ -10,8 +10,8 @@ export default function SignUpRespository() {
         .then((response) => {
             if (response.code===200) {
                 return new Success(response.body)
-            } else if(response.code===401){
-                return new Unauthorized
+            } else if(response.code===409){
+                return new Exists
             } else {
                 return new Error(response)
             }

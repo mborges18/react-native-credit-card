@@ -12,3 +12,5 @@ export class Error extends ResultRequest{}
 export class Failure extends ResultRequest{}
 
 export class Unauthorized {}
+
+export class Exists {}
