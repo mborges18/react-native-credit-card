@@ -40,7 +40,7 @@ const styles = () => {
             width: '100%', 
             height: 55,
             justifyContent: "center",
-            borderRadius: 4,
+            borderRadius: 8,
             backgroundColor: ThemeApp.colors.primary,
             shadowColor: 'rgba(0,0,0, .4)', // IOS
             shadowOffset: { height: 1, width: 1 }, // IOS

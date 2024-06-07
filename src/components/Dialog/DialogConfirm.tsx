@@ -10,7 +10,7 @@ export default function DialogConfirm(props: DialogConfirmProps) {
 
     return (
     <ModalDefault dialog={<>
-            <View style={styles().header}>
+            <View style={[styles().header, {backgroundColor: colorInfo}]}>
                 <Icon name='questioncircleo' size={38} color={Theme().colors.background} />
             </View>
             <View style={styles().container}>

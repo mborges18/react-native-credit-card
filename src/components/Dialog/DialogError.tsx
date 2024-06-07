@@ -10,7 +10,7 @@ export default function DialogError(props: DialogErrorProps) {
 
     return (
     <ModalDefault dialog={<>
-            <View style={styles().header}>
+            <View style={[styles().header, {backgroundColor: colorError}]}>
                 <Icon name='alert-circle-outline' size={48} color={Theme().colors.background} />
             </View>
             <View style={styles().container}>

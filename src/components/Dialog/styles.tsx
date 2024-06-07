@@ -1,10 +1,9 @@
 import { StyleSheet } from "react-native"
-import Theme, { colorInfo } from '../../utils/AppTheme';
+import Theme from '../../utils/AppTheme';
 
 export const styles = () => {
     return StyleSheet.create({
         header: {
-            backgroundColor: colorInfo, 
             borderTopStartRadius: 8, 
             borderTopEndRadius: 8, 
             justifyContent:'center', 
@@ -27,7 +26,7 @@ export const styles = () => {
         subTitle: {
             marginTop: 16, 
             fontSize: 15, 
-            color: '#000000'
+            color: Theme().colors.text
         },
     })
 }

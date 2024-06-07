@@ -28,7 +28,7 @@ export default function  SignUpViewModel() {
         email: '', 
         password: '', 
         confirmPassword: '',
-        status: '', 
+        status: '',
     });
     const model = modelRef.current
 
@@ -157,7 +157,7 @@ export default function  SignUpViewModel() {
     }
 
     const onSubmit = async () => {
-
+        var response = null;
         if(validateHasError()){
             setState({...state})
             return
@@ -173,27 +173,24 @@ export default function  SignUpViewModel() {
             state.isLoading = true
             setState({...state})
 
-            var response = await respository.signUp(model)
+            response = await respository.signUp(model)
 
             if(response instanceof Success) {
                 state.successService = true
-                console.log('Success ', response.data)
             } else if(response instanceof Exists) {
                 state.errorEmail = "E-mail já registrado"
-                console.log('Exists ', response)
             } else if(response instanceof Error) {
                 state.errorService = true
-                console.log('Error ', response)
             } else {
                 state.errorService = true
-                console.log('Failure ', response)
             }
+        } catch(error) {
+            state.errorService = true
+           console.log('erro  ', error)
+        } finally {
             state.isLoading = false
             setState({...state})
-        } catch(error) {
-           console.log('erro  ', error)
-           state.isLoading = false
-           setState({...state})
+            return response;
         }
     }
 

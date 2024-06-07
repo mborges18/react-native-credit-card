@@ -1,4 +1,4 @@
-abstract class ResultRequest {
+export abstract class ResultRequest {
     data: Object;
     constructor(data: Object) {
         this.data = data;

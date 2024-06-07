@@ -5,4 +5,6 @@ export default interface SignInState {
     isDisabledButton: boolean,
     isLoading: boolean,
     isKeepConnected: boolean,
+    errorService: boolean,
+    successService: boolean,
 }
