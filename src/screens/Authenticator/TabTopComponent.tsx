@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import { View, Text, Animated, TouchableOpacity, StyleSheet, useWindowDimensions} from 'react-native';
 import Theme from '../../utils/AppTheme';
+import { AuthenticatorProps } from './AuthenticatorProps';
 
-export default function TabTopComponent() {
+export default function TabTopComponent(props: AuthenticatorProps) {
   const [isKeepConnected, setIsKeepConnected] = useState(false);
   const [lampAnimation, setLampAnimation] = useState(new Animated.Value(5));
   const {width} = useWindowDimensions();
 
-  const startAnimation = () => {
+  const startAnimation = (page: number) => {
+    props.onClick(page)
     setIsKeepConnected(!isKeepConnected);
     Animated.timing(lampAnimation, {
       toValue: isKeepConnected ? 5 : (width/2) - 21,
@@ -29,11 +31,11 @@ export default function TabTopComponent() {
           <Animated.View style={[styles.lamp, animatedStyles.lamp, { backgroundColor: ThemeApp.colors.background, }]} />
     
           <View style={{flexDirection: 'row', height: 70, }}>
-          <TouchableOpacity style={{flex: 1, justifyContent: "center",}} onPress={()=>{ startAnimation() }}>
+          <TouchableOpacity style={{flex: 1, justifyContent: "center",}} onPress={()=>{ startAnimation(0) }}>
             <Text style={{ textAlign: 'center', color: isKeepConnected ? ThemeApp.colors.background : ThemeApp.colors.onBackground }}>ACESSAR</Text>
           </TouchableOpacity>
     
-          <TouchableOpacity style={{flex: 1, justifyContent: "center",}} onPress={()=>{ startAnimation() }}>
+          <TouchableOpacity style={{flex: 1, justifyContent: "center",}} onPress={()=>{ startAnimation(1) }}>
             <Text style={{textAlign: 'center', color: isKeepConnected ? ThemeApp.colors.onBackground : ThemeApp.colors.background }}>CADASTRAR</Text>
           </TouchableOpacity>
           </View>

@@ -52,13 +52,15 @@ export default function TextField(
     switch (props.maskType) {
 
       case MaskType.PHONE:
-        text = Mask.phoneDDI2(text);
-        handlerLimitAndText(text, 19);
+        text = Mask.maskCustom(MaskType.PHONE, text);
+        props.listenerChangeText(text);
+        setDigit(text)
         break;
 
       case MaskType.DATE:
-        text = Mask.date(text);
-        handlerLimitAndText(text, 11);
+        text = Mask.maskCustom(MaskType.DATE, text);
+        props.listenerChangeText(text);
+        setDigit(text)
         break;
 
       case '' || null:
@@ -70,11 +72,6 @@ export default function TextField(
         props.listenerChangeText(text);
         setDigit(text);
     }
-  };
-
-  const handlerLimitAndText = (text: string, limit: number) => {
-    props.listenerChangeText(text);
-    text.length < limit ? setDigit(text) : '';
   };
 
   function handlerColorLabel() {

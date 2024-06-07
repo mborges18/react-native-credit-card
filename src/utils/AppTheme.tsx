@@ -1,6 +1,6 @@
 import { useColorScheme } from 'react-native';
 
-const AppTheme = () => {
+export const AppTheme = () => {
     const scheme = useColorScheme();
     return scheme === 'dark' ? ThemeDark  : ThemeLight 
 }
@@ -39,7 +39,7 @@ const ThemeLight: ThemeSchemeDefault = {
         onError:"#FFFFFF",
         background: "#fdfcff",
         onBackground:"#1b1b1b",
-        surface: "#fdfcff",
+        surface: "#ebf1fa",
         onSurface: "#1b1b1b",
         surfaceVariant: "#dfe2eb",
         onSurfaceVariant: "#a6a6a6",
@@ -71,5 +71,10 @@ const ThemeDark: ThemeSchemeDefault = {
         notification: "#a6a6a6",
 }
 }
+
+export const colorError = '#b94e4e';
+export const colorSuccess = '#499865';
+export const colorInfo = '#5c89b6';
+export const colorWarning = '#b2a065';
 
 export default AppTheme;

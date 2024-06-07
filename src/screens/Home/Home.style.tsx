@@ -22,5 +22,5 @@ export default StyleSheet.create({
     borderColor: '#F0F0F0',
     borderRadius: 10,
   },
-  text: { fontSize: 18, color: '#808080', fontWeight: 'bold' },
+  text: { fontSize: 18, color: 'rgb(128, 128, 128)', fontWeight: 'bold' },
 });

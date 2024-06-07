@@ -24,6 +24,7 @@ export default function TextFieldDefault(
         label={props.label}
         placeHolder={props.placeHolder}
         inputMode={props.inputMode}
+        maskType={ props.maskType }
         messageError={props.messageError}
         listenerChangeText={(text) => {
             props.listenerChangeText(text)
