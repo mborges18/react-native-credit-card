@@ -4,6 +4,7 @@ import MaskType from './MaskType';
 export type TextFieldProps = {
     label: string,
     placeHolder: string,
+    value?: string,
     inputMode: InputModeOptions,
     messageError: string,
     colorBorderEnabled: string,

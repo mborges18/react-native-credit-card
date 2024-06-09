@@ -1,74 +1,58 @@
 
 export const Api = () => {
-  const baseUrl = 'https://api-credit-card-792613245.development.catalystserverless.com/server/'
+    const baseUrl = 'https://api-credit-card-792613245.development.catalystserverless.com/server/'
 
- const Post = async (endPoint: string, data: Object) => {
-    return DoRequest(Method.POST, data, endPoint)
-  }
+const Post = async (endPoint: string, data: Object) => {
+    return DoRequest(Method.POST, endPoint, data)
+}
 
-  const Put = async (data: Object, endPoint: string) => {
+const Put = async (data: Object, endPoint: string) => {
+    return DoRequest(Method.PUT, endPoint, data)
+}
+
+const Get = async (endPoint: string) => {
+    return DoRequest(Method.GET, endPoint)
+}
+
+const DoRequest = async (method: Method, endPoint: string, data?: Object,) => {
     const response = await fetch(baseUrl+endPoint, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-      });
+    method: method,
+    headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'X-Auth-Token': 'xhjXi2YSrWVQ03c2johE3er4U3Cud24k5AzFUljrfm9LYC2YhykbJdGepiDIZwzJ.creditcard',
+    'X-User-Id': '10205000000176097'
+    },
+    body: JSON.stringify(data),
+    });
 
-      var res = await response.json()
+    var res = await response.json()
 
-      console.log('REQUEST =>')
-      console.log('POST => '+baseUrl+endPoint)
-      console.log('BODY => '+JSON.stringify(data))
-      console.log('\n\n ')
-      console.log('RESULT =>')
-      console.log('POST =>'+baseUrl+endPoint)
-      console.log('CODE => '+response.status)
-      console.log('RESPONSE => '+JSON.stringify(res))
-      
-      return {
-        code: response.status,
-        body: res
-      };
-  }
+    console.log('REQUEST =>')
+    console.log('POST => '+baseUrl+endPoint)
+    console.log('BODY => '+JSON.stringify(data))
+    console.log('\n\n ')
+    console.log('RESULT =>')
+    console.log('POST =>'+baseUrl+endPoint)
+    console.log('CODE => '+response.status)
+    console.log('RESPONSE => '+JSON.stringify(res, null, 2))
+    
+    return {
+    code: response.status,
+    body: res
+    };
+}
 
-  const DoRequest = async (method: Method, data: Object, endPoint: string) => {
-    const response = await fetch(baseUrl+endPoint, {
-      method: method,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-      });
-
-      var res = await response.json()
-
-      console.log('REQUEST =>')
-      console.log('POST => '+baseUrl+endPoint)
-      console.log('BODY => '+JSON.stringify(data))
-      console.log('\n\n ')
-      console.log('RESULT =>')
-      console.log('POST =>'+baseUrl+endPoint)
-      console.log('CODE => '+response.status)
-      console.log('RESPONSE => '+JSON.stringify(res))
-      
-      return {
-        code: response.status,
-        body: res
-      };
-  }
-
-  enum Method {
+enum Method {
     POST = 'POST',
     PUT = 'PUT',
     DELETE = 'DELETE',
     GET = 'GET'
-  }
+}
 
-  return {
+return {
     Post,
-    Put
+    Put,
+    Get
   }
 };

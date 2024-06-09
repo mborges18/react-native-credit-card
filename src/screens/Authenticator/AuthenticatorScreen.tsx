@@ -13,6 +13,7 @@ const AuthenticatorScreen = () => {
 const ViewPagerComponent = () => {
   const pageRef = useRef<PagerView>(null)
   const ThemeApp = Theme()
+
     return (
       <View style={{ backgroundColor: ThemeApp.colors.background, flex: 1,}}>
       <TabTopComponent onClick={ (page: number) => {

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import styles from '../Home/Home.style';
+import styles from '../CreditCard/styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Home = ({ navigation }: any) => {

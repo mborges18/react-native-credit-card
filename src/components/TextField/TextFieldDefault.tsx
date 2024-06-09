@@ -7,6 +7,7 @@ import MaskType from './MaskType';
 type TextFieldDefultProps = {
     label: string,
     placeHolder: string,
+    value?: string,
     inputMode: InputModeOptions,
     maskType?: MaskType,
     iconStart: string
@@ -21,21 +22,22 @@ export default function TextFieldDefault(
     const ThemeApp = Theme()
     return(
         <TextField 
-        label={props.label}
-        placeHolder={props.placeHolder}
-        inputMode={props.inputMode}
-        maskType={ props.maskType }
-        messageError={props.messageError}
-        listenerChangeText={(text) => {
-            props.listenerChangeText(text)
-        } }
-        colorBorderEnabled={ThemeApp.colors.primary}
-        colorBorderDisabled={ThemeApp.colors.border}
-        colorBorderError={ThemeApp.colors.error}
-        colorContent={ThemeApp.colors.background}
-        colorText={ThemeApp.colors.onBackground}
-        iconStart={props.iconStart} 
-        isPassword={props.isPassword}
-         />
+            label={props.label}
+            placeHolder={props.placeHolder}
+            value={props.value}
+            inputMode={props.inputMode}
+            maskType={ props.maskType }
+            messageError={props.messageError}
+            listenerChangeText={(text) => {
+                props.listenerChangeText(text)
+            } }
+            colorBorderEnabled={ThemeApp.colors.primary}
+            colorBorderDisabled={ThemeApp.colors.border}
+            colorBorderError={ThemeApp.colors.error}
+            colorContent={ThemeApp.colors.background}
+            colorText={ThemeApp.colors.onBackground}
+            iconStart={props.iconStart} 
+            isPassword={props.isPassword}
+        />
     )
 }

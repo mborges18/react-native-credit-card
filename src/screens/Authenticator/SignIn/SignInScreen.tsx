@@ -10,10 +10,14 @@ import HeaderWellCome from '../../../components/Header/HeaderWellCome';
 import AuthenticatorContextApi from '../AuthenticatorContextApi';
 import DialogError from '../../../components/Dialog/DialogError';
 import { ResultRequest } from '../../../api/ResultRequest';
+import { NavigationUrl } from '../../../navigation/NavigationUrl';
+import SignUpModel from '../SignUp/model/SignUpModel';
+import { useNavigation } from '@react-navigation/native';
 
 const SignInScreen = () => {
     const {signUp, setSignIn} = useContext(AuthenticatorContextApi)
     const viewModel = SignInViewModel()
+    const navigation = useNavigation<any>();
 
     return (
         <GestureHandlerRootView>
@@ -21,24 +25,25 @@ const SignInScreen = () => {
         <View style={{padding: 16}}>
 
         <DialogError 
-                title={'Informação'}
-                description={'Ocorreu um erro inesperado. Por favor, tente novamente em alguns instantes'}
-                onClickOk={() => {
-                    viewModel.onCloseErrorService()
-                } } 
-                isVisible={viewModel.state.errorService}
-            />
+            title={'Informação'}
+            description={'Ocorreu um erro inesperado. Por favor, tente novamente em alguns instantes'}
+            onClickOk={() => {
+                viewModel.onCloseErrorService()
+            } } 
+            isVisible={viewModel.state.errorService}
+         />
             
         <HeaderWellCome 
             title={'Acesso'} 
             iconName={'lock'} 
             subTitle={'Seja bem vindo!'} 
-            description={'Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.'+('\n\n'+(signUp.data))}
+            description={'Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.\n\n'+(signUp.data as SignUpModel)?.email}
         />
 
         <TextFieldDefault 
             label={'E-mail'} 
             placeHolder={'Ex: nome@dominio.com'} 
+            value={(signUp.data as SignUpModel)?.email}
             inputMode={'email'} 
             iconStart={'alternate-email'} 
             messageError={viewModel.state.errorEmail} 
@@ -70,7 +75,10 @@ const SignInScreen = () => {
 
         <ButtonDefault text={'ACESSAR'} isLoading={viewModel.state.isLoading} clickListener={() => {
             viewModel.onSubmit().then((result) => {
-                setSignIn(result as ResultRequest)
+                if(viewModel.state.successService){
+                    setSignIn(result as ResultRequest)
+                    navigation.navigate(NavigationUrl.CreditCardListScreen)
+                }
             }).catch((error) => {
                 setSignIn(error)
             })
@@ -83,6 +91,7 @@ const SignInScreen = () => {
         </ScrollView>
         </GestureHandlerRootView>
     );
+    
 }
 
 export default SignInScreen

@@ -6,8 +6,6 @@ export default StyleSheet.create({
     paddingTop: 10,
     paddingHorizontal: 10,
   },
-  SafeAreaView1: { backgroundColor: '#FFF', flex: 0 },
-  SafeAreaView2: { flex: 1, backgroundColor: '#FFF' },
   outerWrapper: {
     flex: 1,
     alignItems: 'center',
