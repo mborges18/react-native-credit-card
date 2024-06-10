@@ -13,7 +13,7 @@ import { ResultRequest } from '../../../api/ResultRequest';
 
 const SignUpScreen = () => {
     const viewModel = SignUpViewModel()
-    const {signIn, setSignUp} = useContext(AuthenticatorContextApi)
+    const {setSignUp} = useContext(AuthenticatorContextApi)
     const ThemeApp = Theme()
 
     return (
@@ -34,7 +34,7 @@ const SignUpScreen = () => {
                 title={'Cadastro'} 
                 iconName={'clipboard-account'} 
                 subTitle={'Seja bem vindo!'} 
-                description={'Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.'+('\n\n'+(signIn.data))}
+                description={'Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.'}
             />
 
             <Text style={{marginTop: 16, fontWeight:'bold', fontSize: 20, color: ThemeApp.colors.text }}>
@@ -121,7 +121,9 @@ const SignUpScreen = () => {
 
             <ButtonDefault text={'CADASTRAR'} isLoading={viewModel.state.isLoading} clickListener={() => {
                 viewModel.onSubmit().then((result) => {
-                    setSignUp(result as ResultRequest)
+                    if(viewModel.state.successService){
+                        setSignUp(result as ResultRequest)
+                    }
                 }).catch((error) => {
                     setSignUp(error)
                 })

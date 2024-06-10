@@ -4,13 +4,13 @@ import styles from './styles';
 import Mask from './mask';
 import MaskType from './MaskType';
 import { TextFieldProps } from './TextFieldProps';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function TextField(
   props: TextFieldProps
 ) {
   const [borderOn, setBorderOn] = useState(false);
-  const [digit, setDigit] = useState('');
+  const [digit, setDigit] = useState(props.value ?? '');
   const [activated, setActivated] = useState(false);
   const [eyeToggle, setEyeToggle] = useState(true);
   const [upperAnimation, setUpperAnimation] = useState(new Animated.Value(0));
