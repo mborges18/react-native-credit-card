@@ -38,7 +38,7 @@ const ThemeLight: ThemeSchemeDefault = {
         onSecondary: "#FFFFFF",
         error: "#ba1b1b",
         onError: "#FFFFFF",
-        background: "#fdfcff",
+        background: "#f2f2f2",
         onBackground: "#1b1b1b",
         surface: "#ebf1fa",
         onSurface: "#1b1b1b",

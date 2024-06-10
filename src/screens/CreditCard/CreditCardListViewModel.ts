@@ -59,8 +59,8 @@ export default function CreditCardListViewModel() {
             styleCard: CreditCardDefault().Elo
         }
         var model2 : CreditCardListModel = {
-            ROWID: "1",
-            idUser: "1",
+            ROWID: "2",
+            idUser: "2",
             number: "8521 8532 8452 9852",
             nameUser: "MARCIO BORGES SILVA",
             dateExpire: "10/2025",
@@ -70,8 +70,8 @@ export default function CreditCardListViewModel() {
             styleCard: CreditCardDefault().HipperCard
         }
         var model3 : CreditCardListModel = {
-            ROWID: "1",
-            idUser: "1",
+            ROWID: "3",
+            idUser: "3",
             number: "8521 8532 8452 9852",
             nameUser: "MARCIO BORGES SILVA",
             dateExpire: "10/2025",
@@ -80,7 +80,29 @@ export default function CreditCardListViewModel() {
             status: "ENABLED",
             styleCard: CreditCardDefault().Visa
         }
-        return [model1, model2, model3]
+        var model4 : CreditCardListModel = {
+            ROWID: "4",
+            idUser: "4",
+            number: "8521 8532 8452 9852",
+            nameUser: "MARCIO BORGES SILVA",
+            dateExpire: "10/2025",
+            cvv: "325",
+            flag: "MasterCard",
+            status: "ENABLED",
+            styleCard: CreditCardDefault().MasterCard
+        }
+        var model5 : CreditCardListModel = {
+            ROWID: "5",
+            idUser: "5",
+            number: "8521 8532 8452 9852",
+            nameUser: "MARCIO BORGES SILVA",
+            dateExpire: "10/2025",
+            cvv: "325",
+            flag: "JCB",
+            status: "ENABLED",
+            styleCard: CreditCardDefault().Jcb
+        }
+        return [model1, model2, model3, model4, model5]
     }
 
     return {
