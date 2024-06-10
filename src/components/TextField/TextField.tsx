@@ -4,7 +4,7 @@ import styles from './styles';
 import Mask from './mask';
 import MaskType from './MaskType';
 import { TextFieldProps } from './TextFieldProps';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function TextField(
   props: TextFieldProps

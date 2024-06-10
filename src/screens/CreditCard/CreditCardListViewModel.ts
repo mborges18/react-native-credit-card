@@ -65,7 +65,7 @@ export default function CreditCardListViewModel() {
             nameUser: "MARCIO BORGES SILVA",
             dateExpire: "10/2025",
             cvv: "325",
-            flag: "hiperCard",
+            flag: "HiperCard",
             status: "ENABLED",
             styleCard: CreditCardDefault().HipperCard
         }

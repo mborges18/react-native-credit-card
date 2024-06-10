@@ -22,6 +22,7 @@ type ThemeSchemeDefault = {
       onSurfaceVariant: string;
       card: string;
       text: string;
+      onText: string;
       border: string;
       notification: string;
     };
@@ -32,22 +33,23 @@ const ThemeLight: ThemeSchemeDefault = {
     dark: false,
     colors: {
         primary: "#0345ca",
-        onPrimary:"#FFFFFF",
+        onPrimary: "#FFFFFF",
         secondary: "#535f70",
         onSecondary: "#FFFFFF",
         error: "#ba1b1b",
-        onError:"#FFFFFF",
+        onError: "#FFFFFF",
         background: "#fdfcff",
-        onBackground:"#1b1b1b",
+        onBackground: "#1b1b1b",
         surface: "#ebf1fa",
         onSurface: "#1b1b1b",
         surfaceVariant: "#dfe2eb",
         onSurfaceVariant: "#a6a6a6",
         card: "#a6a6a6",
         text: "#1f1e1d",
+        onText: "#FFFFFF",
         border: "#1b1b1b",
         notification: "#a6a6a6",
-}
+    }
 }
 
 const ThemeDark: ThemeSchemeDefault = {
@@ -67,6 +69,7 @@ const ThemeDark: ThemeSchemeDefault = {
         onSurfaceVariant: "#a6a6a6",
         card: "#a6a6a6",
         text: "#a6a6a6",
+        onText: "#FFFFFF",
         border: "#a6a6a6",
         notification: "#a6a6a6",
 }
