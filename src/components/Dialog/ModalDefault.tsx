@@ -4,7 +4,6 @@ import Theme, { colorError } from '../../utils/AppTheme';
 
 export default function ModalDefault(props:DialogProps) {
 
-    
     return (
         <Modal
             animationType="fade"

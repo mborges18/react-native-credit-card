@@ -31,7 +31,7 @@ export default function DialogConfirm(props: DialogConfirmProps) {
                     text={'Confirmar'}
                     isLoading={false}
                     isDisabled={false}
-                    colorContainer={Theme().colors.background}
+                    colorContainer={Theme().colors.onText}
                     colorText={Theme().colors.onBackground}
                     clickListener={
                         () => { props.onClickConfirm() }

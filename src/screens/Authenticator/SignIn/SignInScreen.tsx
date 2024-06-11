@@ -12,12 +12,12 @@ import DialogError from '../../../components/Dialog/DialogError';
 import { ResultRequest } from '../../../api/ResultRequest';
 import { NavigationUrl } from '../../../navigation/NavigationUrl';
 import SignUpModel from '../SignUp/model/SignUpModel';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 
 const SignInScreen = () => {
     const {signUp, setSignIn} = useContext(AuthenticatorContextApi)
     const viewModel = SignInViewModel()
-    const navigation = useNavigation<any>();
+    const navigation: NavigationProp<ParamListBase> = useNavigation();
 
     return (
         <GestureHandlerRootView>

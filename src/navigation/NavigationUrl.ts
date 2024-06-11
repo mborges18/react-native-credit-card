@@ -1,5 +1,8 @@
 
 export enum NavigationUrl {
+    ScreenAuthentication = 'ScreenAuthentication',
     SignInScreen = 'SignInScreen',
-    CreditCardListScreen = 'CreditCardListScreen'
+    SignUpScreen = 'SignUpScreen',
+    CreditCardListScreen = 'CreditCardListScreen',
+    CreditCardFormScreen = 'CreditCardFormScreen'
   }
