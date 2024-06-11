@@ -1,13 +1,13 @@
 
-import IconElo from "../../../assets/images/ic_elo.svg";
-import IconHiper from "../../../assets/images/ic_hipercard.svg";
-import IconVisa from "../../../assets/images/ic_visa.svg";
-import IconAmex from "../../../assets/images/ic_american_express.svg";
-import IconDiners from "../../../assets/images/ic_diners.svg";
-import IconDiscover from "../../../assets/images/ic_discover.svg";
-import IconJcb from "../../../assets/images/ic_jcb.svg";
-import IconMaster from "../../../assets/images/ic_mastercard.svg";
-import IconUndefined from "../../../assets/images/ic_credit_card.svg";
+import IconElo from "../../../../assets/images/ic_elo.svg";
+import IconHiper from "../../../../assets/images/ic_hipercard.svg";
+import IconVisa from "../../../../assets/images/ic_visa.svg";
+import IconAmex from "../../../../assets/images/ic_american_express.svg";
+import IconDiners from "../../../../assets/images/ic_diners.svg";
+import IconDiscover from "../../../../assets/images/ic_discover.svg";
+import IconJcb from "../../../../assets/images/ic_jcb.svg";
+import IconMaster from "../../../../assets/images/ic_mastercard.svg";
+import IconUndefined from "../../../../assets/images/ic_credit_card.svg";
 
 export const StyleCard = () => {
 

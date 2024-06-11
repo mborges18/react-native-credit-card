@@ -13,7 +13,8 @@ type TextFieldDefultProps = {
     iconStart: string
     messageError: string,
     listenerChangeText: ((text: string) => void),
-    isPassword: boolean
+    isPassword: boolean,
+    isVisible: boolean
 }
 
 export default function TextFieldDefault(
@@ -38,6 +39,7 @@ export default function TextFieldDefault(
             colorText={ThemeApp.colors.onBackground}
             iconStart={props.iconStart} 
             isPassword={props.isPassword}
+            isVisible={props.isVisible}
         />
     )
 }

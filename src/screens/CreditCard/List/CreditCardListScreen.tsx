@@ -6,11 +6,11 @@ import {
   SafeAreaView,
 } from 'react-native';
 import CreditCardListViewModel from './CreditCardListViewModel';
-import Theme from '../../utils/AppTheme';
+import Theme from '../../../utils/AppTheme';
 import Itemcard from './ItemCard';
 import { useNavigation, ParamListBase,  NavigationProp } from '@react-navigation/native';
-import { NavigationUrl } from '../../navigation/NavigationUrl';
-import DialogConfirm from '../../components/Dialog/DialogConfirm';
+import { NavigationUrl } from '../../../navigation/NavigationUrl';
+import DialogConfirm from '../../../components/Dialog/DialogConfirm';
 
 const CreditCardListScreen = () => {
     const viewModel = CreditCardListViewModel()

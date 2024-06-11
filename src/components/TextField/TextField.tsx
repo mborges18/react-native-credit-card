@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import { View, Text, Animated, TextInput, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import Mask from './mask';
-import MaskType from './MaskType';
 import { TextFieldProps } from './TextFieldProps';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function TextField(
   props: TextFieldProps
@@ -49,29 +48,38 @@ export default function TextField(
   };
 
   const handlerMaskType = (text: string) => {
-    switch (props.maskType) {
-
-      case MaskType.PHONE:
-        text = Mask.maskCustom(MaskType.PHONE, text);
-        props.listenerChangeText(text);
-        setDigit(text)
-        break;
-
-      case MaskType.DATE:
-        text = Mask.maskCustom(MaskType.DATE, text);
-        props.listenerChangeText(text);
-        setDigit(text)
-        break;
-
-      case '' || null:
-        props.listenerChangeText(text);
-        setDigit(text);
-        break;
-
-      default:
-        props.listenerChangeText(text);
-        setDigit(text);
+    if(props.maskType!=null) {
+      text = Mask.maskCustom(props.maskType, text);
+      props.listenerChangeText(text);
+      setDigit(text)
+    } else {
+      props.listenerChangeText(text);
+      setDigit(text);
     }
+
+    // switch (props.maskType) {
+
+    //   case MaskType.PHONE:
+    //     text = Mask.maskCustom(MaskType.PHONE, text);
+    //     props.listenerChangeText(text);
+    //     setDigit(text)
+    //     break;
+
+    //   case MaskType.DATE:
+    //     text = Mask.maskCustom(MaskType.DATE, text);
+    //     props.listenerChangeText(text);
+    //     setDigit(text)
+    //     break;
+
+    //   case '' || null:
+    //     props.listenerChangeText(text);
+    //     setDigit(text);
+    //     break;
+
+    //   default:
+    //     props.listenerChangeText(text);
+    //     setDigit(text);
+    // }
   };
 
   function handlerColorLabel() {
@@ -92,23 +100,25 @@ export default function TextField(
     }
   }
 
+  
   return (
+  <>{props.isVisible && 
     <View style={{
         marginTop: 20,
         position: 'relative',
         width: '100%',
         backgroundColor: props.colorContent != null ? props.colorContent : '#fff'
-        }}>
+    }}>
   
-      <TextInput
-          style={[styles.input, {borderColor: helperBorderColor(props)}]}
-          onBlur={() => handlerBlurInput()}
-          onFocus={() => handlerFocusInput()}
-          onChangeText={(text: string) => handlerMaskType(text)}
-          value={digit}
-          placeholder={activated ? props.placeHolder : ''}
-          inputMode={props.inputMode}
-          secureTextEntry={props.isPassword && eyeToggle}
+       <TextInput
+            style={[styles.input, {borderColor: helperBorderColor(props)}]}
+            onBlur={() => handlerBlurInput()}
+            onFocus={() => handlerFocusInput()}
+            onChangeText={(text: string) => handlerMaskType(text)}
+            value={digit}
+            placeholder={activated ? props.placeHolder : ''}
+            inputMode={props.inputMode}
+            secureTextEntry={props.isPassword && eyeToggle}
         />
 
         <Icon style={styles.icon} name={props.iconStart} size={22} color={handlerColorLabel()} />
@@ -123,8 +133,7 @@ export default function TextField(
           </TouchableOpacity>
         }
 
-       
-       <Animated.Text
+        <Animated.Text
           style={[
             animatedStyles.animeLabel,
             styles.label,
@@ -141,6 +150,8 @@ export default function TextField(
         <Text style={{color: props.colorBorderError}}>{props.messageError}</Text>}
     
     </View>
+  }
+    </>
   );
 }
 

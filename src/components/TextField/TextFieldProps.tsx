@@ -15,5 +15,6 @@ export type TextFieldProps = {
     colorContent: string,
     colorText: string,
     iconStart: string,
-    isPassword: boolean
+    isPassword: boolean,
+    isVisible: boolean
 }

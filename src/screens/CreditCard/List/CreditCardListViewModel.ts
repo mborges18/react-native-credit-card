@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CreditCardListRepository from "./data/CreditCardListRepository"
 import CreditCardListState from "./CreditCardListState";
-import { Success } from "../../api/ResultRequest";
+import { Success } from "../../../api/ResultRequest";
 import CreditCardListModel from "./model/CreditCardListModel";
 import CreditCardDefault from "./model/StyleCard";
 
