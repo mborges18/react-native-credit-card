@@ -23,24 +23,26 @@ const CreditCardFormScreen = () => {
                 inputMode={'numeric'} 
                 iconStart={'credit-card'} 
                 maskType={MaskType.NUMBER_CARD}
-                messageError={FormHook.state.errorNumber} 
+                messageError={FormHook.inputNumber.state.errorData} 
                 isPassword={false} 
                 listenerChangeText={(text) => {
-                    FormHook.onNumber(text)
+                    FormHook.inputNumber.onValue(text)
+                    FormHook.handlerEnabledButton()
                 } }
-                isVisible={FormHook.state.isVisibleFieldNumber}
+                isVisible={FormHook.inputNumber.state.isVisibleField}
             />
             <TextFieldDefault 
                 label={'Nome do titular'} 
                 placeHolder={'Ex: JOSÉ ROBERTO'} 
                 inputMode={'text'} 
                 iconStart={'person'} 
-                messageError={FormHook.state.errorName} 
+                messageError={FormHook.inputName.state.errorData} 
                 isPassword={false} 
                 listenerChangeText={(text) => {
-                    FormHook.onName(text)
+                    FormHook.inputName.onValue(text)
+                    FormHook.handlerEnabledButton()
                 } }
-                isVisible={FormHook.state.isVisibleFieldName}
+                isVisible={FormHook.inputName.state.isVisibleField}
             />
             <TextFieldDefault 
                 label={'Data de vencimento'} 
@@ -48,25 +50,26 @@ const CreditCardFormScreen = () => {
                 inputMode={'numeric'} 
                 iconStart={'calendar-month'} 
                 maskType={MaskType.DATE_CARD}
-                messageError={FormHook.state.errorDateExpire} 
+                messageError={FormHook.inputDate.state.errorData} 
                 isPassword={false} 
                 listenerChangeText={(text) => {
-                    FormHook.onDataExpire(text)
+                    FormHook.inputDate.onValue(text)
+                    FormHook.handlerEnabledButton()
                 } }
-                isVisible={FormHook.state.isVisibleFieldDateExpire}
+                isVisible={FormHook.inputDate.state.isVisibleField}
             />
-
             <TextFieldDefault 
                 label={'Código de seguraça'} 
                 placeHolder={'Ex: 000'} 
                 inputMode={'numeric'} 
                 iconStart={'security'} 
-                messageError={FormHook.state.errorCvv} 
+                messageError={FormHook.inputCvv.state.errorData} 
                 isPassword={false} 
                 listenerChangeText={(text) => {
-                    FormHook.onDataCvv(text)
+                    FormHook.inputCvv.onValue(text)
+                    FormHook.handlerEnabledButton()
                 } }
-                isVisible={FormHook.state.isVisibleFieldCvv}
+                isVisible={FormHook.inputCvv.state.isVisibleField}
             />
 
             <View style={{ flexDirection:'row', width: '100%', justifyContent: 'center', alignContent: 'center', alignItems:'center'}}>
