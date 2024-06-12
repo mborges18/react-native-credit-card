@@ -1,42 +1,46 @@
-import { SafeAreaView, StatusBar, View } from "react-native";
+import { SafeAreaView, StatusBar, View , Text} from "react-native";
 import MaskType from "../../../../components/TextField/MaskType";
 import TextFieldDefault from "../../../../components/TextField/TextFieldDefault";
 import ButtonDefault from "../../../../components/Button/ButtonDefault";
 import Theme from "../../../../utils/AppTheme";
-import CreditCardFormViewModel from "./CreditCardFormViewModel";
+import CreditCardFormHook from "../hooks/CreditCardFormHook";
 
 const CreditCardFormScreen = () => {
     const ThemeApp = Theme()
-    const viewModel = CreditCardFormViewModel()
+    const FormHook = CreditCardFormHook()
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" backgroundColor={ ThemeApp.colors.primary } />
-        <View style={{ flexDirection: 'column', padding: 16, justifyContent: 'center', alignContent:'center', alignItems: 'center'}}>
+        <View style={{ flex: 1 , flexDirection: 'column', padding: 16, justifyContent: 'space-between', alignContent:'center', alignItems: 'center'}}>
+           
+           {FormHook.state.step==4 ? <Text>CARTÃO VERSO</Text> : <Text>CARTÃO FRENTE</Text>}
+
+            <View style={{ width: '100%' }}>
             <TextFieldDefault 
                 label={'Número do cartão'} 
                 placeHolder={'Ex: 0000 0000 0000 0000'} 
                 inputMode={'numeric'} 
                 iconStart={'credit-card'} 
                 maskType={MaskType.NUMBER_CARD}
-                messageError={viewModel.state.errorNumber} 
+                messageError={FormHook.state.errorNumber} 
                 isPassword={false} 
                 listenerChangeText={(text) => {
-                    viewModel.onNumber(text)
+                    FormHook.onNumber(text)
                 } }
-                isVisible={viewModel.state.isVisibleFieldNumber}
+                isVisible={FormHook.state.isVisibleFieldNumber}
             />
             <TextFieldDefault 
                 label={'Nome do titular'} 
                 placeHolder={'Ex: JOSÉ ROBERTO'} 
                 inputMode={'text'} 
                 iconStart={'person'} 
-                messageError={viewModel.state.errorName} 
+                messageError={FormHook.state.errorName} 
                 isPassword={false} 
                 listenerChangeText={(text) => {
-                    viewModel.onName(text)
+                    FormHook.onName(text)
                 } }
-                isVisible={viewModel.state.isVisibleFieldName}
+                isVisible={FormHook.state.isVisibleFieldName}
             />
             <TextFieldDefault 
                 label={'Data de vencimento'} 
@@ -44,12 +48,25 @@ const CreditCardFormScreen = () => {
                 inputMode={'numeric'} 
                 iconStart={'calendar-month'} 
                 maskType={MaskType.DATE_CARD}
-                messageError={viewModel.state.errorDateExpire} 
+                messageError={FormHook.state.errorDateExpire} 
                 isPassword={false} 
                 listenerChangeText={(text) => {
-                    viewModel.onDataExpire(text)
+                    FormHook.onDataExpire(text)
                 } }
-                isVisible={viewModel.state.isVisibleFieldDateExpire}
+                isVisible={FormHook.state.isVisibleFieldDateExpire}
+            />
+
+            <TextFieldDefault 
+                label={'Código de seguraça'} 
+                placeHolder={'Ex: 000'} 
+                inputMode={'numeric'} 
+                iconStart={'security'} 
+                messageError={FormHook.state.errorCvv} 
+                isPassword={false} 
+                listenerChangeText={(text) => {
+                    FormHook.onDataCvv(text)
+                } }
+                isVisible={FormHook.state.isVisibleFieldCvv}
             />
 
             <View style={{ flexDirection:'row', width: '100%', justifyContent: 'center', alignContent: 'center', alignItems:'center'}}>
@@ -57,21 +74,22 @@ const CreditCardFormScreen = () => {
                     text={'Anterior'}
                     width='50%'
                     isLoading={false}
-                    isDisabled={viewModel.state.isDisabledButtonPrev}
+                    isDisabled={FormHook.state.isDisabledButtonPrev}
                     clickListener={() => {
-                        viewModel.onPrev()
+                        FormHook.onPrev()
                     }} 
                 />
                 <View style={{width: 8}} />
                 <ButtonDefault
                     text={'Próximo'}
                     width='50%'
-                    isLoading={viewModel.state.isLoading}
-                    isDisabled={viewModel.state.isDisabledButtonNext}
+                    isLoading={FormHook.state.isLoading}
+                    isDisabled={FormHook.state.isDisabledButtonNext}
                     clickListener={() => {
-                        viewModel.onNext()
+                        FormHook.onNext()
                     }} 
                 />
+            </View>
             </View>
             </View>
         </SafeAreaView>

@@ -56,30 +56,6 @@ export default function TextField(
       props.listenerChangeText(text);
       setDigit(text);
     }
-
-    // switch (props.maskType) {
-
-    //   case MaskType.PHONE:
-    //     text = Mask.maskCustom(MaskType.PHONE, text);
-    //     props.listenerChangeText(text);
-    //     setDigit(text)
-    //     break;
-
-    //   case MaskType.DATE:
-    //     text = Mask.maskCustom(MaskType.DATE, text);
-    //     props.listenerChangeText(text);
-    //     setDigit(text)
-    //     break;
-
-    //   case '' || null:
-    //     props.listenerChangeText(text);
-    //     setDigit(text);
-    //     break;
-
-    //   default:
-    //     props.listenerChangeText(text);
-    //     setDigit(text);
-    // }
   };
 
   function handlerColorLabel() {
