@@ -4,6 +4,7 @@ import InputDateHook from "./InputDate/InputDateHook";
 import InputCvvHook from "./InputCvv/InputCvvHook";
 import InputNumberHook from "./InputNumber/InputNumberHook";
 import InputNameHook from "./InputName/InputNameHook";
+import ButtonHook from "./Button/ButtonHook";
 
 export default function CreditCardFormHook() {
 
@@ -11,86 +12,39 @@ export default function CreditCardFormHook() {
     const inputName = InputNameHook()
     const inputDate = InputDateHook()
     const inputCvv = InputCvvHook()
+    const buttons = ButtonHook()
 
     const [state, setState] = useState<CreditCardFormState>({
         step: 1,
-        isLoading: false,
-        isDisabledButtonPrev: true,
-        isDisabledButtonNext: true,
         errorService: false,
         successService: false,
     });
 
     const handlerEnabledButton = () => {
-        if(state.step==1 && inputNumber.state.isValidData) {
-            state.isDisabledButtonNext = false
-            state.isDisabledButtonPrev = true
-            setState({...state})
-        }
-        if(state.step==2 && inputName.state.isValidData) {
-            state.isDisabledButtonNext = false
-            state.isDisabledButtonPrev = false
-            setState({...state})
-        }
-        if(state.step==3 && inputDate.state.isValidData) {
-            state.isDisabledButtonNext = false
-            state.isDisabledButtonPrev = false
-            setState({...state})
-        }
-        if(state.step==4 && inputCvv.state.isValidData) {
-            state.isDisabledButtonNext = false
-            state.isDisabledButtonPrev = false
-            setState({...state})
-        } 
+        buttons.handlerEnabledListener(
+            state.step,
+            inputNumber.state.isValidData,
+            inputName.state.isValidData,
+            inputDate.state.isValidData,
+            inputCvv.state.isValidData
+        )
     }
 
     const onPrev = () => {
-        if(state.step==4){
-            state.step = 3
-        } else if(state.step==3) {
-            state.step = 2
-        } else if(state.step==2) {
-            state.isDisabledButtonPrev = true
-            state.step = 1
-        } else {
-            state.isDisabledButtonPrev = true
-        }
-        
-        handlerVisibilityInputs()
+        state.step = buttons.hanlderEnableClickPrev(state.step)
 
-        state.isDisabledButtonNext = false
+        handlerVisibilityInputs()
         setState({...state})
     }
 
     const onNext = () => {
-        if(state.step==1){
-            state.step = 2
-            if(inputName.valueData == ""){
-                state.isDisabledButtonNext = true
-            } else {
-                state.isDisabledButtonNext = false
-            }
-        } else if(state.step==2) {
-            state.step = 3
-            if(inputDate.valueData == ""){
-                state.isDisabledButtonNext = true
-            } else {
-                state.isDisabledButtonNext = false
-            }
-        } else if(state.step==3) {
-            state.step = 4
-            if(inputCvv.valueData == ""){
-                state.isDisabledButtonNext = true
-            } else {
-                state.isDisabledButtonNext = false
-            }
-        } else {
-            //send data
-        }
-
+        state.step = buttons.hanlderEnableClickNext(
+            state.step,
+            inputName.valueData,
+            inputDate.valueData,
+            inputCvv.valueData
+        )
         handlerVisibilityInputs()
-
-        state.isDisabledButtonPrev = false
         setState({...state})
     }
 
@@ -107,6 +61,7 @@ export default function CreditCardFormHook() {
         inputName,
         inputDate,
         inputCvv,
+        buttons,
         onPrev,
         onNext,
         handlerEnabledButton

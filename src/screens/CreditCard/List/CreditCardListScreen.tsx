@@ -32,7 +32,10 @@ const CreditCardListScreen = () => {
                     onClickConfirm={() => { viewModel.onDeleteDataConfirm() }} 
                     onClickCancel={() => { viewModel.onDeleteDataCancel() } } 
                 />
-                <FlatList
+                <FlatList style={{
+                    marginStart: 16, 
+                    marginEnd: 16, 
+                }}
                     data={viewModel.state.listCards}
                     renderItem={({item}) => <Itemcard item={item} delete={(item) => {
                         viewModel.onDeleteData(item)

@@ -7,13 +7,15 @@ import Theme from '../../../utils/AppTheme';
 
 type CreditCardItemProps = {
     item: CreditCardListModel,
+    isClickable?: boolean,
+    isOpen?: boolean,
     delete: (item: CreditCardListModel) => void,
     edit: (item: CreditCardListModel) => void,
 }
 
 export default function Itemcard(props: CreditCardItemProps) {
     const [heightAnimation, setHeightAnimation] = useState(new Animated.Value(60));
-    const [isOpentState, setIsOpentState] = useState(false);
+    const [isOpentState, setIsOpentState] = useState(props.isOpen);
     const ThemeApp = Theme()
     const style = styles()
 
@@ -33,8 +35,10 @@ export default function Itemcard(props: CreditCardItemProps) {
     }
 
     return (
-        <Pressable style={{backgroundColor: ThemeApp.colors.background}} onPress={() => {
-            showContent()
+        <Pressable style={{ width: "100%", backgroundColor: ThemeApp.colors.background}} onPress={() => {
+            if(props.isClickable) {
+                showContent()
+            }
         }}>
 
         <Animated.View style={[{ height: heightAnimation, marginTop: 3}]}>
@@ -75,7 +79,7 @@ export default function Itemcard(props: CreditCardItemProps) {
         </LinearGradient>
         </Animated.View>
 
-        { isOpentState ? (
+        { isOpentState && props.isClickable ? (
             <View style={style.bottomActions}>
                 <TouchableOpacity 
                     onPress={() => { props.delete(props.item) }} 
@@ -102,8 +106,6 @@ export default function Itemcard(props: CreditCardItemProps) {
     return StyleSheet.create({
     card: { 
         padding: 16, 
-        marginStart: 16, 
-        marginEnd: 16, 
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
         height: 210

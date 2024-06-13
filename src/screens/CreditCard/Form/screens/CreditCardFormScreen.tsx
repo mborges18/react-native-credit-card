@@ -4,17 +4,42 @@ import TextFieldDefault from "../../../../components/TextField/TextFieldDefault"
 import ButtonDefault from "../../../../components/Button/ButtonDefault";
 import Theme from "../../../../utils/AppTheme";
 import CreditCardFormHook from "../hooks/CreditCardFormHook";
+import Itemcard from "../../List/ItemCard";
+import { useState } from "react";
+import CreditCardListModel from "../../List/model/CreditCardListModel";
+import StyleCard from "../../List/model/StyleCard";
 
 const CreditCardFormScreen = () => {
     const ThemeApp = Theme()
     const FormHook = CreditCardFormHook()
+ 
+    const [model, setModel] = useState<CreditCardListModel>(
+        {
+            ROWID: "1",
+            idUser: "1",
+            number: "8521 8532 8452 9852",
+            nameUser: "MARCIO BORGES SILVA",
+            dateExpire: "10/2025",
+            cvv: "325",
+            flag: "Elo",
+            status: "ENABLED",
+            styleCard: StyleCard().Elo
+        }
+    )
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" backgroundColor={ ThemeApp.colors.primary } />
         <View style={{ flex: 1 , flexDirection: 'column', padding: 16, justifyContent: 'space-between', alignContent:'center', alignItems: 'center'}}>
            
-           {FormHook.state.step==4 ? <Text>CARTÃO VERSO</Text> : <Text>CARTÃO FRENTE</Text>}
+           {/* {FormHook.state.step==4 ? <Text>CARTÃO VERSO</Text> : <Text>CARTÃO FRENTE</Text>} */}
+
+            <Itemcard 
+                item={model}
+                isOpen={true}
+                delete={(_) => {} } 
+                edit={(_) => {} }  
+            />
 
             <View style={{ width: '100%' }}>
             <TextFieldDefault 
@@ -77,7 +102,7 @@ const CreditCardFormScreen = () => {
                     text={'Anterior'}
                     width='50%'
                     isLoading={false}
-                    isDisabled={FormHook.state.isDisabledButtonPrev}
+                    isDisabled={FormHook.buttons.state.isDisabledButtonPrev}
                     clickListener={() => {
                         FormHook.onPrev()
                     }} 
@@ -86,8 +111,8 @@ const CreditCardFormScreen = () => {
                 <ButtonDefault
                     text={'Próximo'}
                     width='50%'
-                    isLoading={FormHook.state.isLoading}
-                    isDisabled={FormHook.state.isDisabledButtonNext}
+                    isLoading={false}
+                    isDisabled={FormHook.buttons.state.isDisabledButtonNext}
                     clickListener={() => {
                         FormHook.onNext()
                     }} 
