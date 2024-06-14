@@ -1,5 +1,5 @@
-import { Text, Animated, TouchableOpacity, StyleSheet, ActivityIndicator} from 'react-native';
-import Theme from '../../utils/AppTheme';
+import { Text, TouchableOpacity, StyleSheet, ActivityIndicator, DimensionValue} from 'react-native';
+import Theme from 'utils/AppTheme';
 
 export default function ButtonDefault(
     props: ButtonDefaultProps
@@ -20,9 +20,9 @@ export default function ButtonDefault(
                     ? Theme().colors.onSurfaceVariant 
                     : props.colorContainer == null
                     ? Theme().colors.primary
-                    : props.colorContainer
-
-                } ]} 
+                    : props.colorContainer, 
+                    width: props.width ?? '100%' 
+                }]} 
             disabled={props.isDisabled || props.isLoading}
             onPress={()=>{ props.clickListener() }}
             activeOpacity={.7} >
@@ -37,7 +37,6 @@ const styles = () => {
     return StyleSheet.create({
         button: { 
             marginTop: 24,
-            width: '100%', 
             height: 55,
             justifyContent: "center",
             borderRadius: 8,
@@ -61,6 +60,7 @@ const styles = () => {
 
 type ButtonDefaultProps = {
     text: string,
+    width?: DimensionValue,
     isLoading: boolean,
     isDisabled: boolean,
     colorContainer?: string,

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { View, Text, Animated, TouchableOpacity, StyleSheet, useWindowDimensions} from 'react-native';
-import Theme from '../../utils/AppTheme';
-import { AuthenticatorProps } from './AuthenticatorProps';
+import Theme from 'utils/AppTheme';
+import { AuthenticatorProps } from 'screens/authenticator/AuthenticatorProps';
 
 export default function TabTopComponent(props: AuthenticatorProps) {
   const [isKeepConnected, setIsKeepConnected] = useState(false);

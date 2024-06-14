@@ -1,6 +1,6 @@
 import { useColorScheme } from 'react-native';
 
-export const AppTheme = () => {
+const AppTheme = () => {
     const scheme = useColorScheme();
     return scheme === 'dark' ? ThemeDark  : ThemeLight 
 }
@@ -40,7 +40,7 @@ const ThemeLight: ThemeSchemeDefault = {
         onError: "#FFFFFF",
         background: "#f2f2f2",
         onBackground: "#1b1b1b",
-        surface: "#ebf1fa",
+        surface: "#e7f1ff",
         onSurface: "#1b1b1b",
         surfaceVariant: "#dfe2eb",
         onSurfaceVariant: "#a6a6a6",

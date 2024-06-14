@@ -1,3 +1,4 @@
+
 export default interface SignUpRequest {
     name: string,
     birthDate: string, 

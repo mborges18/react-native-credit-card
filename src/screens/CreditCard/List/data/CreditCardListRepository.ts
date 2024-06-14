@@ -1,5 +1,5 @@
-import { Api } from "../../../api/Api";
-import { Error, Failure, Success } from "../../../api/ResultRequest";
+import { Api } from "api/Api";
+import { Error, Failure, Success } from "api/ResultRequest";
 
 export default function CreditCardListRespository() {
     const Servise = Api()

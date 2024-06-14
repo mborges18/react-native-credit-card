@@ -1,7 +1,7 @@
-import {Api} from '../../../../api/Api'
-import {Failure, Error, Success, Exists } from '../../../../api/ResultRequest'
-import SignUpModel from '../model/SignUpModel'
-import { ToRequest } from './SignUpMapper'
+import {Api} from 'api/Api'
+import {Failure, Error, Success, Exists } from 'api/ResultRequest'
+import SignUpModel from 'screens/authenticator/signup/model/SignUpModel'
+import { ToRequest } from 'screens/authenticator/signup/data/SignUpMapper'
 
 export default function SignUpRespository() {
     const Servise = Api()

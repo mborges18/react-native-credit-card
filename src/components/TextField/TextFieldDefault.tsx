@@ -1,8 +1,8 @@
 import React from 'react';
 import { InputModeOptions } from 'react-native';
-import TextField from '../../components/TextField/TextField';
-import Theme from '../../utils/AppTheme';
-import MaskType from './MaskType';
+import TextField from 'components/textfield/TextField';
+import Theme from 'utils/AppTheme';
+import MaskType from 'components/textfield/MaskType';
 
 type TextFieldDefultProps = {
     label: string,
@@ -13,7 +13,8 @@ type TextFieldDefultProps = {
     iconStart: string
     messageError: string,
     listenerChangeText: ((text: string) => void),
-    isPassword: boolean
+    isPassword: boolean,
+    isVisible: boolean
 }
 
 export default function TextFieldDefault(
@@ -38,6 +39,7 @@ export default function TextFieldDefault(
             colorText={ThemeApp.colors.onBackground}
             iconStart={props.iconStart} 
             isPassword={props.isPassword}
+            isVisible={props.isVisible}
         />
     )
 }

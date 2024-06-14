@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { ResultRequest } from '../../api/ResultRequest'
+import { ResultRequest } from 'api/ResultRequest'
 
 interface AuthDate {
     setSignIn:  (result: ResultRequest) => void,

@@ -1,7 +1,5 @@
-import React, {useState} from 'react';
 
 const Mask = {
-  //Create your masks here
 
   cep(text: string) {
     text = text.replace(/\D/g, '');

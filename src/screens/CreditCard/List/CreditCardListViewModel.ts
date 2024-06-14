@@ -1,20 +1,21 @@
 import { useState } from "react";
-import CreditCardListRepository from "./data/CreditCardListRepository"
-import CreditCardListState from "./CreditCardListState";
-import { Success } from "../../api/ResultRequest";
-import CreditCardListModel from "./model/CreditCardListModel";
-import CreditCardDefault from "./model/StyleCard";
+import CreditCardListRepository from "screens/creditcard/list/data/CreditCardListRepository"
+import CreditCardListState from "screens/creditcard/list/CreditCardListState";
+import { Success } from "api/ResultRequest";
+import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
+import CreditCardDefault from "screens/creditcard/list/model/StyleCard";
 
 export default function CreditCardListViewModel() {
     const respository = CreditCardListRepository()
-
-
+    const creditCard = CreditCardDefault()
 
     const [state, setState] = useState<CreditCardListState>({
         listCards: [],
+        itemDelete: null,
         isLoading: false,
         errorService: false,
-        successService: false,
+        confirmDelete: false,
+        successDeleteService: false,
     });
 
     const onGetData = async () => {
@@ -32,8 +33,6 @@ export default function CreditCardListViewModel() {
             // } else {
             //     state.errorService = true
             // }
-       
-            state.successService = true
             state.listCards = list()
     
         } catch(error) {
@@ -56,7 +55,7 @@ export default function CreditCardListViewModel() {
             cvv: "325",
             flag: "Elo",
             status: "ENABLED",
-            styleCard: CreditCardDefault().Elo
+            styleCard: creditCard.Elo
         }
         var model2 : CreditCardListModel = {
             ROWID: "2",
@@ -67,7 +66,7 @@ export default function CreditCardListViewModel() {
             cvv: "325",
             flag: "HiperCard",
             status: "ENABLED",
-            styleCard: CreditCardDefault().HipperCard
+            styleCard: creditCard.HipperCard
         }
         var model3 : CreditCardListModel = {
             ROWID: "3",
@@ -78,7 +77,7 @@ export default function CreditCardListViewModel() {
             cvv: "325",
             flag: "Visa",
             status: "ENABLED",
-            styleCard: CreditCardDefault().Visa
+            styleCard: creditCard.Visa
         }
         var model4 : CreditCardListModel = {
             ROWID: "4",
@@ -89,7 +88,7 @@ export default function CreditCardListViewModel() {
             cvv: "325",
             flag: "MasterCard",
             status: "ENABLED",
-            styleCard: CreditCardDefault().MasterCard
+            styleCard: creditCard.MasterCard
         }
         var model5 : CreditCardListModel = {
             ROWID: "5",
@@ -100,13 +99,36 @@ export default function CreditCardListViewModel() {
             cvv: "325",
             flag: "JCB",
             status: "ENABLED",
-            styleCard: CreditCardDefault().Jcb
+            styleCard: creditCard.Jcb
         }
         return [model1, model2, model3, model4, model5]
     }
 
+    const onDeleteData = (item: CreditCardListModel) => {
+        state.itemDelete = item
+        state.confirmDelete = true
+        setState({...state})
+        console.log("onDeleteData")
+    }
+
+    const onDeleteDataConfirm = () => {
+        state.confirmDelete = false
+        setState({...state})
+        console.log("onDeleteDataConfirm "+ state.itemDelete)
+    }
+
+    const onDeleteDataCancel = () => {
+        state.itemDelete = null
+        state.confirmDelete = false
+        setState({...state})
+        console.log("onDeleteDataCancel "+ state.itemDelete)
+    }
+
     return {
         onGetData,
-        state
+        state,
+        onDeleteData,
+        onDeleteDataConfirm,
+        onDeleteDataCancel,
     }
 }

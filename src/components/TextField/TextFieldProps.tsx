@@ -1,5 +1,5 @@
 import {InputModeOptions} from 'react-native';
-import MaskType from './MaskType';
+import MaskType from 'components/textfield/MaskType';
 
 export type TextFieldProps = {
     label: string,
@@ -15,5 +15,6 @@ export type TextFieldProps = {
     colorContent: string,
     colorText: string,
     iconStart: string,
-    isPassword: boolean
+    isPassword: boolean,
+    isVisible: boolean
 }

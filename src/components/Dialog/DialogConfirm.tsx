@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign'
-import Theme, { colorInfo } from '../../utils/AppTheme';
-import ButtonDefault from '../Button/ButtonDefault';
-import ModalDefault from './ModalDefault';
-import { styles } from './styles';
+import Theme, { colorInfo } from 'utils/AppTheme';
+import ButtonDefault from 'components/button/ButtonDefault';
+import ModalDefault from 'components/dialog/ModalDefault';
+import { styles } from 'components/dialog//styles';
 
 export default function DialogConfirm(props: DialogConfirmProps) {
 
@@ -31,7 +31,7 @@ export default function DialogConfirm(props: DialogConfirmProps) {
                     text={'Confirmar'}
                     isLoading={false}
                     isDisabled={false}
-                    colorContainer={Theme().colors.background}
+                    colorContainer={Theme().colors.onText}
                     colorText={Theme().colors.onBackground}
                     clickListener={
                         () => { props.onClickConfirm() }
