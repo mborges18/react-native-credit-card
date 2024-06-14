@@ -1,11 +1,11 @@
-import { SafeAreaView, StatusBar, View } from "react-native";
+import { SafeAreaView, StatusBar, Text, View } from "react-native";
 import MaskType from "components/textfield/MaskType";
 import TextFieldDefault from "components/textfield/TextFieldDefault";
 import ButtonDefault from "components/button/ButtonDefault";
 import Theme from "utils/AppTheme";
 import CreditCardFormHook from "screens/creditcard/form/hooks/CreditCardFormHook";
 import Itemcard from "screens/creditcard/list/ItemCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
 import StyleCard from "screens/creditcard/list/model/StyleCard";
 
@@ -35,8 +35,8 @@ const CreditCardFormScreen = () => {
             <Itemcard 
                 item={model}
                 isOpen={true}
-                delete={(_) => {} } 
-                edit={(_) => {} }  
+                isFront={!FormHook.inputCvv.state.isVisibleField} 
+                isFlipable={true}
             />
 
             <View style={{ width: '100%' }}>
@@ -112,6 +112,7 @@ const CreditCardFormScreen = () => {
                     isLoading={false}
                     isDisabled={FormHook.buttons.state.isDisabledButtonNext}
                     clickListener={() => {
+                        //setIsFront(!isFront)
                         FormHook.onNext()
                     }} 
                 />
