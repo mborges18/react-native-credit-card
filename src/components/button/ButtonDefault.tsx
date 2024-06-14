@@ -1,5 +1,5 @@
-import { Text, Animated, TouchableOpacity, StyleSheet, ActivityIndicator, DimensionValue} from 'react-native';
-import Theme from '../../utils/AppTheme';
+import { Text, TouchableOpacity, StyleSheet, ActivityIndicator, DimensionValue} from 'react-native';
+import Theme from 'utils/AppTheme';
 
 export default function ButtonDefault(
     props: ButtonDefaultProps

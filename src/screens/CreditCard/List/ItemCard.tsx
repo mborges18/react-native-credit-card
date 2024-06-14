@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Animated, Easing, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-import CreditCardListModel from "./model/CreditCardListModel";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Theme from '../../../utils/AppTheme';
+import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
+import Theme from 'utils/AppTheme';
 
 type CreditCardItemProps = {
     item: CreditCardListModel,

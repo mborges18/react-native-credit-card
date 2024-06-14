@@ -1,5 +1,5 @@
-import {Api} from '../../../../api/Api'
-import {Failure, Error, Success, Unauthorized } from '../../../../api/ResultRequest'
+import { Api } from 'api/Api'
+import { Failure, Error, Success, Unauthorized } from 'api/ResultRequest'
 
 export default function SignInRespository() {
     const Servise = Api()

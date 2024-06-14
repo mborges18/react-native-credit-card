@@ -1,4 +1,4 @@
-import CreditCardListModel from "./model/CreditCardListModel";
+import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
 
 export default interface CreditCardListState {
     listCards: Array<CreditCardListModel>,

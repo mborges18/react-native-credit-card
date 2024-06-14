@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
-import Theme from '../../utils/AppTheme';
+import Theme from 'utils/AppTheme';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export default function HeaderWellCome(props: HeaderWellComeProps) {

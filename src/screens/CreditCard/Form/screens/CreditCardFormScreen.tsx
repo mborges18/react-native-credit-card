@@ -1,13 +1,13 @@
-import { SafeAreaView, StatusBar, View , Text} from "react-native";
-import MaskType from "../../../../components/TextField/MaskType";
-import TextFieldDefault from "../../../../components/TextField/TextFieldDefault";
-import ButtonDefault from "../../../../components/Button/ButtonDefault";
-import Theme from "../../../../utils/AppTheme";
-import CreditCardFormHook from "../hooks/CreditCardFormHook";
-import Itemcard from "../../List/ItemCard";
+import { SafeAreaView, StatusBar, View } from "react-native";
+import MaskType from "components/textfield/MaskType";
+import TextFieldDefault from "components/textfield/TextFieldDefault";
+import ButtonDefault from "components/button/ButtonDefault";
+import Theme from "utils/AppTheme";
+import CreditCardFormHook from "screens/creditcard/form/hooks/CreditCardFormHook";
+import Itemcard from "screens/creditcard/list/ItemCard";
 import { useState } from "react";
-import CreditCardListModel from "../../List/model/CreditCardListModel";
-import StyleCard from "../../List/model/StyleCard";
+import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
+import StyleCard from "screens/creditcard/list/model/StyleCard";
 
 const CreditCardFormScreen = () => {
     const ThemeApp = Theme()
@@ -31,8 +31,6 @@ const CreditCardFormScreen = () => {
         <SafeAreaView style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" backgroundColor={ ThemeApp.colors.primary } />
         <View style={{ flex: 1 , flexDirection: 'column', padding: 16, justifyContent: 'space-between', alignContent:'center', alignItems: 'center'}}>
-           
-           {/* {FormHook.state.step==4 ? <Text>CARTÃO VERSO</Text> : <Text>CARTÃO FRENTE</Text>} */}
 
             <Itemcard 
                 item={model}

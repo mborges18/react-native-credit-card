@@ -1,9 +1,9 @@
 import { useState } from "react";
-import CreditCardListRepository from "./data/CreditCardListRepository"
-import CreditCardListState from "./CreditCardListState";
-import { Success } from "../../../api/ResultRequest";
-import CreditCardListModel from "./model/CreditCardListModel";
-import CreditCardDefault from "./model/StyleCard";
+import CreditCardListRepository from "screens/creditcard/list/data/CreditCardListRepository"
+import CreditCardListState from "screens/creditcard/list/CreditCardListState";
+import { Success } from "api/ResultRequest";
+import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
+import CreditCardDefault from "screens/creditcard/list/model/StyleCard";
 
 export default function CreditCardListViewModel() {
     const respository = CreditCardListRepository()

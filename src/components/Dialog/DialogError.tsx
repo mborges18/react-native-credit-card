@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Theme, { colorError } from '../../utils/AppTheme';
-import ButtonDefault from '../Button/ButtonDefault';
-import ModalDefault from './ModalDefault';
-import { styles } from './styles';
+import Theme, { colorError } from 'utils/AppTheme';
+import ButtonDefault from 'components/button/ButtonDefault';
+import ModalDefault from 'components/dialog/ModalDefault';
+import { styles } from 'components/dialog//styles';
 
 export default function DialogError(props: DialogErrorProps) {
 

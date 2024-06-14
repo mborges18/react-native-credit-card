@@ -1,4 +1,4 @@
-import StyleCard, { CraditCardDefault } from "./StyleCard";
+import { CraditCardDefault } from "screens/creditcard/list/model/StyleCard";
 
 export default interface CreditCardListModel {
     ROWID: string,

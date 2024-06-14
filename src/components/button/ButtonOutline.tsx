@@ -1,5 +1,5 @@
 import { Text, TouchableOpacity, StyleSheet, ActivityIndicator} from 'react-native';
-import Theme from '../../utils/AppTheme';
+import Theme from 'utils/AppTheme';
 
 export default function ButtonOutline(
     props: ButtonOutlineProps

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import CreditCardFormState from "../screens/CreditCardFormState";
-import InputDateHook from "./InputDate/InputDateHook";
-import InputCvvHook from "./InputCvv/InputCvvHook";
-import InputNumberHook from "./InputNumber/InputNumberHook";
-import InputNameHook from "./InputName/InputNameHook";
-import ButtonHook from "./Button/ButtonHook";
+import CreditCardFormState from "screens/creditcard/form/screens/CreditCardFormState";
+import InputDateHook from "screens/creditcard/form/hooks/inputdate/InputDateHook";
+import InputCvvHook from "screens/creditcard/form/hooks/inputcvv/InputCvvHook";
+import InputNumberHook from "screens/creditcard/form/hooks/inputnumber/InputNumberHook";
+import InputNameHook from "screens/creditcard/form/hooks/inputname/InputNameHook";
+import ButtonHook from "screens/creditcard/form/hooks/button/ButtonHook";
 
 export default function CreditCardFormHook() {
 

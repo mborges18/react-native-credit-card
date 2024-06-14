@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { View, Text, Animated, TextInput, TouchableOpacity } from 'react-native';
-import styles from './styles';
-import Mask from './mask';
-import { TextFieldProps } from './TextFieldProps';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import styles from 'components/textfield/styles';
+import Mask from 'components/textfield/mask';
+import { TextFieldProps } from 'components/textfield/TextFieldProps';
 
 export default function TextField(
   props: TextFieldProps

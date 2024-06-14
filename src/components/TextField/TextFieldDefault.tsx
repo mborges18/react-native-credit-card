@@ -1,8 +1,8 @@
 import React from 'react';
 import { InputModeOptions } from 'react-native';
-import TextField from '../../components/TextField/TextField';
-import Theme from '../../utils/AppTheme';
-import MaskType from './MaskType';
+import TextField from 'components/textfield/TextField';
+import Theme from 'utils/AppTheme';
+import MaskType from 'components/textfield/MaskType';
 
 type TextFieldDefultProps = {
     label: string,

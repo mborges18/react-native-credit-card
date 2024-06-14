@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';   
 import {View, Text } from 'react-native';
-import TextFieldDefault from '../../../components/TextField/TextFieldDefault';
-import Theme from '../../../utils/AppTheme';
-import ButtonDefault from '../../../components/Button/ButtonDefault';
+import TextFieldDefault from 'components/textfield/TextFieldDefault';
+import Theme from 'utils/AppTheme';
+import ButtonDefault from 'components/button/ButtonDefault';
 import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler';
-import SignUpViewModel from './SignUpViewModel';
-import MaskType from '../../../components/TextField/MaskType';
-import HeaderWellCome from '../../../components/Header/HeaderWellCome';
-import DialogError from '../../../components/Dialog/DialogError';
-import AuthenticatorContextApi from '../AuthenticatorContextApi';
-import { ResultRequest } from '../../../api/ResultRequest';
+import SignUpViewModel from 'screens/authenticator/signup/SignUpViewModel';
+import MaskType from 'components/textfield/MaskType';
+import HeaderWellCome from 'components/header/HeaderWellCome';
+import DialogError from 'components/dialog/DialogError';
+import AuthenticatorContextApi from 'screens/authenticator/AuthenticatorContextApi';
+import { ResultRequest } from 'api/ResultRequest';
 
 const SignUpScreen = () => {
     const viewModel = SignUpViewModel()

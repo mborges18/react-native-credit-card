@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {View, Modal, StyleSheet } from 'react-native'
-import Theme, { colorError } from '../../utils/AppTheme';
+import Theme, { colorError } from 'utils/AppTheme';
 
 export default function ModalDefault(props:DialogProps) {
 

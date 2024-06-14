@@ -1,6 +1,6 @@
 
-import SignUpRequest from './SignUpRequest'
-import SignUpModel from '../model/SignUpModel'
+import SignUpRequest from 'screens/authenticator/signup/data/SignUpRequest'
+import SignUpModel from 'screens/authenticator/signup/model/SignUpModel'
 
 export const ToRequest = (model: SignUpModel) => {
     var date = model.birthDate.split('/')

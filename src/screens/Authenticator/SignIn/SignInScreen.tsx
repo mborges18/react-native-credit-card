@@ -1,17 +1,17 @@
 import React, { useContext } from 'react';
 import { View } from 'react-native';
-import TextFieldDefault from '../../../components/TextField/TextFieldDefault';
-import ButtonDefault from '../../../components/Button/ButtonDefault';
+import TextFieldDefault from 'components/textfield/TextFieldDefault';
+import ButtonDefault from 'components/button/ButtonDefault';
 import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler';
-import SwitchButton from './SwitchButton';
-import SignInViewModel from './SignInViewModel';
-import ButtonOutline from '../../../components/Button/ButtonOutline';
-import HeaderWellCome from '../../../components/Header/HeaderWellCome';
+import SwitchButton from 'screens/authenticator/signin/SwitchButton';
+import SignInViewModel from 'screens/authenticator/signin/SignInViewModel';
+import ButtonOutline from 'components/button/ButtonOutline';
+import HeaderWellCome from 'components/header/HeaderWellCome';
 import AuthenticatorContextApi from '../AuthenticatorContextApi';
-import DialogError from '../../../components/Dialog/DialogError';
-import { ResultRequest } from '../../../api/ResultRequest';
-import { NavigationUrl } from '../../../navigation/NavigationUrl';
-import SignUpModel from '../SignUp/model/SignUpModel';
+import DialogError from 'components/dialog/DialogError';
+import { ResultRequest } from 'api/ResultRequest';
+import { NavigationUrl } from 'navigation/NavigationUrl';
+import SignUpModel from 'screens/authenticator/signup/model/SignUpModel';
 import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 
 const SignInScreen = () => {
