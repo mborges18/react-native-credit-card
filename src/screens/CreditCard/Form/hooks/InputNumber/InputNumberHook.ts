@@ -7,7 +7,7 @@ export default function InputNumberHook() {
         isValidData: false,
         isVisibleField: true,
     });
-    const valueRef = useRef<any>("");
+    const valueRef = useRef<any>("XXXX XXXX XXXX XXXX");
     const valueData  = valueRef.current
 
     const onValue = (value: string) => {

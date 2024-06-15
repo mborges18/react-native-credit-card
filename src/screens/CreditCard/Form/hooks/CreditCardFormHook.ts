@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreditCardFormState from "screens/creditcard/form/screens/CreditCardFormState";
 import InputDateHook from "screens/creditcard/form/hooks/inputdate/InputDateHook";
 import InputCvvHook from "screens/creditcard/form/hooks/inputcvv/InputCvvHook";
 import InputNumberHook from "screens/creditcard/form/hooks/inputnumber/InputNumberHook";
 import InputNameHook from "screens/creditcard/form/hooks/inputname/InputNameHook";
 import ButtonHook from "screens/creditcard/form/hooks/button/ButtonHook";
+import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
+import StyleCard from "screens/creditcard/list/model/StyleCard";
 
 export default function CreditCardFormHook() {
 
@@ -20,6 +22,20 @@ export default function CreditCardFormHook() {
         successService: false,
     });
 
+    const [model, setModel] = useState<CreditCardListModel>(
+        {
+            ROWID: "1",
+            idUser: "1",
+            number: inputNumber.valueData,
+            nameUser: inputName.valueData,
+            dateExpire: inputDate.valueData,
+            cvv: inputCvv.valueData,
+            flag: "Elo",
+            status: "ENABLED",
+            styleCard: StyleCard().Elo
+        }
+    )
+
     const handlerEnabledButton = () => {
         buttons.handlerEnabledListener(
             state.step,
@@ -30,9 +46,16 @@ export default function CreditCardFormHook() {
         )
     }
 
+    useEffect(()=> {
+        model.number = inputNumber.valueData
+        model.nameUser = inputName.valueData
+        model.dateExpire = inputDate.valueData
+        model.cvv = inputCvv.valueData
+        setModel(model)
+    },[inputNumber, inputName, inputDate, inputCvv])
+
     const onPrev = () => {
         state.step = buttons.hanlderEnableClickPrev(state.step)
-
         handlerVisibilityInputs()
         setState({...state})
     }
@@ -64,6 +87,7 @@ export default function CreditCardFormHook() {
         buttons,
         onPrev,
         onNext,
-        handlerEnabledButton
+        handlerEnabledButton,
+        model
     }
 }

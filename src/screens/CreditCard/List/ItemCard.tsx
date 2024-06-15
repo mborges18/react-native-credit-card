@@ -20,8 +20,7 @@ export default function Itemcard(props: CreditCardItemProps) {
     const [isOpentState, setIsOpentState] = useState(props.isOpen);
 
     const flipAnim = useRef(new Animated.Value(0)).current;
-    const opacityAnim = useRef(new Animated.Value(1)).current;
-    const [isFlipFront, setIsFlipFront] = useState(true);
+    const [isFront, setIsFront] = useState(true);
 
     const ThemeApp = Theme()
     const style = styles()
@@ -38,8 +37,6 @@ export default function Itemcard(props: CreditCardItemProps) {
     };
 
     const flip = () => {
-        //setIsFlipFront(props.isFront ?? false)
-        
         Animated.timing(flipAnim, {
             toValue: props.isFront ? 0 : 1,
             duration: 500,
@@ -47,12 +44,9 @@ export default function Itemcard(props: CreditCardItemProps) {
             useNativeDriver: false 
         }).start();
 
-        Animated.timing(opacityAnim, {
-            toValue: props.isFront ? 1 : 0,
-            duration: props.isFront ? 3000 : 250,
-            easing: Easing.linear,
-            useNativeDriver: true 
-        }).start();
+        setTimeout(() => {
+            setIsFront(props.isFront ?? false)
+        }, 250)
     };
 
     const rotateCard = flipAnim.interpolate({
@@ -61,12 +55,65 @@ export default function Itemcard(props: CreditCardItemProps) {
     });
 
      useEffect(() => {
-        console.log("----------itemCard props.isFront = "+props.isFront)
         flip()
      }, [props.isFront]);
 
     const IconCard = (): JSX.Element => {
         return props.item.styleCard.icon
+    }
+
+    const DataFront = () => {
+        if(isFront) {
+            return (
+                <Animated.View>
+                <View style={style.topHeader}>
+                    <Text style={[style.text18, {marginTop: 8}]}>{props.item?.flag}</Text>
+                    <IconCard />
+                </View>
+
+                { isOpentState ? (
+                <>
+                    <View style={style.middleHeader}>
+                    <Text style={[style.text18, { letterSpacing: 2}]}>{props.item?.number.split(" ")[0]}</Text>
+                    <Text style={[style.text18, { letterSpacing: 2}]}>{props.item?.number.split(" ")[1]}</Text>
+                    <Text style={[style.text18, { letterSpacing: 2}]}>{props.item?.number.split(" ")[2]}</Text>
+                    <Text style={[style.text18, { letterSpacing: 2}]}>{props.item?.number.split(" ")[3]}</Text>
+                    </View>
+
+                    <View style={{marginTop: 20}}>
+                    <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
+                        <Text style={style.text16}>Nome</Text>
+                        <Text style={style.text16}>Validade</Text>
+                    </View>
+                    <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
+                        <Text style={style.text16}>{props.item?.nameUser}</Text>
+                        <Text style={style.text16}>{props.item?.dateExpire}</Text>
+                    </View>
+                    </View>
+                </>
+                ) : null}
+            </Animated.View>
+            )
+        }
+    }
+
+    const DataBack = () => {
+        if(!isFront){
+            return(
+                <Animated.View>
+                    <View style={{width: '100%', height: 50, backgroundColor: '#000'}}></View>
+                    <View style={{ justifyContent: 'center',marginTop: 20, width: '100%', height: 50, backgroundColor: '#FFF'}}>
+                        <Animated.Text style={{
+                            transform: [
+                                { rotateY:  '180deg' },
+                            ],
+                            textAlign:'right',
+                            marginLeft: 16
+                        }}>{props.item.cvv}</Animated.Text>
+                    </View>
+                </Animated.View >
+            )
+        }
     }
 
     return (
@@ -76,51 +123,26 @@ export default function Itemcard(props: CreditCardItemProps) {
             }
         }}>
 
-        <Animated.View style={[{
+        <Animated.View style={{
             transform: [
                 {rotateY:  rotateCard},
             ],
             height: heightAnimation, 
             marginTop: 3,
-            }]}>
+            }}>
+
         <LinearGradient style={[style.card, {
             borderBottomLeftRadius: isOpentState ? 8 : 0,
             borderBottomRightRadius: isOpentState ? 8 : 0,
         }]} 
         useAngle={true} angle={75} angleCenter={{x:0.3,y:0.5}}
-        colors={[props.item.styleCard.colorLight, props.item.styleCard.colorDark]} >
+        colors={[props.item.styleCard.colorLight, props.item.styleCard.colorDark]}>
   
-        <Animated.View style={[{
-              opacity: opacityAnim,
-            }]}>
-            <View style={style.topHeader}>
-                <Text style={[style.text18, {marginTop: 8}]}>{props.item?.flag}</Text>
-                <IconCard />
-            </View>
+        <DataFront />
+        <DataBack />
 
-            { isOpentState ? (
-            <>
-                <View style={style.middleHeader}>
-                <Text style={[style.text18, { letterSpacing: 2}]}>{props.item?.number.split(" ")[0]}</Text>
-                <Text style={[style.text18, { letterSpacing: 2}]}>{props.item?.number.split(" ")[1]}</Text>
-                <Text style={[style.text18, { letterSpacing: 2}]}>{props.item?.number.split(" ")[2]}</Text>
-                <Text style={[style.text18, { letterSpacing: 2}]}>{props.item?.number.split(" ")[3]}</Text>
-                </View>
-
-                <View style={{marginTop: 20}}>
-                <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
-                    <Text style={style.text16}>Nome</Text>
-                    <Text style={style.text16}>Validade</Text>
-                </View>
-                <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
-                    <Text style={style.text16}>{props.item?.nameUser}</Text>
-                    <Text style={style.text16}>{props.item?.dateExpire}</Text>
-                </View>
-                </View>
-            </>
-            ) : null}
-        </Animated.View>
         </LinearGradient>
+
         </Animated.View>
 
         { isOpentState && props.isClickable && !props.isFlipable ? (
@@ -152,7 +174,8 @@ export default function Itemcard(props: CreditCardItemProps) {
         padding: 16, 
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
-        height: 210
+        height: 210,
+        width: '100%'
     },
     topHeader: {
         flexDirection:'row', 

@@ -7,7 +7,7 @@ export default function InputDateHook() {
         isValidData: false,
         isVisibleField: false,
     });
-    const valueRef = useRef<any>("");
+    const valueRef = useRef<any>("00/0000");
     const valueData  = valueRef.current
 
     const onValue = (value: string) => {

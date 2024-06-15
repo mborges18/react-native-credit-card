@@ -5,27 +5,10 @@ import ButtonDefault from "components/button/ButtonDefault";
 import Theme from "utils/AppTheme";
 import CreditCardFormHook from "screens/creditcard/form/hooks/CreditCardFormHook";
 import Itemcard from "screens/creditcard/list/ItemCard";
-import { useEffect, useState } from "react";
-import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
-import StyleCard from "screens/creditcard/list/model/StyleCard";
 
 const CreditCardFormScreen = () => {
     const ThemeApp = Theme()
     const FormHook = CreditCardFormHook()
- 
-    const [model, setModel] = useState<CreditCardListModel>(
-        {
-            ROWID: "1",
-            idUser: "1",
-            number: "8521 8532 8452 9852",
-            nameUser: "MARCIO BORGES SILVA",
-            dateExpire: "10/2025",
-            cvv: "325",
-            flag: "Elo",
-            status: "ENABLED",
-            styleCard: StyleCard().Elo
-        }
-    )
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -33,7 +16,7 @@ const CreditCardFormScreen = () => {
         <View style={{ flex: 1 , flexDirection: 'column', padding: 16, justifyContent: 'space-between', alignContent:'center', alignItems: 'center'}}>
 
             <Itemcard 
-                item={model}
+                item={FormHook.model}
                 isOpen={true}
                 isFront={!FormHook.inputCvv.state.isVisibleField} 
                 isFlipable={true}
@@ -62,7 +45,7 @@ const CreditCardFormScreen = () => {
                 messageError={FormHook.inputName.state.errorData} 
                 isPassword={false} 
                 listenerChangeText={(text) => {
-                    FormHook.inputName.onValue(text)
+                    FormHook.inputName.onValue(text.toUpperCase())
                     FormHook.handlerEnabledButton()
                 } }
                 isVisible={FormHook.inputName.state.isVisibleField}
@@ -112,7 +95,6 @@ const CreditCardFormScreen = () => {
                     isLoading={false}
                     isDisabled={FormHook.buttons.state.isDisabledButtonNext}
                     clickListener={() => {
-                        //setIsFront(!isFront)
                         FormHook.onNext()
                     }} 
                 />

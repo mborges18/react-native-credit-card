@@ -7,7 +7,7 @@ export default function InputNameHook() {
         isValidData: false,
         isVisibleField: false,
     });
-    const valueRef = useRef<any>("");
+    const valueRef = useRef<any>("SEU NOME");
     const valueData  = valueRef.current
 
     const onValue = (value: string) => {
