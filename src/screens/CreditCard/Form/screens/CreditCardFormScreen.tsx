@@ -16,7 +16,11 @@ const CreditCardFormScreen = () => {
         <View style={{ flex: 1 , flexDirection: 'column', padding: 16, justifyContent: 'space-between', alignContent:'center', alignItems: 'center'}}>
 
             <Itemcard 
-                item={FormHook.model}
+                number={FormHook.inputNumber.valueData}
+                name={FormHook.inputName.valueData}
+                date={FormHook.inputDate.valueData}
+                creditCardType={FormHook.inputNumber.typeCardData}
+                cvv={FormHook.inputCvv.valueData}
                 isOpen={true}
                 isFront={!FormHook.inputCvv.state.isVisibleField} 
                 isFlipable={true}
@@ -40,7 +44,8 @@ const CreditCardFormScreen = () => {
             <TextFieldDefault 
                 label={'Nome do titular'} 
                 placeHolder={'Ex: JOSÉ ROBERTO'} 
-                inputMode={'text'} 
+                inputMode={'text'}
+                maxLength={25}
                 iconStart={'person'} 
                 messageError={FormHook.inputName.state.errorData} 
                 isPassword={false} 

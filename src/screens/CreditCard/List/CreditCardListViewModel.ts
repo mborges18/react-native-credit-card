@@ -104,7 +104,7 @@ export default function CreditCardListViewModel() {
         return [model1, model2, model3, model4, model5]
     }
 
-    const onDeleteData = (item: CreditCardListModel) => {
+    const onDeleteData = (item: string) => {
         state.itemDelete = item
         state.confirmDelete = true
         setState({...state})

@@ -2,7 +2,7 @@ import CreditCardListModel from "screens/creditcard/list/model/CreditCardListMod
 
 export default interface CreditCardListState {
     listCards: Array<CreditCardListModel>,
-    itemDelete: CreditCardListModel | null,
+    itemDelete: string | null,
     isLoading: boolean,
     errorService: boolean,
     confirmDelete: boolean,

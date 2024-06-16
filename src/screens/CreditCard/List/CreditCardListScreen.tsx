@@ -37,12 +37,20 @@ const CreditCardListScreen = () => {
                     marginEnd: 16, 
                 }}
                     data={viewModel.state.listCards}
-                    renderItem={({item}) => <Itemcard item={item} delete={(item) => {
-                        viewModel.onDeleteData(item)
-                    } } 
-                    edit={(item) => {
-                        navigation.navigate(NavigationUrl.CreditCardFormScreen, item)
-                    } }  />}
+                    renderItem={({item}) => 
+                    <Itemcard 
+                        number={item.number}
+                        name={item.nameUser}
+                        date={item.dateExpire} 
+                        cvv={''} 
+                        creditCardType={item.styleCard}
+                        delete={(item) => {
+                            viewModel.onDeleteData(item);
+                        } }
+                        edit={(item) => {
+                            navigation.navigate(NavigationUrl.CreditCardFormScreen);
+                        } } 
+                        />}
                 />
             </View>
         </SafeAreaView>

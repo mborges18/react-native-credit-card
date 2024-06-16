@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import StyleCard, { CreditCardDefault } from "screens/creditcard/list/model/StyleCard";
+import Validation from "utils/Validation";
 
 
 export default function InputNumberHook() {
@@ -7,11 +9,16 @@ export default function InputNumberHook() {
         isValidData: false,
         isVisibleField: true,
     });
-    const valueRef = useRef<any>("XXXX XXXX XXXX XXXX");
+    const maskNumber = "XXXX XXXX XXXX XXXX"
+    const valueRef = useRef<any>(maskNumber);
     const valueData  = valueRef.current
+    const typeCardRef = useRef<CreditCardDefault>(StyleCard().Undefined);
+    const typeCardData  = typeCardRef.current
 
     const onValue = (value: string) => {
-        valueRef.current = value
+        let text = value + maskNumber.substring(0 + value.length)
+        valueRef.current = text
+        typeCardRef.current = Validation().validateCCNum(value)
         if(state.errorData != ""){
             state.errorData = ""
         }
@@ -38,7 +45,8 @@ export default function InputNumberHook() {
         state,
         handlerVisibility,
         onValue,
-        valueData
+        valueData,
+        typeCardData
     }
 }
 

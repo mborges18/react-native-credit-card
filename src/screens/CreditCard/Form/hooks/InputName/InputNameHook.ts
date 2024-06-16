@@ -11,11 +11,13 @@ export default function InputNameHook() {
     const valueData  = valueRef.current
 
     const onValue = (value: string) => {
+        if(value.length<=25) {
         valueRef.current = value
         if(state.errorData != ""){
             state.errorData = ""
         }
         onValidateDate(value)
+    }
     }
 
     const onValidateDate = (number: string) => {

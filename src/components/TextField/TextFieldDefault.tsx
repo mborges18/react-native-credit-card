@@ -9,6 +9,7 @@ type TextFieldDefultProps = {
     placeHolder: string,
     value?: string,
     inputMode: InputModeOptions,
+    maxLength?: number,
     maskType?: MaskType,
     iconStart: string
     messageError: string,
@@ -27,19 +28,19 @@ export default function TextFieldDefault(
             placeHolder={props.placeHolder}
             value={props.value}
             inputMode={props.inputMode}
-            maskType={ props.maskType }
+            maskType={props.maskType}
             messageError={props.messageError}
             listenerChangeText={(text) => {
-                props.listenerChangeText(text)
+                props.listenerChangeText(text);
             } }
             colorBorderEnabled={ThemeApp.colors.primary}
             colorBorderDisabled={ThemeApp.colors.border}
             colorBorderError={ThemeApp.colors.error}
             colorContent={ThemeApp.colors.background}
             colorText={ThemeApp.colors.onBackground}
-            iconStart={props.iconStart} 
+            iconStart={props.iconStart}
             isPassword={props.isPassword}
-            isVisible={props.isVisible}
-        />
+            isVisible={props.isVisible} 
+            maxLength={props.maxLength ?? 55} />
     )
 }

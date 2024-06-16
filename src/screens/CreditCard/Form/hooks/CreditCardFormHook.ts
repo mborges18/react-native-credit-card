@@ -6,7 +6,6 @@ import InputNumberHook from "screens/creditcard/form/hooks/inputnumber/InputNumb
 import InputNameHook from "screens/creditcard/form/hooks/inputname/InputNameHook";
 import ButtonHook from "screens/creditcard/form/hooks/button/ButtonHook";
 import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
-import StyleCard from "screens/creditcard/list/model/StyleCard";
 
 export default function CreditCardFormHook() {
 
@@ -30,9 +29,9 @@ export default function CreditCardFormHook() {
             nameUser: inputName.valueData,
             dateExpire: inputDate.valueData,
             cvv: inputCvv.valueData,
-            flag: "Elo",
+            flag: inputNumber.typeCardData.name,
+            styleCard: inputNumber.typeCardData,
             status: "ENABLED",
-            styleCard: StyleCard().Elo
         }
     )
 
@@ -51,6 +50,8 @@ export default function CreditCardFormHook() {
         model.nameUser = inputName.valueData
         model.dateExpire = inputDate.valueData
         model.cvv = inputCvv.valueData
+        model.flag = inputNumber.typeCardData.name
+        model.styleCard = inputNumber.typeCardData
         setModel(model)
     },[inputNumber, inputName, inputDate, inputCvv])
 

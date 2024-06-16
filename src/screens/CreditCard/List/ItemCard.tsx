@@ -4,15 +4,20 @@ import LinearGradient from "react-native-linear-gradient";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
 import Theme from 'utils/AppTheme';
+import { CreditCardDefault } from "./model/StyleCard";
 
 type CreditCardItemProps = {
-    item: CreditCardListModel,
+    number: string,
+    name: string,
+    date: string,
+    cvv: string,
+    creditCardType: CreditCardDefault,
     isClickable?: boolean,
     isOpen?: boolean,
     isFront?: boolean,
     isFlipable?: boolean,
-    delete?: (item: CreditCardListModel) => void,
-    edit?: (item: CreditCardListModel) => void,
+    delete?: (number: string) => void,
+    edit?: (number: string) => void,
 }
 
 export default function Itemcard(props: CreditCardItemProps) {
@@ -56,10 +61,10 @@ export default function Itemcard(props: CreditCardItemProps) {
 
      useEffect(() => {
         flip()
-     }, [props.isFront]);
+     }, [props]);
 
-    const IconCard = (): JSX.Element => {
-        return props.item.styleCard.icon
+    const IconCard = () : JSX.Element => {
+        return props.creditCardType.icon
     }
 
     const DataFront = () => {
@@ -67,17 +72,17 @@ export default function Itemcard(props: CreditCardItemProps) {
             return (
                 <Animated.View>
                 <View style={style.topHeader}>
-                    <Text style={[style.text18, {marginTop: 8}]}>{props.item?.flag}</Text>
+                    <Text style={[style.text18, {marginTop: 8}]}>{props.creditCardType.name}</Text>
                     <IconCard />
                 </View>
 
                 { isOpentState ? (
                 <>
                     <View style={style.middleHeader}>
-                    <Text style={[style.text18, { letterSpacing: 2}]}>{props.item?.number.split(" ")[0]}</Text>
-                    <Text style={[style.text18, { letterSpacing: 2}]}>{props.item?.number.split(" ")[1]}</Text>
-                    <Text style={[style.text18, { letterSpacing: 2}]}>{props.item?.number.split(" ")[2]}</Text>
-                    <Text style={[style.text18, { letterSpacing: 2}]}>{props.item?.number.split(" ")[3]}</Text>
+                    <Text style={[style.text18, { letterSpacing: 2}]}>{props.number.split(" ")[0]}</Text>
+                    <Text style={[style.text18, { letterSpacing: 2}]}>{props.number.split(" ")[1]}</Text>
+                    <Text style={[style.text18, { letterSpacing: 2}]}>{props.number.split(" ")[2]}</Text>
+                    <Text style={[style.text18, { letterSpacing: 2}]}>{props.number.split(" ")[3]}</Text>
                     </View>
 
                     <View style={{marginTop: 20}}>
@@ -86,8 +91,8 @@ export default function Itemcard(props: CreditCardItemProps) {
                         <Text style={style.text16}>Validade</Text>
                     </View>
                     <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
-                        <Text style={style.text16}>{props.item?.nameUser}</Text>
-                        <Text style={style.text16}>{props.item?.dateExpire}</Text>
+                        <Text style={style.text16}>{props.name}</Text>
+                        <Text style={style.text16}>{props.date}</Text>
                     </View>
                     </View>
                 </>
@@ -109,7 +114,7 @@ export default function Itemcard(props: CreditCardItemProps) {
                             ],
                             textAlign:'right',
                             marginLeft: 16
-                        }}>{props.item.cvv}</Animated.Text>
+                        }}>{props.cvv}</Animated.Text>
                     </View>
                 </Animated.View >
             )
@@ -136,7 +141,7 @@ export default function Itemcard(props: CreditCardItemProps) {
             borderBottomRightRadius: isOpentState ? 8 : 0,
         }]} 
         useAngle={true} angle={75} angleCenter={{x:0.3,y:0.5}}
-        colors={[props.item.styleCard.colorLight, props.item.styleCard.colorDark]}>
+        colors={[props.creditCardType.colorLight, props.creditCardType.colorDark]}>
   
         <DataFront />
         <DataBack />
@@ -148,14 +153,14 @@ export default function Itemcard(props: CreditCardItemProps) {
         { isOpentState && props.isClickable && !props.isFlipable ? (
             <View style={style.bottomActions}>
                 <TouchableOpacity 
-                    onPress={() => { props.delete?.(props.item) }} 
+                    onPress={() => { props.delete?.(props.number) }} 
                     activeOpacity={0.8} 
                     style={style.buttonAction}>
                     <Icon name={'delete'} size={24} color={ThemeApp.colors.onText} />
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                    onPress={() => { props.edit?.(props.item) }} 
+                    onPress={() => { props.edit?.(props.number) }} 
                     activeOpacity={0.8} 
                     style={style.buttonAction}>
                     <Icon name={'edit'} size={24} color={ThemeApp.colors.onText} />
