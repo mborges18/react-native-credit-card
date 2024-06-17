@@ -1,4 +1,4 @@
-import { SafeAreaView, StatusBar, Text, View } from "react-native";
+import { SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
 import MaskType from "components/textfield/MaskType";
 import TextFieldDefault from "components/textfield/TextFieldDefault";
 import ButtonDefault from "components/button/ButtonDefault";
@@ -13,7 +13,7 @@ const CreditCardFormScreen = () => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" backgroundColor={ ThemeApp.colors.primary } />
-        <View style={{ flex: 1 , flexDirection: 'column', padding: 16, justifyContent: 'space-between', alignContent:'center', alignItems: 'center'}}>
+        <View style={styles.container}>
 
             <Itemcard 
                 number={FormHook.inputNumber.valueData}
@@ -73,6 +73,7 @@ const CreditCardFormScreen = () => {
                 label={'Código de seguraça'} 
                 placeHolder={'Ex: 000'} 
                 inputMode={'numeric'} 
+                maxLength={4}
                 iconStart={'security'} 
                 messageError={FormHook.inputCvv.state.errorData} 
                 isPassword={false} 
@@ -83,7 +84,7 @@ const CreditCardFormScreen = () => {
                 isVisible={FormHook.inputCvv.state.isVisibleField}
             />
 
-            <View style={{ flexDirection:'row', width: '100%', justifyContent: 'center', alignContent: 'center', alignItems:'center'}}>
+            <View style={styles.rowActions}>
                 <ButtonDefault
                     text={'Anterior'}
                     width='50%'
@@ -111,3 +112,21 @@ const CreditCardFormScreen = () => {
 }
 
 export default CreditCardFormScreen;
+
+const styles = StyleSheet.create({
+    container : { 
+        flex: 1 , 
+        flexDirection: 'column', 
+        padding: 16, 
+        justifyContent: 'space-between', 
+        alignContent:'center', 
+        alignItems: 'center'
+    },
+    rowActions: { 
+        flexDirection:'row', 
+        width: '100%', 
+        justifyContent: 'center', 
+        alignContent: 'center', 
+        alignItems:'center'
+    }
+})

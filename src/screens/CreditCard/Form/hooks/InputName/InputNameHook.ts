@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 
 
 export default function InputNameHook() {
-    const [state, setState] = useState<InputState>({
+    const [state] = useState<InputState>({
         errorData: "",
         isValidData: false,
         isVisibleField: false,
@@ -11,20 +11,20 @@ export default function InputNameHook() {
     const valueData  = valueRef.current
 
     const onValue = (value: string) => {
-        if(value.length<=25) {
         valueRef.current = value
         if(state.errorData != ""){
             state.errorData = ""
         }
-        onValidateDate(value)
-    }
+        onValidateData(value)
     }
 
-    const onValidateDate = (number: string) => {
-        if(number.length>6){
+    const onValidateData = (value: string) => {
+        if(value.length > 10 && value.match(".*\\s.*")){
             state.isValidData = true
+        } else {
+            state.isValidData = false
+            state.errorData = ""
         }
-        setState({...state})
     }
 
     const handlerVisibility = (step: number) => {
@@ -33,7 +33,6 @@ export default function InputNameHook() {
         } else {
             state.isVisibleField = false
         }
-        setState({...state})
     }
 
     return {

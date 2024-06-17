@@ -48,6 +48,7 @@ const SignUpScreen = () => {
                 iconStart={'person'} 
                 messageError={viewModel.state.errorName} 
                 isPassword={false} 
+                isVisible={true}
                 listenerChangeText={(text) => {
                     viewModel.onName(text)
                 } }
@@ -61,6 +62,7 @@ const SignUpScreen = () => {
                 maskType={MaskType.DATE}
                 messageError={viewModel.state.errorBirthDate} 
                 isPassword={false} 
+                isVisible={true}
                 listenerChangeText={(text) => {
                     viewModel.onBirthDate(text)
                 } }
@@ -74,6 +76,7 @@ const SignUpScreen = () => {
                 maskType={MaskType.PHONE}
                 messageError={viewModel.state.errorPhone} 
                 isPassword={false} 
+                isVisible={true}
                 listenerChangeText={(text) => {
                     viewModel.onPhone(text)
                 } }
@@ -86,6 +89,7 @@ const SignUpScreen = () => {
                 iconStart={'alternate-email'} 
                 messageError={viewModel.state.errorEmail} 
                 isPassword={false} 
+                isVisible={true}
                 listenerChangeText={(text) => {
                     viewModel.onEmail(text)
                 } }
@@ -102,6 +106,7 @@ const SignUpScreen = () => {
                 iconStart={'key'} 
                 messageError={viewModel.state.errorPassword} 
                 isPassword={true} 
+                isVisible={true}
                 listenerChangeText={(text) => {
                     viewModel.onPassword(text)
                 } }
@@ -112,6 +117,7 @@ const SignUpScreen = () => {
                 placeHolder={'Ex: A@123'} 
                 inputMode={'text'} 
                 iconStart={'key'} 
+                isVisible={true}
                 messageError={viewModel.state.errorConfirmPassword} 
                 isPassword={true} 
                 listenerChangeText={(text) => {

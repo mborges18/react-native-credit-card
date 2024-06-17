@@ -14,26 +14,43 @@ export default function ButtonHook() {
         isValidDate: boolean,
         isValidCvv: boolean,
     ) => {
-        if(step==1 && isValidNumber) {
-            state.isDisabledButtonNext = false
-            state.isDisabledButtonPrev = true
-            setState({...state})
+        if(step==1) {
+            if(isValidNumber){
+                state.isDisabledButtonNext = false
+                state.isDisabledButtonPrev = true
+            } else {
+                state.isDisabledButtonNext = true
+                state.isDisabledButtonPrev = true
+            }
         }
-        if(step==2 && isValidName) {
-            state.isDisabledButtonNext = false
-            state.isDisabledButtonPrev = false
-            setState({...state})
+        if(step==2) {
+            if(isValidName) {
+                state.isDisabledButtonNext = false
+                state.isDisabledButtonPrev = false
+            } else {
+                state.isDisabledButtonNext = true
+                state.isDisabledButtonPrev = false
+            }
         }
-        if(step==3 && isValidDate) {
-            state.isDisabledButtonNext = false
-            state.isDisabledButtonPrev = false
-            setState({...state})
+        if(step==3) {
+            if(isValidDate) {
+                state.isDisabledButtonNext = false
+                state.isDisabledButtonPrev = false
+            } else {
+                state.isDisabledButtonNext = true
+                state.isDisabledButtonPrev = false
+            }
         }
-        if(step==4 && isValidCvv) {
-            state.isDisabledButtonNext = false
-            state.isDisabledButtonPrev = false
-            setState({...state})
-        } 
+        if(step==4) {
+            if(isValidCvv) {
+                state.isDisabledButtonNext = false
+                state.isDisabledButtonPrev = false
+            } else {
+                state.isDisabledButtonNext = true
+                state.isDisabledButtonPrev = false
+            }
+        }
+        setState({...state}) 
     }
 
     const hanlderEnableClickPrev = (step: number) => {
@@ -61,14 +78,14 @@ export default function ButtonHook() {
 
         if(step==1){
             step = 2
-            if(nameValue== ""){
+            if(nameValue== "" || nameValue=="SEU NOME"){
                 state.isDisabledButtonNext = true
             } else {
                 state.isDisabledButtonNext = false
             }
         } else if(step==2) {
             step = 3
-            if(dateValue == ""){
+            if(dateValue == "" || dateValue == "00/0000"){
                 state.isDisabledButtonNext = true
             } else {
                 state.isDisabledButtonNext = false
@@ -84,6 +101,7 @@ export default function ButtonHook() {
             //send data
         }
         state.isDisabledButtonPrev = false
+        console.log(nameValue + " "+step)
         return step
     }
 

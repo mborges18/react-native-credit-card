@@ -41,16 +41,17 @@ const SignInScreen = () => {
         />
 
         <TextFieldDefault 
-            label={'E-mail'} 
-            placeHolder={'Ex: nome@dominio.com'} 
+            label={'E-mail'}
+            placeHolder={'Ex: nome@dominio.com'}
             value={(signUp.data as SignUpModel)?.email}
-            inputMode={'email'} 
-            iconStart={'alternate-email'} 
-            messageError={viewModel.state.errorEmail} 
-            isPassword={false} 
+            inputMode={'email'}
+            iconStart={'alternate-email'}
+            messageError={viewModel.state.errorEmail}
+            isPassword={false}
+            isVisible={true}
             listenerChangeText={(text) => {
-                viewModel.onEmail(text)
-            } }
+                viewModel.onEmail(text);
+            } } 
         />
 
         <TextFieldDefault 
@@ -59,7 +60,8 @@ const SignInScreen = () => {
             inputMode={'text'} 
             iconStart={'key'} 
             messageError={viewModel.state.errorPassword} 
-            isPassword={true} 
+            isPassword={true}
+            isVisible={true}
             listenerChangeText={(text) => {
                 viewModel.onPassword(text)
             } }

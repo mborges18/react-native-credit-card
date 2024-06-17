@@ -25,12 +25,6 @@ const Stack = createNativeStackNavigator();
 const MainNavigation = () => {
   const ThemeApp = Theme()
 
-  const ScreenAuthentication = () => {
-    return(
-      <AuthenticatorScreen />
-    );
-  }
-  
   return (
     <>
     <SafeAreaView style={{ flex: 1 }}>
@@ -39,26 +33,21 @@ const MainNavigation = () => {
       } />
       <NavigationContainer>
         <AuthenticatorProvider>
-          <Stack.Navigator>
-            {/* <Stack.Screen
-              name="ScreenAuthentication"
+          <Stack.Navigator initialRouteName={NavigationUrl.CreditCardFormScreen}>
+            <Stack.Screen
+              name={NavigationUrl.AuthenticationScreen}
               options={{ headerShown: false }}
-              component={ScreenAuthentication}
-            /> */}
-            {/* <Stack.Screen
+              component={AuthenticatorScreen}
+            />
+            <Stack.Screen
                 name={NavigationUrl.CreditCardListScreen}
                 options={{
                     title: 'CreditCard',
                     headerTitleStyle: { color: ThemeApp.colors.background }, 
                     headerStyle: { backgroundColor: ThemeApp.colors.primary },
-                    headerLeft: () => (
-                        <TouchableOpacity style={{ marginEnd: 16 }} activeOpacity={0.5}>
-                             <Icon name='arrow-left' size={24} color={ThemeApp.colors.background}/>
-                        </TouchableOpacity>
-                    ),
                 }}
                 component={CreditCardListScreen}
-            /> */}
+            />
             <Stack.Screen
                 name={NavigationUrl.CreditCardFormScreen}
                 options={{

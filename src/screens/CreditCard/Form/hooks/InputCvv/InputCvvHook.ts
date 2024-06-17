@@ -20,7 +20,16 @@ export default function InputCvvHook() {
 
     const onValidateData = (value: string) => {
         if(value.length==3 || value.length==4){
-            state.isValidData = true
+            if(Number(value)==0) {
+                state.isValidData = false
+                state.errorData = "Código inválido"
+            } else {
+                state.isValidData = true
+                state.errorData = ""
+            }
+        } else {
+            state.isValidData = false
+            state.errorData = ""
         }
         setState({...state})
     }

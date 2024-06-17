@@ -62,6 +62,7 @@ export default function CreditCardFormHook() {
     }
 
     const onNext = () => {
+        // you could validate here too
         state.step = buttons.hanlderEnableClickNext(
             state.step,
             inputName.valueData,
