@@ -6,6 +6,7 @@ export type TextFieldProps = {
     placeHolder: string,
     value?: string,
     inputMode: InputModeOptions,
+    maxLength: number,
     messageError: string,
     colorBorderEnabled: string,
     colorBorderDisabled: string,

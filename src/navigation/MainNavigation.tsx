@@ -1,36 +1,24 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer, NavigationProp } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import AuthenticatorScreen from 'screens/authenticator/AuthenticatorScreen';
 import CreditCardListScreen from 'screens/creditcard/list/CreditCardListScreen'
-import { SafeAreaView, StatusBar, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, StatusBar } from 'react-native';
 import Theme from 'utils/AppTheme';
 import { AuthenticatorProvider } from 'screens/authenticator/AuthenticatorContextApi';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { NavigationUrl } from 'navigation/NavigationUrl';
 import CreditCardFormScreen from 'screens/creditcard/form/screens/CreditCardFormScreen';
+import { LogBox } from 'react-native';
+
 
 const Stack = createNativeStackNavigator();
 
-// export type ScreenNames = [
-//   NavigationUrl.CreditCardListScreen, 
-//   NavigationUrl.CreditCardFormScreen,
-//   NavigationUrl.ScreenAuthentication
-// ] 
-// export type RootStackParamList = Record<ScreenNames[number], undefined | {}>;
-// export type StackNavigation = NavigationProp<RootStackParamList>;
-
-//const Stack = createNativeStackNavigator<RootStackParamList>();
-
 const MainNavigation = () => {
+  LogBox.ignoreLogs([
+    'Non-serializable values were found in the navigation state',
+  ]);
   const ThemeApp = Theme()
 
-  const ScreenAuthentication = () => {
-    return(
-      <AuthenticatorScreen />
-    );
-  }
-  
   return (
     <>
     <SafeAreaView style={{ flex: 1 }}>
@@ -39,26 +27,21 @@ const MainNavigation = () => {
       } />
       <NavigationContainer>
         <AuthenticatorProvider>
-          <Stack.Navigator>
-            {/* <Stack.Screen
-              name="ScreenAuthentication"
+          <Stack.Navigator initialRouteName={NavigationUrl.AuthenticationScreen}>
+            <Stack.Screen
+              name={NavigationUrl.AuthenticationScreen}
               options={{ headerShown: false }}
-              component={ScreenAuthentication}
-            /> */}
-            {/* <Stack.Screen
+              component={AuthenticatorScreen}
+            />
+            <Stack.Screen
                 name={NavigationUrl.CreditCardListScreen}
                 options={{
                     title: 'CreditCard',
                     headerTitleStyle: { color: ThemeApp.colors.background }, 
                     headerStyle: { backgroundColor: ThemeApp.colors.primary },
-                    headerLeft: () => (
-                        <TouchableOpacity style={{ marginEnd: 16 }} activeOpacity={0.5}>
-                             <Icon name='arrow-left' size={24} color={ThemeApp.colors.background}/>
-                        </TouchableOpacity>
-                    ),
                 }}
                 component={CreditCardListScreen}
-            /> */}
+            />
             <Stack.Screen
                 name={NavigationUrl.CreditCardFormScreen}
                 options={{

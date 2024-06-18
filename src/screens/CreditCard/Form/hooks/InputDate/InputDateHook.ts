@@ -2,12 +2,12 @@ import { useRef, useState } from "react";
 
 
 export default function InputDateHook() {
-    const [state, setState] = useState<InputState>({
+    const [state] = useState<InputState>({
         errorData: "",
         isValidData: false,
         isVisibleField: false,
     });
-    const valueRef = useRef<any>("");
+    const valueRef = useRef<any>("00/0000");
     const valueData  = valueRef.current
 
     const onValue = (value: string) => {
@@ -20,9 +20,25 @@ export default function InputDateHook() {
 
     const onValidateData = (value: string) => {
         if(value.length==7){
-            state.isValidData = true
+            var date = new Date()
+    
+            if(Number(value.split("/")[0]) < 1 || Number(value.split("/")[0]) > 12) {
+                state.errorData = "Mês inválido"
+                state.isValidData = false
+            } else if(
+                (Number(value.split("/")[0]) < date.getMonth()+1 && Number(value.split("/")[1]) == date.getFullYear())
+                || Number(value.split("/")[1]) < date.getFullYear()
+            ) {
+                state.errorData = "Cartão expirado"
+                state.isValidData = false
+            } else {
+                state.errorData = ""
+                state.isValidData = true
+            }
+        } else {
+            state.errorData = ""
+            state.isValidData = false
         }
-        setState({...state})
     }
 
     const handlerVisibility = (step: number) => {
@@ -31,7 +47,6 @@ export default function InputDateHook() {
         } else {
             state.isVisibleField = false
         }
-        setState({...state})
     }
 
     return {

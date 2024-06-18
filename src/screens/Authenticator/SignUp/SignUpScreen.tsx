@@ -8,12 +8,10 @@ import SignUpViewModel from 'screens/authenticator/signup/SignUpViewModel';
 import MaskType from 'components/textfield/MaskType';
 import HeaderWellCome from 'components/header/HeaderWellCome';
 import DialogError from 'components/dialog/DialogError';
-import AuthenticatorContextApi from 'screens/authenticator/AuthenticatorContextApi';
 import { ResultRequest } from 'api/ResultRequest';
 
 const SignUpScreen = () => {
     const viewModel = SignUpViewModel()
-    const {setSignUp} = useContext(AuthenticatorContextApi)
     const ThemeApp = Theme()
 
     return (
@@ -48,6 +46,7 @@ const SignUpScreen = () => {
                 iconStart={'person'} 
                 messageError={viewModel.state.errorName} 
                 isPassword={false} 
+                isVisible={true}
                 listenerChangeText={(text) => {
                     viewModel.onName(text)
                 } }
@@ -61,6 +60,7 @@ const SignUpScreen = () => {
                 maskType={MaskType.DATE}
                 messageError={viewModel.state.errorBirthDate} 
                 isPassword={false} 
+                isVisible={true}
                 listenerChangeText={(text) => {
                     viewModel.onBirthDate(text)
                 } }
@@ -74,6 +74,7 @@ const SignUpScreen = () => {
                 maskType={MaskType.PHONE}
                 messageError={viewModel.state.errorPhone} 
                 isPassword={false} 
+                isVisible={true}
                 listenerChangeText={(text) => {
                     viewModel.onPhone(text)
                 } }
@@ -86,6 +87,7 @@ const SignUpScreen = () => {
                 iconStart={'alternate-email'} 
                 messageError={viewModel.state.errorEmail} 
                 isPassword={false} 
+                isVisible={true}
                 listenerChangeText={(text) => {
                     viewModel.onEmail(text)
                 } }
@@ -102,6 +104,7 @@ const SignUpScreen = () => {
                 iconStart={'key'} 
                 messageError={viewModel.state.errorPassword} 
                 isPassword={true} 
+                isVisible={true}
                 listenerChangeText={(text) => {
                     viewModel.onPassword(text)
                 } }
@@ -112,6 +115,7 @@ const SignUpScreen = () => {
                 placeHolder={'Ex: A@123'} 
                 inputMode={'text'} 
                 iconStart={'key'} 
+                isVisible={true}
                 messageError={viewModel.state.errorConfirmPassword} 
                 isPassword={true} 
                 listenerChangeText={(text) => {
@@ -120,13 +124,7 @@ const SignUpScreen = () => {
             />
 
             <ButtonDefault text={'CADASTRAR'} isLoading={viewModel.state.isLoading} clickListener={() => {
-                viewModel.onSubmit().then((result) => {
-                    if(viewModel.state.successService){
-                        setSignUp(result as ResultRequest)
-                    }
-                }).catch((error) => {
-                    setSignUp(error)
-                })
+                viewModel.onSubmit()
             } } isDisabled={viewModel.state.isDisabledButton || viewModel.state.isLoading} />
 
         </View>

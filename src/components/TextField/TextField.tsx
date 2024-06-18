@@ -95,6 +95,7 @@ export default function TextField(
             placeholder={activated ? props.placeHolder : ''}
             inputMode={props.inputMode}
             secureTextEntry={props.isPassword && eyeToggle}
+            maxLength={props.maxLength}
         />
 
         <Icon style={styles.icon} name={props.iconStart} size={22} color={handlerColorLabel()} />

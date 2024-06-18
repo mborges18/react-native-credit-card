@@ -1,42 +1,39 @@
-import { SafeAreaView, StatusBar, View } from "react-native";
+import { SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
 import MaskType from "components/textfield/MaskType";
 import TextFieldDefault from "components/textfield/TextFieldDefault";
 import ButtonDefault from "components/button/ButtonDefault";
 import Theme from "utils/AppTheme";
 import CreditCardFormHook from "screens/creditcard/form/hooks/CreditCardFormHook";
 import Itemcard from "screens/creditcard/list/ItemCard";
-import { useState } from "react";
-import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
-import StyleCard from "screens/creditcard/list/model/StyleCard";
+import DialogError from "components/dialog/DialogError";
 
 const CreditCardFormScreen = () => {
     const ThemeApp = Theme()
     const FormHook = CreditCardFormHook()
- 
-    const [model, setModel] = useState<CreditCardListModel>(
-        {
-            ROWID: "1",
-            idUser: "1",
-            number: "8521 8532 8452 9852",
-            nameUser: "MARCIO BORGES SILVA",
-            dateExpire: "10/2025",
-            cvv: "325",
-            flag: "Elo",
-            status: "ENABLED",
-            styleCard: StyleCard().Elo
-        }
-    )
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" backgroundColor={ ThemeApp.colors.primary } />
-        <View style={{ flex: 1 , flexDirection: 'column', padding: 16, justifyContent: 'space-between', alignContent:'center', alignItems: 'center'}}>
+        <View style={styles.container}>
+
+            <DialogError 
+                title={'Informação'}
+                description={'Ocorreu um erro inesperado. Por favor, tente novamente em alguns instantes'}
+                onClickOk={() => {
+                    FormHook.onCloseErrorService()
+                } } 
+                isVisible={FormHook.state.errorService}
+            />
 
             <Itemcard 
-                item={model}
+                number={FormHook.inputNumber.valueData}
+                name={FormHook.inputName.valueData}
+                date={FormHook.inputDate.valueData}
+                creditCardType={FormHook.inputNumber.typeCardData}
+                cvv={FormHook.inputCvv.valueData}
                 isOpen={true}
-                delete={(_) => {} } 
-                edit={(_) => {} }  
+                isFront={!FormHook.inputCvv.state.isVisibleField} 
+                isFlipable={true}
             />
 
             <View style={{ width: '100%' }}>
@@ -57,12 +54,13 @@ const CreditCardFormScreen = () => {
             <TextFieldDefault 
                 label={'Nome do titular'} 
                 placeHolder={'Ex: JOSÉ ROBERTO'} 
-                inputMode={'text'} 
+                inputMode={'text'}
+                maxLength={25}
                 iconStart={'person'} 
                 messageError={FormHook.inputName.state.errorData} 
                 isPassword={false} 
                 listenerChangeText={(text) => {
-                    FormHook.inputName.onValue(text)
+                    FormHook.inputName.onValue(text.toUpperCase())
                     FormHook.handlerEnabledButton()
                 } }
                 isVisible={FormHook.inputName.state.isVisibleField}
@@ -85,6 +83,7 @@ const CreditCardFormScreen = () => {
                 label={'Código de seguraça'} 
                 placeHolder={'Ex: 000'} 
                 inputMode={'numeric'} 
+                maxLength={4}
                 iconStart={'security'} 
                 messageError={FormHook.inputCvv.state.errorData} 
                 isPassword={false} 
@@ -95,7 +94,7 @@ const CreditCardFormScreen = () => {
                 isVisible={FormHook.inputCvv.state.isVisibleField}
             />
 
-            <View style={{ flexDirection:'row', width: '100%', justifyContent: 'center', alignContent: 'center', alignItems:'center'}}>
+            <View style={styles.rowActions}>
                 <ButtonDefault
                     text={'Anterior'}
                     width='50%'
@@ -107,9 +106,9 @@ const CreditCardFormScreen = () => {
                 />
                 <View style={{width: 8}} />
                 <ButtonDefault
-                    text={'Próximo'}
+                    text={FormHook.state.step!= 4 ? 'Próximo' : 'Salvar'}
                     width='50%'
-                    isLoading={false}
+                    isLoading={FormHook.state.isLoading}
                     isDisabled={FormHook.buttons.state.isDisabledButtonNext}
                     clickListener={() => {
                         FormHook.onNext()
@@ -123,3 +122,21 @@ const CreditCardFormScreen = () => {
 }
 
 export default CreditCardFormScreen;
+
+const styles = StyleSheet.create({
+    container : { 
+        flex: 1 , 
+        flexDirection: 'column', 
+        padding: 16, 
+        justifyContent: 'space-between', 
+        alignContent:'center', 
+        alignItems: 'center'
+    },
+    rowActions: { 
+        flexDirection:'row', 
+        width: '100%', 
+        justifyContent: 'center', 
+        alignContent: 'center', 
+        alignItems:'center'
+    }
+})

@@ -1,11 +1,16 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import SignInState from 'screens/authenticator/signin/SignInState';
 import SignInModel from 'screens/authenticator/signin/model/SignInModel';
 import SignInRespository from 'screens/authenticator/signin/data/SignInRepository';
-import { Success, Error, Unauthorized } from 'api/ResultRequest';
+import { Success, Error, Unauthorized, ResultRequest } from 'api/ResultRequest';
 import Validation from 'utils/Validation';
+import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
+import { NavigationUrl } from 'navigation/NavigationUrl';
+import AuthenticatorContextApi from '../AuthenticatorContextApi';
 
 export default function SignInViewModel() {
+    const navigation: NavigationProp<ParamListBase> = useNavigation();
+    const { signUp , setSignIn } = useContext(AuthenticatorContextApi)
     const respository = SignInRespository();
 
     const [state, setState] = useState<SignInState>({
@@ -69,15 +74,13 @@ export default function SignInViewModel() {
             return
         }
 
-        var response = null
-
         try {
             state.errorEmail = ""
             state.errorPassword = ""
             state.isLoading = true
             setState({...state})
 
-            response = await respository.signIn(
+            var response = await respository.signIn(
                 model.email, 
                 model.password
             )
@@ -85,6 +88,8 @@ export default function SignInViewModel() {
             if(response instanceof Success) {
                 state.successService = true
                 console.log('Success ', response.data)
+                setSignIn(response.data as ResultRequest)
+                navigation.navigate(NavigationUrl.CreditCardListScreen)
             } else if(response instanceof Unauthorized) {
                 state.errorEmail = "Por favor, verifique seu e-mail"
                 state.errorPassword= "Por favor, verifique sua senha"
@@ -98,11 +103,10 @@ export default function SignInViewModel() {
             }
         } catch(error) {
             state.errorService = true
-           console.log('erro  ', error)
+           console.log('error  ', error)
         } finally {
             state.isLoading = false
             setState({...state})
-            return response
         }
     }
 
@@ -117,6 +121,7 @@ export default function SignInViewModel() {
         onPassword,
         onKeepConnected,
         onSubmit,
-        onCloseErrorService
+        onCloseErrorService,
+        signUp,
     }
 }

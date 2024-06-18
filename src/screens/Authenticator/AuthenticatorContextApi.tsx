@@ -8,7 +8,7 @@ interface AuthDate {
     signUp : ResultRequest
 }
 
-const AuthenticatorContextApi = createContext({} as AuthDate);
+const AuthenticatorContextApi = createContext<AuthDate>({} as AuthDate);
 
 export const AuthenticatorProvider = (props: AuthProps) => {
     const[signIn, setStateSignIn] = useState({} as ResultRequest)

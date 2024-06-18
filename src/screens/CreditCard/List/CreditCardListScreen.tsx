@@ -4,22 +4,33 @@ import {
   StatusBar,
   FlatList,
   SafeAreaView,
+  TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
 import CreditCardListViewModel from 'screens/creditcard/list/CreditCardListViewModel';
 import Theme from 'utils/AppTheme';
 import Itemcard from 'screens/creditcard/list/ItemCard';
-import { useNavigation, ParamListBase,  NavigationProp } from '@react-navigation/native';
+import { useNavigation, ParamListBase,  NavigationProp, useRoute, RouteProp } from '@react-navigation/native';
 import { NavigationUrl } from 'navigation/NavigationUrl';
 import DialogConfirm from 'components/dialog/DialogConfirm';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import LogApp from 'utils/LogApp';
 
 const CreditCardListScreen = () => {
     const viewModel = CreditCardListViewModel()
     const ThemeApp = Theme()
     const navigation: NavigationProp<ParamListBase> = useNavigation();
+    const route = useRoute<RouteProp<ParamListBase>>();
+    
+    useEffect(() => {
+        LogApp("viewModel.onDataCreated")
+        viewModel.onDataCreated(route.params as Object) 
+    }, [route.params])
 
     useEffect(() => {
+        LogApp("viewModel.onGetData")
         viewModel.onGetData()
-    },[])
+    }, [])
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -37,17 +48,49 @@ const CreditCardListScreen = () => {
                     marginEnd: 16, 
                 }}
                     data={viewModel.state.listCards}
-                    renderItem={({item}) => <Itemcard item={item} delete={(item) => {
-                        viewModel.onDeleteData(item)
-                    } } 
-                    edit={(item) => {
-                        navigation.navigate(NavigationUrl.CreditCardFormScreen, item)
-                    } }  />}
+                    renderItem={({item}) => 
+                    <Itemcard 
+                        number={item.number}
+                        name={item.nameUser}
+                        date={item.dateExpire} 
+                        cvv={''}
+                        isFront={true}
+                        isClickable={true} 
+                        isFlipable={false}
+                        creditCardType={item.styleCard}
+                        delete={(item) => {
+                            viewModel.onDeleteData(item);
+                        } }
+                        edit={(item) => {
+                            navigation.navigate(NavigationUrl.CreditCardFormScreen);
+                        } } 
+                        />}
                 />
             </View>
+            <TouchableOpacity 
+                activeOpacity={0.8} 
+                style={[styles.floatButton, {backgroundColor: ThemeApp.colors.primary}]} 
+                onPress={() => {
+                    navigation.navigate(NavigationUrl.CreditCardFormScreen);
+                }}>
+                <Icon name={'add'} size={24} color={ThemeApp.colors.onText} />
+            </TouchableOpacity>
         </SafeAreaView>
-        
     );
 };
 
 export default CreditCardListScreen;
+
+const styles = StyleSheet.create({
+    floatButton: { 
+        position: 'absolute', 
+        bottom: 16, 
+        right: 16, 
+        zIndex: 10, 
+        padding: 16, 
+        elevation: 5, 
+        borderRadius: 16, 
+    }
+})
+
+
