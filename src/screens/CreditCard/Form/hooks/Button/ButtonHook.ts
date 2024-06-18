@@ -74,6 +74,7 @@ export default function ButtonHook() {
         nameValue: string,
         dateValue: string,
         cvvValue: string,
+        excute: () => void
     ) => {
 
         if(step==1){
@@ -98,10 +99,9 @@ export default function ButtonHook() {
                 state.isDisabledButtonNext = false
             }
         } else {
-            //send data
+            excute()
         }
         state.isDisabledButtonPrev = false
-        console.log(nameValue + " "+step)
         return step
     }
 

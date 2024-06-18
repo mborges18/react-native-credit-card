@@ -33,7 +33,7 @@ const MainNavigation = () => {
       } />
       <NavigationContainer>
         <AuthenticatorProvider>
-          <Stack.Navigator initialRouteName={NavigationUrl.CreditCardFormScreen}>
+          <Stack.Navigator initialRouteName={NavigationUrl.AuthenticationScreen}>
             <Stack.Screen
               name={NavigationUrl.AuthenticationScreen}
               options={{ headerShown: false }}

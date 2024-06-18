@@ -8,12 +8,10 @@ import SignUpViewModel from 'screens/authenticator/signup/SignUpViewModel';
 import MaskType from 'components/textfield/MaskType';
 import HeaderWellCome from 'components/header/HeaderWellCome';
 import DialogError from 'components/dialog/DialogError';
-import AuthenticatorContextApi from 'screens/authenticator/AuthenticatorContextApi';
 import { ResultRequest } from 'api/ResultRequest';
 
 const SignUpScreen = () => {
     const viewModel = SignUpViewModel()
-    const {setSignUp} = useContext(AuthenticatorContextApi)
     const ThemeApp = Theme()
 
     return (

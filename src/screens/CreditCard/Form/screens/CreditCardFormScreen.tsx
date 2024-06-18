@@ -5,6 +5,7 @@ import ButtonDefault from "components/button/ButtonDefault";
 import Theme from "utils/AppTheme";
 import CreditCardFormHook from "screens/creditcard/form/hooks/CreditCardFormHook";
 import Itemcard from "screens/creditcard/list/ItemCard";
+import DialogError from "components/dialog/DialogError";
 
 const CreditCardFormScreen = () => {
     const ThemeApp = Theme()
@@ -14,6 +15,15 @@ const CreditCardFormScreen = () => {
         <SafeAreaView style={{ flex: 1 }}>
         <StatusBar barStyle="light-content" backgroundColor={ ThemeApp.colors.primary } />
         <View style={styles.container}>
+
+            <DialogError 
+                title={'Informação'}
+                description={'Ocorreu um erro inesperado. Por favor, tente novamente em alguns instantes'}
+                onClickOk={() => {
+                    FormHook.onCloseErrorService()
+                } } 
+                isVisible={FormHook.state.errorService}
+            />
 
             <Itemcard 
                 number={FormHook.inputNumber.valueData}
@@ -96,9 +106,9 @@ const CreditCardFormScreen = () => {
                 />
                 <View style={{width: 8}} />
                 <ButtonDefault
-                    text={'Próximo'}
+                    text={FormHook.state.step!= 4 ? 'Próximo' : 'Salvar'}
                     width='50%'
-                    isLoading={false}
+                    isLoading={FormHook.state.isLoading}
                     isDisabled={FormHook.buttons.state.isDisabledButtonNext}
                     clickListener={() => {
                         FormHook.onNext()

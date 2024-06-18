@@ -1,6 +1,5 @@
-import { CreditCardDefault } from "screens/creditcard/list/model/StyleCard";
 
-export default interface CreditCardFormModel {
+export default interface CreditCardFromRequest {
     ROWID: string,
     idUser: string,
     number: string,
@@ -9,5 +8,4 @@ export default interface CreditCardFormModel {
     cvv: string,
     flag: string,
     status: string,
-    styleCard: CreditCardDefault
 }

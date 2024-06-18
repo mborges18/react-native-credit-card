@@ -1,11 +1,13 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import SignUpState from "./SignUpState";
 import SignUpModel from "./model/SignUpModel"
 import Validation from "../../../utils/Validation";
-import { Exists, Success } from "../../../api/ResultRequest";
+import { Exists, ResultRequest, Success } from "../../../api/ResultRequest";
 import SignUpRespository from "./data/SignUpRepository";
+import AuthenticatorContextApi from "../AuthenticatorContextApi";
 
 export default function  SignUpViewModel() {
+    const { setSignUp } = useContext(AuthenticatorContextApi)
     const respository = SignUpRespository();
 
     const [state, setState] = useState<SignUpState>({
@@ -157,7 +159,6 @@ export default function  SignUpViewModel() {
     }
 
     const onSubmit = async () => {
-        var response = null;
         if(validateHasError()){
             setState({...state})
             return
@@ -173,10 +174,11 @@ export default function  SignUpViewModel() {
             state.isLoading = true
             setState({...state})
 
-            response = await respository.signUp(model)
+            var response = await respository.signUp(model)
 
             if(response instanceof Success) {
                 state.successService = true
+                setSignUp(response as ResultRequest)
             } else if(response instanceof Exists) {
                 state.errorEmail = "E-mail já registrado"
             } else if(response instanceof Error) {
@@ -190,7 +192,6 @@ export default function  SignUpViewModel() {
         } finally {
             state.isLoading = false
             setState({...state})
-            return response;
         }
     }
 

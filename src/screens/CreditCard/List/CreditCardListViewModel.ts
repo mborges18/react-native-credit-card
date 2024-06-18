@@ -25,15 +25,15 @@ export default function CreditCardListViewModel() {
             state.isLoading = true
             setState({...state})
 
-            // var response = await respository.getData()
+            var response = await respository.getData()
 
-            // if(response instanceof Success) {
-            //     state.successService = true
-            //     state.listCards = list()
-            // } else {
-            //     state.errorService = true
-            // }
-            state.listCards = list()
+            if(response instanceof Success) {
+                //state.successService = true
+                state.listCards = list()
+            } else {
+                state.errorService = true
+            }
+            //state.listCards = list()
     
         } catch(error) {
             state.errorService = true

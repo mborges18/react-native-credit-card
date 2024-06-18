@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Animated, Easing, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
 import Theme from 'utils/AppTheme';
 import { CreditCardDefault } from "./model/StyleCard";
 
@@ -21,7 +20,7 @@ type CreditCardItemProps = {
 }
 
 export default function Itemcard(props: CreditCardItemProps) {
-    const [heightAnimation, setHeightAnimation] = useState(new Animated.Value(60));
+    const [heightAnimation] = useState(new Animated.Value(60));
     const [isOpentState, setIsOpentState] = useState(props.isOpen);
 
     const flipAnim = useRef(new Animated.Value(0)).current;

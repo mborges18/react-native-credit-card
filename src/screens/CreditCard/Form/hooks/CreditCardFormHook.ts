@@ -1,14 +1,22 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CreditCardFormState from "screens/creditcard/form/screens/CreditCardFormState";
 import InputDateHook from "screens/creditcard/form/hooks/inputdate/InputDateHook";
 import InputCvvHook from "screens/creditcard/form/hooks/inputcvv/InputCvvHook";
 import InputNumberHook from "screens/creditcard/form/hooks/inputnumber/InputNumberHook";
 import InputNameHook from "screens/creditcard/form/hooks/inputname/InputNameHook";
 import ButtonHook from "screens/creditcard/form/hooks/button/ButtonHook";
-import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
+import CreditCardFormRepository from "screens/creditcard/form/data/CreditCardFormRepository";
+import { Success } from "api/ResultRequest";
+import CreditCardFormModel from "screens/creditcard/form/model/CreditCardFormModel";
+import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
+import { NavigationUrl } from "navigation/NavigationUrl";
+import AuthenticatorContextApi from "screens/authenticator/AuthenticatorContextApi";
 
 export default function CreditCardFormHook() {
 
+    const { signIn } = useContext(AuthenticatorContextApi)
+    const navigation: NavigationProp<ParamListBase> = useNavigation();
+    const respository = CreditCardFormRepository()
     const inputNumber = InputNumberHook()
     const inputName = InputNameHook()
     const inputDate = InputDateHook()
@@ -19,10 +27,11 @@ export default function CreditCardFormHook() {
         step: 1,
         errorService: false,
         successService: false,
+        isLoading: false,
+        resultRequest: null,
     });
 
-    const [model, setModel] = useState<CreditCardListModel>(
-        {
+    const [model, setModel] = useState<CreditCardFormModel>({
             ROWID: "1",
             idUser: "1",
             number: inputNumber.valueData,
@@ -67,7 +76,10 @@ export default function CreditCardFormHook() {
             state.step,
             inputName.valueData,
             inputDate.valueData,
-            inputCvv.valueData
+            inputCvv.valueData,
+            () => {
+                createData()
+            }
         )
         handlerVisibilityInputs()
         setState({...state})
@@ -80,6 +92,32 @@ export default function CreditCardFormHook() {
         inputCvv.handlerVisibility(state.step)
     }
 
+    const createData = async () => {
+        console.log("createData")
+        try {
+            state.isLoading = true
+            model.idUser = signIn.toString().split("-")[0]
+            var response = await respository.createData(model)
+
+            if(response instanceof Success) {
+                state.successService = true
+                navigation.navigate(NavigationUrl.CreditCardListScreen, response as Success)
+            } else {
+                state.errorService = true
+            }
+        } catch(error) {
+            state.errorService = true
+        } finally {
+            state.isLoading = false
+            setState({...state})
+        }
+    }
+
+    const onCloseErrorService = () => {
+        state.errorService = false
+        setState({...state})
+    }
+
     return {
         state,
         inputNumber,
@@ -90,6 +128,8 @@ export default function CreditCardFormHook() {
         onPrev,
         onNext,
         handlerEnabledButton,
-        model
+        model,
+        createData,
+        onCloseErrorService
     }
 }
