@@ -4,6 +4,7 @@ import CreditCardListState from "screens/creditcard/list/CreditCardListState";
 import { Success } from "api/ResultRequest";
 import CreditCardListModel from "screens/creditcard/list/model/CreditCardListModel";
 import CreditCardDefault, { find } from "screens/creditcard/list/model/StyleCard";
+import LogApp from "utils/LogApp";
 
 export default function CreditCardListViewModel() {
     const respository = CreditCardListRepository()
@@ -36,7 +37,7 @@ export default function CreditCardListViewModel() {
             }
         } catch(error) {
             state.errorService = true
-           console.log('error ', error)
+            LogApp('error '+ error)
         } finally {
             state.isLoading = false
             setState({...state})
@@ -47,29 +48,28 @@ export default function CreditCardListViewModel() {
         state.itemDelete = item
         state.confirmDelete = true
         setState({...state})
-        console.log("onDeleteData")
+        LogApp("onDeleteData "+ state.itemDelete)
     }
 
     const onDeleteDataConfirm = () => {
         state.confirmDelete = false
         setState({...state})
-        console.log("onDeleteDataConfirm "+ state.itemDelete)
+        LogApp("onDeleteDataConfirm "+ state.confirmDelete)
     }
 
     const onDeleteDataCancel = () => {
         state.itemDelete = null
         state.confirmDelete = false
         setState({...state})
-        console.log("onDeleteDataCancel "+ state.itemDelete)
+        LogApp("onDeleteDataCancel "+ state.itemDelete)
     }
 
     const onDataCreated = (data: Object) => {
-        console.log("onDataCreated "+ data)
-        if(data!=null) {
+        if(data != undefined &&  data != null) {
             var model = data as CreditCardListModel
             (model.styleCard = find(model.flag) ?? creditCard.Undefined)
             state.listCards.unshift(model)
-            console.log("onDataCreated "+ (model))
+            LogApp("onDataCreated "+ model)
             setState({...state})
         }
     }

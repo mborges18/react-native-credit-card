@@ -11,6 +11,7 @@ import CreditCardFormModel from "screens/creditcard/form/model/CreditCardFormMod
 import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
 import { NavigationUrl } from "navigation/NavigationUrl";
 import AuthenticatorContextApi from "screens/authenticator/AuthenticatorContextApi";
+import LogApp from "utils/LogApp";
 
 export default function CreditCardFormHook() {
 
@@ -94,7 +95,7 @@ export default function CreditCardFormHook() {
     }
 
     const createData = async () => {
-        console.log("createData")
+
         try {
             state.isLoading = true
             model.idUser = signIn.toString().split("-")[0]
@@ -102,13 +103,14 @@ export default function CreditCardFormHook() {
 
             if(response instanceof Success) {
                 state.successService = true
-                console.log("ENVIANDO DADOS "+response.data)
+                LogApp("ENVIANDO DADOS "+response.data)
                 navigation.navigate(NavigationUrl.CreditCardListScreen, response.data)
             } else {
                 state.errorService = true
             }
         } catch(error) {
             state.errorService = true
+            LogApp("createData error "+error)
         } finally {
             state.isLoading = false
             setState({...state})

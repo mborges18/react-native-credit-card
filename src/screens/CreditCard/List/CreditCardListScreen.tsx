@@ -14,6 +14,7 @@ import { useNavigation, ParamListBase,  NavigationProp, useRoute, RouteProp } fr
 import { NavigationUrl } from 'navigation/NavigationUrl';
 import DialogConfirm from 'components/dialog/DialogConfirm';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import LogApp from 'utils/LogApp';
 
 const CreditCardListScreen = () => {
     const viewModel = CreditCardListViewModel()
@@ -22,13 +23,14 @@ const CreditCardListScreen = () => {
     const route = useRoute<RouteProp<ParamListBase>>();
     
     useEffect(() => {
-        if(route.params != undefined &&  route.params != null) {
-            console.log("PEGANDO DADOS "+JSON.stringify(route.params))
-            viewModel.onDataCreated(route.params as Object)
-        } else {
-            viewModel.onGetData()
-        }
+        LogApp("viewModel.onDataCreated")
+        viewModel.onDataCreated(route.params as Object) 
     }, [route.params])
+
+    useEffect(() => {
+        LogApp("viewModel.onGetData")
+        viewModel.onGetData()
+    }, [])
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
