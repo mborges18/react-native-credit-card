@@ -124,13 +124,7 @@ const SignUpScreen = () => {
             />
 
             <ButtonDefault text={'CADASTRAR'} isLoading={viewModel.state.isLoading} clickListener={() => {
-                viewModel.onSubmit().then((result) => {
-                    if(viewModel.state.successService){
-                        setSignUp(result as ResultRequest)
-                    }
-                }).catch((error) => {
-                    setSignUp(error)
-                })
+                viewModel.onSubmit()
             } } isDisabled={viewModel.state.isDisabledButton || viewModel.state.isLoading} />
 
         </View>

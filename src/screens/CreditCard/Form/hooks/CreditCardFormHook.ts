@@ -16,6 +16,7 @@ export default function CreditCardFormHook() {
 
     const { signIn } = useContext(AuthenticatorContextApi)
     const navigation: NavigationProp<ParamListBase> = useNavigation();
+
     const respository = CreditCardFormRepository()
     const inputNumber = InputNumberHook()
     const inputName = InputNameHook()
@@ -101,7 +102,8 @@ export default function CreditCardFormHook() {
 
             if(response instanceof Success) {
                 state.successService = true
-                navigation.navigate(NavigationUrl.CreditCardListScreen, response as Success)
+                console.log("ENVIANDO DADOS "+response.data)
+                navigation.navigate(NavigationUrl.CreditCardListScreen, response.data)
             } else {
                 state.errorService = true
             }

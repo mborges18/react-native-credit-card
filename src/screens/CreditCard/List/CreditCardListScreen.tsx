@@ -10,7 +10,7 @@ import {
 import CreditCardListViewModel from 'screens/creditcard/list/CreditCardListViewModel';
 import Theme from 'utils/AppTheme';
 import Itemcard from 'screens/creditcard/list/ItemCard';
-import { useNavigation, ParamListBase,  NavigationProp } from '@react-navigation/native';
+import { useNavigation, ParamListBase,  NavigationProp, useRoute, RouteProp } from '@react-navigation/native';
 import { NavigationUrl } from 'navigation/NavigationUrl';
 import DialogConfirm from 'components/dialog/DialogConfirm';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -19,10 +19,16 @@ const CreditCardListScreen = () => {
     const viewModel = CreditCardListViewModel()
     const ThemeApp = Theme()
     const navigation: NavigationProp<ParamListBase> = useNavigation();
-
+    const route = useRoute<RouteProp<ParamListBase>>();
+    
     useEffect(() => {
-        viewModel.onGetData()
-    },[])
+        if(route.params != undefined &&  route.params != null) {
+            console.log("PEGANDO DADOS "+JSON.stringify(route.params))
+            viewModel.onDataCreated(route.params as Object)
+        } else {
+            viewModel.onGetData()
+        }
+    }, [route.params])
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -60,15 +66,14 @@ const CreditCardListScreen = () => {
                 />
             </View>
             <TouchableOpacity 
-            activeOpacity={0.8} 
-            style={[styles.floatButton, {backgroundColor: ThemeApp.colors.primary}]} 
-            onPress={() => {
-                navigation.navigate(NavigationUrl.CreditCardFormScreen);
-            }}>
+                activeOpacity={0.8} 
+                style={[styles.floatButton, {backgroundColor: ThemeApp.colors.primary}]} 
+                onPress={() => {
+                    navigation.navigate(NavigationUrl.CreditCardFormScreen);
+                }}>
                 <Icon name={'add'} size={24} color={ThemeApp.colors.onText} />
             </TouchableOpacity>
         </SafeAreaView>
-        
     );
 };
 

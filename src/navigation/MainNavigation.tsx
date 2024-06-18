@@ -1,28 +1,22 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer, NavigationProp } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import AuthenticatorScreen from 'screens/authenticator/AuthenticatorScreen';
 import CreditCardListScreen from 'screens/creditcard/list/CreditCardListScreen'
-import { SafeAreaView, StatusBar, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, StatusBar } from 'react-native';
 import Theme from 'utils/AppTheme';
 import { AuthenticatorProvider } from 'screens/authenticator/AuthenticatorContextApi';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { NavigationUrl } from 'navigation/NavigationUrl';
 import CreditCardFormScreen from 'screens/creditcard/form/screens/CreditCardFormScreen';
+import { LogBox } from 'react-native';
+
 
 const Stack = createNativeStackNavigator();
 
-// export type ScreenNames = [
-//   NavigationUrl.CreditCardListScreen, 
-//   NavigationUrl.CreditCardFormScreen,
-//   NavigationUrl.ScreenAuthentication
-// ] 
-// export type RootStackParamList = Record<ScreenNames[number], undefined | {}>;
-// export type StackNavigation = NavigationProp<RootStackParamList>;
-
-//const Stack = createNativeStackNavigator<RootStackParamList>();
-
 const MainNavigation = () => {
+  LogBox.ignoreLogs([
+    'Non-serializable values were found in the navigation state',
+  ]);
   const ThemeApp = Theme()
 
   return (

@@ -31,6 +31,15 @@ export type CreditCardDefault = {
     colorDark: string,
 }
 
+export const find = (name: string) => {
+    return Object.values(StyleCard()).find((element) => {
+        if(element.name.toLowerCase() == name.toLowerCase()) {
+            console.log("find => "+element.name.toLowerCase() +" === "+ name.toLowerCase())
+            return element
+        }
+    })
+}
+
 const height = 50
 const width = 70
 
