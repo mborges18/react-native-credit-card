@@ -15,8 +15,8 @@ type CreditCardItemProps = {
     isOpen?: boolean,
     isFront?: boolean,
     isFlipable?: boolean,
-    delete?: (number: string) => void,
-    edit?: (number: string) => void,
+    delete?: () => void,
+    edit?: () => void,
 }
 
 export default function Itemcard(props: CreditCardItemProps) {
@@ -152,14 +152,14 @@ export default function Itemcard(props: CreditCardItemProps) {
         { isOpentState && props.isClickable && !props.isFlipable ? (
             <View style={style.bottomActions}>
                 <TouchableOpacity 
-                    onPress={() => { props.delete?.(props.number) }} 
+                    onPress={() => { props.delete?.() }} 
                     activeOpacity={0.8} 
                     style={style.buttonAction}>
                     <Icon name={'delete'} size={24} color={ThemeApp.colors.onText} />
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                    onPress={() => { props.edit?.(props.number) }} 
+                    onPress={() => { props.edit?.() }} 
                     activeOpacity={0.8} 
                     style={style.buttonAction}>
                     <Icon name={'edit'} size={24} color={ThemeApp.colors.onText} />

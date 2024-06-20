@@ -31,7 +31,7 @@ const SignInScreen = () => {
             title={'Acesso'} 
             iconName={'lock'} 
             subTitle={'Seja bem vindo!'} 
-            description={'Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.\n\n'+(viewModel.signUp.data as SignUpModel)?.email}
+            description={'Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.'}
         />
 
         <TextFieldDefault 

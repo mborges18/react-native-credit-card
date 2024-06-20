@@ -43,10 +43,7 @@ const CreditCardListScreen = () => {
                     onClickConfirm={() => { viewModel.onDeleteDataConfirm() }} 
                     onClickCancel={() => { viewModel.onDeleteDataCancel() } } 
                 />
-                <FlatList style={{
-                    marginStart: 16, 
-                    marginEnd: 16, 
-                }}
+                <FlatList style={{marginStart: 16, marginEnd: 16}}
                     data={viewModel.state.listCards}
                     renderItem={({item}) => 
                     <Itemcard 
@@ -58,11 +55,11 @@ const CreditCardListScreen = () => {
                         isClickable={true} 
                         isFlipable={false}
                         creditCardType={item.styleCard}
-                        delete={(item) => {
+                        delete={() => {
                             viewModel.onDeleteData(item);
                         } }
-                        edit={(item) => {
-                            navigation.navigate(NavigationUrl.CreditCardFormScreen);
+                        edit={() => {
+                            navigation.navigate(NavigationUrl.CreditCardFormScreen, item);
                         } } 
                         />}
                 />

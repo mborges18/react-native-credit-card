@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, Animated, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from 'components/textfield/styles';
@@ -9,10 +9,15 @@ export default function TextField(
   props: TextFieldProps
 ) {
   const [borderOn, setBorderOn] = useState(false);
-  const [digit, setDigit] = useState(props.value ?? '');
+  const [digit, setDigit] = useState(props.value);
   const [activated, setActivated] = useState(false);
   const [eyeToggle, setEyeToggle] = useState(true);
-  const [upperAnimation, setUpperAnimation] = useState(new Animated.Value(0));
+  const [upperAnimation] = useState(new Animated.Value(0));
+
+  useEffect(() => {
+    setDigit(props.value);
+    startAnimation();
+  },[props.value])
 
   const handlerFocusInput = () => {
     setBorderOn(true);
@@ -24,11 +29,15 @@ export default function TextField(
     startAnimation();
   };
 
+  const hanlderPositionLabel = () => {
+    return activated ? -28 : digit==undefined || digit==null || digit=='' ? 0 : -28
+  }
+
   const startAnimation = () => {
     setActivated(!activated);
 
     Animated.timing(upperAnimation, {
-      toValue: activated && digit == '' ? 0 : -28,
+      toValue: hanlderPositionLabel(),
       duration: 100,
       useNativeDriver: false,
     }).start();
@@ -76,6 +85,7 @@ export default function TextField(
     }
   }
 
+  console.log("DATA activated "+activated, props.value)
   
   return (
   <>{props.isVisible && 
@@ -92,7 +102,7 @@ export default function TextField(
             onFocus={() => handlerFocusInput()}
             onChangeText={(text: string) => handlerMaskType(text)}
             value={digit}
-            placeholder={activated ? props.placeHolder : ''}
+            placeholder={!activated ? props.placeHolder : ''}
             inputMode={props.inputMode}
             secureTextEntry={props.isPassword && eyeToggle}
             maxLength={props.maxLength}
@@ -115,7 +125,7 @@ export default function TextField(
             animatedStyles.animeLabel,
             styles.label,
             {
-              zIndex: activated || digit != '' ? 2 : -1,
+              zIndex: activated || digit!=undefined || digit!=null || digit!='' ? 2 : -1,
               color: handlerColorLabel(),
               backgroundColor: props.colorContent != null ? props.colorContent : '#fff'
             },

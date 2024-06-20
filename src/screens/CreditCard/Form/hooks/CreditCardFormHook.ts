@@ -95,7 +95,6 @@ export default function CreditCardFormHook() {
     }
 
     const createData = async () => {
-
         try {
             state.isLoading = true
             model.idUser = signIn.toString().split("-")[0]
@@ -117,6 +116,18 @@ export default function CreditCardFormHook() {
         }
     }
 
+    const onEdit = (model?: CreditCardFormModel) => {
+        if(model != undefined && model != null) {
+            inputNumber.onValue(model.number)
+            inputName.onValue(model.nameUser)
+            inputDate.onValue(model.dateExpire)
+            inputCvv.onValue(model.cvv)
+            state.step = 4
+            handlerVisibilityInputs()
+            setState({...state})
+        }
+    }
+
     const onCloseErrorService = () => {
         state.errorService = false
         setState({...state})
@@ -134,6 +145,7 @@ export default function CreditCardFormHook() {
         handlerEnabledButton,
         model,
         createData,
-        onCloseErrorService
+        onCloseErrorService,
+        onEdit
     }
 }

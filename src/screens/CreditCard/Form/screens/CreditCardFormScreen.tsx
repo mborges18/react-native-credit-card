@@ -6,10 +6,20 @@ import Theme from "utils/AppTheme";
 import CreditCardFormHook from "screens/creditcard/form/hooks/CreditCardFormHook";
 import Itemcard from "screens/creditcard/list/ItemCard";
 import DialogError from "components/dialog/DialogError";
+import { ParamListBase, RouteProp, useRoute } from "@react-navigation/native";
+import { useEffect } from "react";
+import LogApp from "utils/LogApp";
+import CreditCardFormModel from "../model/CreditCardFormModel";
 
 const CreditCardFormScreen = () => {
     const ThemeApp = Theme()
     const FormHook = CreditCardFormHook()
+    const route = useRoute<RouteProp<ParamListBase>>();
+
+    useEffect(() => {
+        LogApp("UPDATE ITEM", route.params as [0])
+        FormHook.onEdit((route.params as CreditCardFormModel))
+    }, [route.params])
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -40,6 +50,7 @@ const CreditCardFormScreen = () => {
             <TextFieldDefault 
                 label={'Número do cartão'} 
                 placeHolder={'Ex: 0000 0000 0000 0000'} 
+                value={FormHook.model.number}
                 inputMode={'numeric'} 
                 iconStart={'credit-card'} 
                 maskType={MaskType.NUMBER_CARD}
@@ -54,6 +65,7 @@ const CreditCardFormScreen = () => {
             <TextFieldDefault 
                 label={'Nome do titular'} 
                 placeHolder={'Ex: JOSÉ ROBERTO'} 
+                value={FormHook.model.nameUser}
                 inputMode={'text'}
                 maxLength={25}
                 iconStart={'person'} 
@@ -68,6 +80,7 @@ const CreditCardFormScreen = () => {
             <TextFieldDefault 
                 label={'Data de vencimento'} 
                 placeHolder={'Ex: 00/0000'} 
+                value={FormHook.model.dateExpire}
                 inputMode={'numeric'} 
                 iconStart={'calendar-month'} 
                 maskType={MaskType.DATE_CARD}
@@ -82,6 +95,7 @@ const CreditCardFormScreen = () => {
             <TextFieldDefault 
                 label={'Código de seguraça'} 
                 placeHolder={'Ex: 000'} 
+                value={FormHook.model.cvv}
                 inputMode={'numeric'} 
                 maxLength={4}
                 iconStart={'security'} 
