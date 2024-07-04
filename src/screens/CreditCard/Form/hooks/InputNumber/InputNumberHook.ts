@@ -3,7 +3,7 @@ import StyleCard, { CreditCardDefault } from "screens/creditcard/list/model/Styl
 import Validation from "utils/Validation";
 
 export default function InputNumberHook() {
-    const [state] = useState<InputState>({
+    const [state, setState] = useState<InputState>({
         errorData: "",
         isValidData: false,
         isVisibleField: true,

@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Theme, { colorError } from 'utils/AppTheme';
+import Theme, { colorSuccess } from 'utils/AppTheme';
 import ButtonDefault from 'components/button/ButtonDefault';
 import ModalDefault from 'components/dialog/ModalDefault';
 import  { styles }  from 'components/dialog/styles';
 
-export default function DialogError(props: DialogErrorProps) {
+export default function DialogSuccess(props: DialogSuccessProps) {
     return (
     <ModalDefault dialog={<>
-            <View style={[styles().header, {backgroundColor: colorError}]}>
-                <Icon name='alert-circle-outline' size={48} color={Theme().colors.background} />
+            <View style={[styles().header, {backgroundColor: colorSuccess}]}>
+                <Icon name='check-circle-outline' size={48} color={Theme().colors.background} />
             </View>
             <View style={styles().container}>
                 <Text style={styles().title}>{props.title}</Text>
@@ -19,7 +19,7 @@ export default function DialogError(props: DialogErrorProps) {
                     text={'Ok'}
                     isLoading={false}
                     isDisabled={false}
-                    colorContainer={colorError}
+                    colorContainer={colorSuccess}
                     clickListener={
                         () => { props.onClickOk() }
                     } 
@@ -29,7 +29,7 @@ export default function DialogError(props: DialogErrorProps) {
     );
 }
 
-type DialogErrorProps = {
+type DialogSuccessProps = {
     isVisible: boolean,
     title: string,
     description: string,

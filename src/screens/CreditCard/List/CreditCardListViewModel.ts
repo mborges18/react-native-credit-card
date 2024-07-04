@@ -44,24 +44,24 @@ export default function CreditCardListViewModel() {
         }
     }
 
-    const onDeleteData = (item: string) => {
+    const onDeleteData = (item: CreditCardListModel) => {
         state.itemDelete = item
         state.confirmDelete = true
         setState({...state})
-        LogApp("onDeleteData "+ state.itemDelete)
+        LogApp("onDeleteData ", state.itemDelete)
     }
 
     const onDeleteDataConfirm = () => {
         state.confirmDelete = false
         setState({...state})
-        LogApp("onDeleteDataConfirm "+ state.confirmDelete)
+        LogApp("onDeleteDataConfirm ", state.confirmDelete)
     }
 
     const onDeleteDataCancel = () => {
         state.itemDelete = null
         state.confirmDelete = false
         setState({...state})
-        LogApp("onDeleteDataCancel "+ state.itemDelete)
+        LogApp("onDeleteDataCancel ", state.itemDelete)
     }
 
     const onDataCreated = (data: Object) => {
@@ -69,7 +69,7 @@ export default function CreditCardListViewModel() {
             var model = data as CreditCardListModel
             (model.styleCard = find(model.flag) ?? creditCard.Undefined)
             state.listCards.unshift(model)
-            LogApp("onDataCreated "+ model)
+            LogApp("onDataCreated ", model)
             setState({...state})
         }
     }

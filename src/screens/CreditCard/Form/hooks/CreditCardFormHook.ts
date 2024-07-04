@@ -6,7 +6,7 @@ import InputNumberHook from "screens/creditcard/form/hooks/inputnumber/InputNumb
 import InputNameHook from "screens/creditcard/form/hooks/inputname/InputNameHook";
 import ButtonHook from "screens/creditcard/form/hooks/button/ButtonHook";
 import CreditCardFormRepository from "screens/creditcard/form/data/CreditCardFormRepository";
-import { Success } from "api/ResultRequest";
+import { Exists, Success } from "api/ResultRequest";
 import CreditCardFormModel from "screens/creditcard/form/model/CreditCardFormModel";
 import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
 import { NavigationUrl } from "navigation/NavigationUrl";
@@ -34,8 +34,8 @@ export default function CreditCardFormHook() {
     });
 
     const [model, setModel] = useState<CreditCardFormModel>({
-            ROWID: "1",
-            idUser: "1",
+            ROWID: "",
+            idUser: "",
             number: inputNumber.valueData,
             nameUser: inputName.valueData,
             dateExpire: inputDate.valueData,
@@ -94,8 +94,30 @@ export default function CreditCardFormHook() {
         inputCvv.handlerVisibility(state.step)
     }
 
-    const createData = async () => {
+    const onEdit = (model?: CreditCardFormModel) => {
+        if(model != undefined && model != null) {
+            inputNumber.onValue(model.number)
+            inputName.onValue(model.nameUser)
+            inputDate.onValue(model.dateExpire)
+            inputCvv.onValue(model.cvv)
+            state.step = 4
+            handlerVisibilityInputs()
+            handlerEnabledButton()
+            setState({...state})
+        }
+    }
 
+    const onCloseErrorService = () => {
+        state.errorService = false
+        setState({...state})
+    }
+
+    const onCloseSuccessService = () => {
+        state.successService = false
+        setState({...state})
+    }
+
+    const createData = async () => {
         try {
             state.isLoading = true
             model.idUser = signIn.toString().split("-")[0]
@@ -104,8 +126,9 @@ export default function CreditCardFormHook() {
             if(response instanceof Success) {
                 state.successService = true
                 LogApp("ENVIANDO DADOS "+response.data)
-                navigation.navigate(NavigationUrl.CreditCardListScreen, response.data)
-            } else {
+                //navigation.navigate(NavigationUrl.CreditCardListScreen, response.data)
+            }  else {
+                state.resultRequest = response
                 state.errorService = true
             }
         } catch(error) {
@@ -115,11 +138,6 @@ export default function CreditCardFormHook() {
             state.isLoading = false
             setState({...state})
         }
-    }
-
-    const onCloseErrorService = () => {
-        state.errorService = false
-        setState({...state})
     }
 
     return {
@@ -134,6 +152,8 @@ export default function CreditCardFormHook() {
         handlerEnabledButton,
         model,
         createData,
-        onCloseErrorService
+        onCloseErrorService,
+        onCloseSuccessService,
+        onEdit
     }
 }

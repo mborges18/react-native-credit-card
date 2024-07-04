@@ -6,10 +6,21 @@ import Theme from "utils/AppTheme";
 import CreditCardFormHook from "screens/creditcard/form/hooks/CreditCardFormHook";
 import Itemcard from "screens/creditcard/list/ItemCard";
 import DialogError from "components/dialog/DialogError";
+import { ParamListBase, RouteProp, useRoute } from "@react-navigation/native";
+import { useEffect } from "react";
+import LogApp from "utils/LogApp";
+import CreditCardFormModel from "../model/CreditCardFormModel";
+import DialogSuccess from "components/dialog/DialogSuccess";
 
 const CreditCardFormScreen = () => {
     const ThemeApp = Theme()
     const FormHook = CreditCardFormHook()
+    const route = useRoute<RouteProp<ParamListBase>>();
+
+    useEffect(() => {
+        LogApp("UPDATE ITEM", route.params as [0])
+        FormHook.onEdit((route.params as CreditCardFormModel))
+    }, [route.params])
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -17,20 +28,29 @@ const CreditCardFormScreen = () => {
         <View style={styles.container}>
 
             <DialogError 
-                title={'Informação'}
-                description={'Ocorreu um erro inesperado. Por favor, tente novamente em alguns instantes'}
+                title={"Informação"}
+                description={ String(FormHook.state.resultRequest?.data) }
                 onClickOk={() => {
                     FormHook.onCloseErrorService()
                 } } 
                 isVisible={FormHook.state.errorService}
             />
 
+            <DialogSuccess 
+                title={"Informação"} 
+                description={String(FormHook.state.resultRequest?.data)} 
+                onClickOk={() => {
+                    FormHook.onCloseSuccessService()
+                } } 
+                isVisible={FormHook.state.successService} 
+            />
+
             <Itemcard 
                 number={FormHook.inputNumber.valueData}
                 name={FormHook.inputName.valueData}
                 date={FormHook.inputDate.valueData}
-                creditCardType={FormHook.inputNumber.typeCardData}
                 cvv={FormHook.inputCvv.valueData}
+                creditCardType={FormHook.inputNumber.typeCardData}
                 isOpen={true}
                 isFront={!FormHook.inputCvv.state.isVisibleField} 
                 isFlipable={true}
@@ -40,6 +60,7 @@ const CreditCardFormScreen = () => {
             <TextFieldDefault 
                 label={'Número do cartão'} 
                 placeHolder={'Ex: 0000 0000 0000 0000'} 
+                value={FormHook.inputNumber.valueData}
                 inputMode={'numeric'} 
                 iconStart={'credit-card'} 
                 maskType={MaskType.NUMBER_CARD}
@@ -54,6 +75,7 @@ const CreditCardFormScreen = () => {
             <TextFieldDefault 
                 label={'Nome do titular'} 
                 placeHolder={'Ex: JOSÉ ROBERTO'} 
+                value={FormHook.inputName.valueData}
                 inputMode={'text'}
                 maxLength={25}
                 iconStart={'person'} 
@@ -68,6 +90,7 @@ const CreditCardFormScreen = () => {
             <TextFieldDefault 
                 label={'Data de vencimento'} 
                 placeHolder={'Ex: 00/0000'} 
+                value={FormHook.inputDate.valueData}
                 inputMode={'numeric'} 
                 iconStart={'calendar-month'} 
                 maskType={MaskType.DATE_CARD}
@@ -82,6 +105,7 @@ const CreditCardFormScreen = () => {
             <TextFieldDefault 
                 label={'Código de seguraça'} 
                 placeHolder={'Ex: 000'} 
+                value={FormHook.inputCvv.valueData}
                 inputMode={'numeric'} 
                 maxLength={4}
                 iconStart={'security'} 
