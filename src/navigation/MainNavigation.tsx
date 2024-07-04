@@ -3,13 +3,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import AuthenticatorScreen from 'screens/authenticator/AuthenticatorScreen';
 import CreditCardListScreen from 'screens/creditcard/list/CreditCardListScreen'
+import CreditCardFormScreen from 'screens/creditcard/form/screens/CreditCardFormScreen';
 import { SafeAreaView, StatusBar } from 'react-native';
 import Theme from 'utils/AppTheme';
 import { AuthenticatorProvider } from 'screens/authenticator/AuthenticatorContextApi';
 import { NavigationUrl } from 'navigation/NavigationUrl';
-import CreditCardFormScreen from 'screens/creditcard/form/screens/CreditCardFormScreen';
 import { LogBox } from 'react-native';
-
 
 const Stack = createNativeStackNavigator();
 
