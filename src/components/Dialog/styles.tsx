@@ -2,6 +2,7 @@ import { StyleSheet } from "react-native"
 import Theme from 'utils/AppTheme';
 
 export const styles = () => {
+    const theme = Theme()
     return StyleSheet.create({
         header: {
             borderTopStartRadius: 8, 
@@ -16,17 +17,18 @@ export const styles = () => {
             alignItems:'center',
             borderBottomStartRadius: 8,
             borderBottomEndRadius: 8,
-            backgroundColor: Theme().colors.surface
+            backgroundColor: theme.colors.surface
         },
         title: {
             fontSize: 22, 
             fontWeight:'bold', 
-            color: Theme().colors.text
+            color: theme.colors.text
         },
-        subTitle: {
+        description: {
             marginTop: 16, 
             fontSize: 15, 
-            color: Theme().colors.text
+            textAlign: 'center',
+            color: theme.colors.text
         },
     })
 }

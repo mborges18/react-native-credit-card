@@ -1,5 +1,5 @@
 import { Api } from "api/Api"
-import { Failure, Success, Error } from "api/ResultRequest"
+import { Failure, Success, Error, Exists } from "api/ResultRequest"
 import CreditCardFormModel from "../model/CreditCardFormModel"
 import { ToRequest } from "./CreditCardFormMapper"
 
@@ -12,12 +12,14 @@ export default function CreditCardFormRepository() {
         .then((response) => {
             if (response.code===201) {
                 return new Success(response.body)
-            }else {
-                return new Error(response)
+            } else if (response.code===409){
+                return new Exists("Este cartão já está regsitrado. Por favor, cadastre outro cartão.")
+            } else {
+                return new Error("Ocorreu um erro inesperado. Por favor, tente novamente em alguns instantes")
             }
         })
         .catch((error) => {
-            return new Failure(error)
+            return new Failure("Ocorreu um erro inesperado. Por favor, tente novamente em alguns instantes")
         })
     }
 

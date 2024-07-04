@@ -1,7 +1,9 @@
 export abstract class ResultRequest {
     data: Object;
-    constructor(data: Object) {
+    message: String;
+    constructor(data: Object, message: String) {
         this.data = data;
+        this.message = message;
     }
 }
 
@@ -11,6 +13,6 @@ export class Error extends ResultRequest{}
 
 export class Failure extends ResultRequest{}
 
-export class Unauthorized {}
+export class Unauthorized extends ResultRequest{}
 
-export class Exists {}
+export class Exists extends ResultRequest{}

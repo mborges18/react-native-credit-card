@@ -1,31 +1,39 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Animated, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from 'components/textfield/styles';
 import Mask from 'components/textfield/mask';
 import { TextFieldProps } from 'components/textfield/TextFieldProps';
 
-export default function TextField(
-  props: TextFieldProps
-) {
+export default function TextField(props: TextFieldProps) {
   const [borderOn, setBorderOn] = useState(false);
+  const [zindex, setZindex] = useState(-1);
   const [digit, setDigit] = useState(props.value);
   const [activated, setActivated] = useState(false);
   const [eyeToggle, setEyeToggle] = useState(true);
   const [upperAnimation] = useState(new Animated.Value(0));
 
   useEffect(() => {
+    if(props.value!=undefined && props.value!=null && props.value!='') {
+      setZindex(2);
+    }
     setDigit(props.value);
     startAnimation();
-  },[props.value])
+  }, [props.value])
 
   const handlerFocusInput = () => {
     setBorderOn(true);
+    setZindex(2);
     startAnimation();
   };
 
   const handlerBlurInput = () => {
     setBorderOn(false);
+    if(digit!=undefined && digit!=null && digit!='') {
+      setZindex(2);
+    } else {
+      setZindex(-1);
+    }
     startAnimation();
   };
 
@@ -46,12 +54,8 @@ export default function TextField(
   const animatedStyles = {
     animeLabel: {
       transform: [
-        {
-          translateY: upperAnimation,
-        },
-        {
-          translateX: upperAnimation,
-        },
+        { translateY: upperAnimation },
+        { translateX: upperAnimation },
       ],
     },
   };
@@ -84,11 +88,9 @@ export default function TextField(
       else return props.colorBorderDisabled;
     }
   }
-
-  console.log("DATA activated "+activated, props.value)
   
   return (
-  <>{props.isVisible && 
+  <>{props.isVisible ? 
     <View style={{
         marginTop: 20,
         position: 'relative',
@@ -114,7 +116,7 @@ export default function TextField(
         <TouchableOpacity activeOpacity={.7} style={[styles.icon, { right: 0, zIndex: 100, marginEnd: 10}]} onPress={() => {
           setEyeToggle(!eyeToggle)
         }}> 
-          <Icon  
+          <Icon 
           name={!eyeToggle?  'visibility' : 'visibility-off'} size={22} color={handlerColorLabel()}
           />
           </TouchableOpacity>
@@ -125,7 +127,7 @@ export default function TextField(
             animatedStyles.animeLabel,
             styles.label,
             {
-              zIndex: activated || digit!=undefined || digit!=null || digit!='' ? 2 : -1,
+              zIndex: zindex,
               color: handlerColorLabel(),
               backgroundColor: props.colorContent != null ? props.colorContent : '#fff'
             },
@@ -137,8 +139,7 @@ export default function TextField(
         <Text style={{color: props.colorBorderError}}>{props.messageError}</Text>}
     
     </View>
-  }
+  : null}
     </>
   );
 }
-
