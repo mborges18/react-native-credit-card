@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import Theme from 'utils/AppTheme';
 
 type ButtonDefaultProps = {
-    width?: number,
+    width?: number;
     colorText?: string
 }
 
@@ -18,5 +18,22 @@ export const Button = styled.TouchableOpacity<ButtonDefaultProps>`
 export const TextButton = styled.Text<ButtonDefaultProps>`
     text-align: center; 
     color:  ${({ colorText }) => colorText ?? Theme().colors.onPrimary };
+    font-weight: bold;
+`;
+
+export const ButtonOutline = styled.TouchableOpacity<ButtonDefaultProps>`
+    margin-top: 24px;
+    width: 100%; 
+    height: 55px;
+    justify-content: center;
+    border-radius: 8px;
+    border-width: 1px;
+    border-color: ${(disabled) => disabled ? Theme().colors.onSurfaceVariant : Theme().colors.primary };
+    background-color: transparent;
+`;
+
+export const TextButtonOutline = styled.Text<ButtonDefaultProps>`
+    text-align: center; 
+    color: ${(disabled) => disabled ? Theme().colors.onSurfaceVariant : Theme().colors.primary };
     font-weight: bold;
 `;
