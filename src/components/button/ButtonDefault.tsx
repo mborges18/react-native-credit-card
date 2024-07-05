@@ -1,6 +1,8 @@
-import { Text, StyleSheet, ActivityIndicator, DimensionValue} from 'react-native';
+import { ActivityIndicator, DimensionValue } from 'react-native';
+
 import Theme from 'utils/AppTheme';
 import * as S from "./styles";
+import React from 'react';
 
 type ButtonDefaultProps = {
     text: string,

@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import TextFieldDefault from 'components/textfield/TextFieldDefault';
 import ButtonDefault from 'components/button/ButtonDefault';
 import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler';
-import SwitchButton from 'screens/authenticator/signin/SwitchButton';
+import SwitchButton from 'components/switch/SwitchButton';
 import SignInViewModel from 'screens/authenticator/signin/SignInViewModel';
 import ButtonOutline from 'components/button/ButtonOutline';
 import HeaderWellCome from 'components/header/HeaderWellCome';

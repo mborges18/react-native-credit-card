@@ -13,11 +13,6 @@ export const Button = styled.TouchableOpacity<ButtonDefaultProps>`
     border-radius: 8px;
     width:  ${({ width }) => width ?? 100}%;
     background-color: ${({ disabled }) => disabled ? Theme().colors.onSurfaceVariant : Theme().colors.primary };
-    /* shadow-color: 'rgba(0,0,0, .4)'; // IOS
-    shadow-offset: { height: 1; width: 1 }; // IOS
-    shadow-opacity: 1; // IOS
-    shadow-radius: 1; //IOS
-    elevation: 2; // Android */
 `;
 
 export const TextButton = styled.Text<ButtonDefaultProps>`
