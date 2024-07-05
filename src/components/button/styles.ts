@@ -28,12 +28,12 @@ export const ButtonOutline = styled.TouchableOpacity<ButtonDefaultProps>`
     justify-content: center;
     border-radius: 8px;
     border-width: 1px;
-    border-color: ${(disabled) => disabled ? Theme().colors.onSurfaceVariant : Theme().colors.primary };
+    border-color: ${(disabled) => disabled ? Theme().colors.primary : Theme().colors.onSurfaceVariant };
     background-color: transparent;
 `;
 
 export const TextButtonOutline = styled.Text<ButtonDefaultProps>`
     text-align: center; 
-    color: ${(disabled) => disabled ? Theme().colors.onSurfaceVariant : Theme().colors.primary };
+    color: ${(disabled) => disabled ? Theme().colors.primary : Theme().colors.onSurfaceVariant };
     font-weight: bold;
 `;
