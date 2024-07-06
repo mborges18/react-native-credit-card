@@ -5,7 +5,7 @@ import * as S from "./styles";
 import { TextFieldProps } from 'components/textfield/TextFieldProps';
 import { useTextField } from './useTextField';
 
-export default function TextField(props: TextFieldProps) {
+const TextField = (props: TextFieldProps) => {
   const textFieldHook = useTextField(props);
 
   return (
@@ -59,3 +59,5 @@ export default function TextField(props: TextFieldProps) {
     </>
   );
 }
+
+export default TextField;
