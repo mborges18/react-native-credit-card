@@ -78,7 +78,6 @@ export const colorError = '#b94e4e';
 export const colorSuccess = '#499865';
 export const colorInfo = '#5c89b6';
 export const colorWarning = '#b2a065';
-
 export const overlay = '#00000087';
 
 export default AppTheme;

@@ -22,7 +22,7 @@ const SignUpScreen = () => {
             <DialogError 
                 title={'Informação'}
                 description={'Ocorreu um erro inesperado. Por favor, tente novamente em alguns instantes'}
-                onClickOk={() => {
+                onClickConfirm={() => {
                     viewModel.onCloseErrorService()
                 } } 
                 isVisible={viewModel.state.errorService}

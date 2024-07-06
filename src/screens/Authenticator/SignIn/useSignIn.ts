@@ -8,7 +8,7 @@ import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/
 import { NavigationUrl } from 'navigation/NavigationUrl';
 import AuthenticatorContextApi from '../AuthenticatorContextApi';
 
-export default function SignInViewModel() {
+const useSignIn = () => {
     const navigation: NavigationProp<ParamListBase> = useNavigation();
     const { signUp , setSignIn } = useContext(AuthenticatorContextApi)
     const respository = SignInRespository();
@@ -125,3 +125,5 @@ export default function SignInViewModel() {
         signUp,
     }
 }
+
+export default useSignIn;

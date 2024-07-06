@@ -13,9 +13,9 @@ const TextField = (props: TextFieldProps) => {
     <S.Wrapper>
       <S.InputText
         style={[{borderColor: textFieldHook.helperBorderColor(props)}]}
-        onBlur={() => textFieldHook.handlerBlurInput()}
-        onFocus={() => textFieldHook.handlerFocusInput()}
-        onChangeText={(text: string) => textFieldHook.handlerMaskType(text)}
+        onBlur={textFieldHook.handlerBlurInput}
+        onFocus={textFieldHook.handlerFocusInput}
+        onChangeText={textFieldHook.handlerMaskType}
         value={textFieldHook.digit}
         placeholder={textFieldHook.handlerPlaceHolder()}
         inputMode={props.inputMode}
@@ -33,11 +33,10 @@ const TextField = (props: TextFieldProps) => {
 
       {props.isPassword &&
         <S.IconButton 
-          activeOpacity={.7} onPress={() => {
-            textFieldHook.setEyeToggle(!textFieldHook.eyeToggle)
-        }}> 
+          activeOpacity={.7} 
+          onPress={textFieldHook.handlerEyeToggle}> 
           <Icon 
-            name={textFieldHook.handlerEyeToggle()} 
+            name={textFieldHook.handlerIconEyeToggle()} 
             size={22} 
             color={textFieldHook.handlerColorLabel()}
           />

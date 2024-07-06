@@ -41,7 +41,7 @@ export const useTextField = (props: TextFieldProps) => {
     }
 
     const handlerPlaceHolder = () => {
-        return activated ? props.placeHolder : ''
+        return !activated ? props.placeHolder : ''
     }
   
     const startAnimation = () => {
@@ -92,7 +92,7 @@ export const useTextField = (props: TextFieldProps) => {
       }
     }
 
-    const handlerEyeToggle = () => {
+    const handlerIconEyeToggle = () => {
         return !eyeToggle ? 'visibility' : 'visibility-off';
     }
 
@@ -103,23 +103,26 @@ export const useTextField = (props: TextFieldProps) => {
     const handlerSecretPassword = () => {
       return props.isPassword && eyeToggle;
     }
+
+    const handlerEyeToggle = () => {
+      setEyeToggle(!eyeToggle)
+    }
     
     return {
         handlerFocusInput,
         handlerBlurInput,
         hanlderPositionLabel,
         handlerPlaceHolder,
-        animatedStyles,
         handlerMaskType,
         handlerColorLabel,
         helperBorderColor,
-        setEyeToggle,
-        eyeToggle,
+        handlerEyeToggle,
+        handlerIconEyeToggle,
+        handlerMessageError,
+        handlerSecretPassword,
+        animatedStyles,
         zindex,
         digit,
         activated,
-        handlerEyeToggle,
-        handlerMessageError,
-        handlerSecretPassword
     }
 }
