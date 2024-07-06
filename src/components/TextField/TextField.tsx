@@ -1,144 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Animated, TextInput, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import styles from 'components/textfield/styles';
-import Mask from 'components/textfield/mask';
+import * as S from "./styles";
 import { TextFieldProps } from 'components/textfield/TextFieldProps';
+import { useTextField } from './useTextField';
 
 export default function TextField(props: TextFieldProps) {
-  const [borderOn, setBorderOn] = useState(false);
-  const [zindex, setZindex] = useState(-1);
-  const [digit, setDigit] = useState(props.value);
-  const [activated, setActivated] = useState(false);
-  const [eyeToggle, setEyeToggle] = useState(true);
-  const [upperAnimation] = useState(new Animated.Value(0));
+  const textFieldHook = useTextField(props);
 
-  useEffect(() => {
-    if(props.value!=undefined && props.value!=null && props.value!='') {
-      setZindex(2);
-    }
-    setDigit(props.value);
-    startAnimation();
-  }, [props.value])
-
-  const handlerFocusInput = () => {
-    setBorderOn(true);
-    setZindex(2);
-    startAnimation();
-  };
-
-  const handlerBlurInput = () => {
-    setBorderOn(false);
-    if(digit!=undefined && digit!=null && digit!='') {
-      setZindex(2);
-    } else {
-      setZindex(-1);
-    }
-    startAnimation();
-  };
-
-  const hanlderPositionLabel = () => {
-    return activated ? -28 : digit==undefined || digit==null || digit=='' ? 0 : -28
-  }
-
-  const startAnimation = () => {
-    setActivated(!activated);
-
-    Animated.timing(upperAnimation, {
-      toValue: hanlderPositionLabel(),
-      duration: 100,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const animatedStyles = {
-    animeLabel: {
-      transform: [
-        { translateY: upperAnimation },
-        { translateX: upperAnimation },
-      ],
-    },
-  };
-
-  const handlerMaskType = (text: string) => {
-    if(props.maskType!=null) {
-      text = Mask.maskCustom(props.maskType, text);
-      props.listenerChangeText(text);
-      setDigit(text)
-    } else {
-      props.listenerChangeText(text);
-      setDigit(text);
-    }
-  };
-
-  function handlerColorLabel() {
-    if (props.messageError != '' && props.messageError != null) {
-      return props.colorBorderError;
-    } else {
-      if (borderOn) return props.colorBorderEnabled;
-      else return props.colorBorderDisabled;
-    }
-  }
-
-  function helperBorderColor(props: TextFieldProps) {
-    if (props.messageError != '' && props.messageError != null) {
-      return props.colorBorderError;
-    } else {
-      if (borderOn) return props.colorBorderEnabled;
-      else return props.colorBorderDisabled;
-    }
-  }
-  
   return (
   <>{props.isVisible ? 
-    <View style={{
-        marginTop: 20,
-        position: 'relative',
-        width: '100%',
-        backgroundColor: props.colorContent != null ? props.colorContent : '#fff'
-    }}>
-  
-       <TextInput
-            style={[styles.input, {borderColor: helperBorderColor(props)}]}
-            onBlur={() => handlerBlurInput()}
-            onFocus={() => handlerFocusInput()}
-            onChangeText={(text: string) => handlerMaskType(text)}
-            value={digit}
-            placeholder={!activated ? props.placeHolder : ''}
+    <S.Wrapper>
+       <S.InputText
+            style={[{borderColor: textFieldHook.helperBorderColor(props)}]}
+            onBlur={() => textFieldHook.handlerBlurInput()}
+            onFocus={() => textFieldHook.handlerFocusInput()}
+            onChangeText={(text: string) => textFieldHook.handlerMaskType(text)}
+            value={textFieldHook.digit}
+            placeholder={textFieldHook.handlerPlaceHolder()}
             inputMode={props.inputMode}
-            secureTextEntry={props.isPassword && eyeToggle}
+            secureTextEntry={props.isPassword && textFieldHook.eyeToggle}
             maxLength={props.maxLength}
         />
 
-        <Icon style={styles.icon} name={props.iconStart} size={22} color={handlerColorLabel()} />
+        <S.IconWrapper>
+          <Icon name={props.iconStart} size={22} color={textFieldHook.handlerColorLabel()} />
+        </S.IconWrapper>
 
         {props.isPassword &&
-        <TouchableOpacity activeOpacity={.7} style={[styles.icon, { right: 0, zIndex: 100, marginEnd: 10}]} onPress={() => {
-          setEyeToggle(!eyeToggle)
-        }}> 
-          <Icon 
-          name={!eyeToggle?  'visibility' : 'visibility-off'} size={22} color={handlerColorLabel()}
-          />
-          </TouchableOpacity>
+          <S.IconButton 
+            activeOpacity={.7} onPress={() => {
+              textFieldHook.setEyeToggle(!textFieldHook.eyeToggle)
+          }}> 
+            <Icon name={textFieldHook.handlerEyeToggle()} size={22} color={textFieldHook.handlerColorLabel()}/>
+          </S.IconButton>
         }
 
-        <Animated.Text
-          style={[
-            animatedStyles.animeLabel,
-            styles.label,
-            {
-              zIndex: zindex,
-              color: handlerColorLabel(),
-              backgroundColor: props.colorContent != null ? props.colorContent : '#fff'
-            },
-          ]}>
+        <S.LabelAnimate style={textFieldHook.animatedStyles.animeLabel}  zIndex={textFieldHook.zindex} colorText={textFieldHook.handlerColorLabel()}>
           {props.label}
-        </Animated.Text>
+        </S.LabelAnimate>
 
         {props.messageError != '' && props.messageError != null && 
         <Text style={{color: props.colorBorderError}}>{props.messageError}</Text>}
     
-    </View>
+    </S.Wrapper>
   : null}
     </>
   );
