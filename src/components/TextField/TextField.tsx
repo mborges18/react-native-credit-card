@@ -11,37 +11,48 @@ export default function TextField(props: TextFieldProps) {
   return (
   <>{props.isVisible ? 
     <S.Wrapper>
-       <S.InputText
-            style={[{borderColor: textFieldHook.helperBorderColor(props)}]}
-            onBlur={() => textFieldHook.handlerBlurInput()}
-            onFocus={() => textFieldHook.handlerFocusInput()}
-            onChangeText={(text: string) => textFieldHook.handlerMaskType(text)}
-            value={textFieldHook.digit}
-            placeholder={textFieldHook.handlerPlaceHolder()}
-            inputMode={props.inputMode}
-            secureTextEntry={props.isPassword && textFieldHook.eyeToggle}
-            maxLength={props.maxLength}
+      <S.InputText
+        style={[{borderColor: textFieldHook.helperBorderColor(props)}]}
+        onBlur={() => textFieldHook.handlerBlurInput()}
+        onFocus={() => textFieldHook.handlerFocusInput()}
+        onChangeText={(text: string) => textFieldHook.handlerMaskType(text)}
+        value={textFieldHook.digit}
+        placeholder={textFieldHook.handlerPlaceHolder()}
+        inputMode={props.inputMode}
+        secureTextEntry={textFieldHook.handlerSecretPassword()}
+        maxLength={props.maxLength}
+      />
+
+      <S.IconWrapper>
+        <Icon 
+          name={props.iconStart} 
+          size={22} 
+          color={textFieldHook.handlerColorLabel()} 
         />
+      </S.IconWrapper>
 
-        <S.IconWrapper>
-          <Icon name={props.iconStart} size={22} color={textFieldHook.handlerColorLabel()} />
-        </S.IconWrapper>
+      {props.isPassword &&
+        <S.IconButton 
+          activeOpacity={.7} onPress={() => {
+            textFieldHook.setEyeToggle(!textFieldHook.eyeToggle)
+        }}> 
+          <Icon 
+            name={textFieldHook.handlerEyeToggle()} 
+            size={22} 
+            color={textFieldHook.handlerColorLabel()}
+          />
+        </S.IconButton>
+      }
 
-        {props.isPassword &&
-          <S.IconButton 
-            activeOpacity={.7} onPress={() => {
-              textFieldHook.setEyeToggle(!textFieldHook.eyeToggle)
-          }}> 
-            <Icon name={textFieldHook.handlerEyeToggle()} size={22} color={textFieldHook.handlerColorLabel()}/>
-          </S.IconButton>
-        }
+      <S.LabelAnimate 
+        style={textFieldHook.animatedStyles.animeLabel}  
+        zIndex={textFieldHook.zindex} 
+        colorText={textFieldHook.handlerColorLabel()}>
+        {props.label}
+      </S.LabelAnimate>
 
-        <S.LabelAnimate style={textFieldHook.animatedStyles.animeLabel}  zIndex={textFieldHook.zindex} colorText={textFieldHook.handlerColorLabel()}>
-          {props.label}
-        </S.LabelAnimate>
-
-        {props.messageError != '' && props.messageError != null && 
-        <Text style={{color: props.colorBorderError}}>{props.messageError}</Text>}
+      {textFieldHook.handlerMessageError() && 
+      <Text style={{color: props.colorBorderError}}>{props.messageError}</Text>}
     
     </S.Wrapper>
   : null}

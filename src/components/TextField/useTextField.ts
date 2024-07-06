@@ -40,7 +40,7 @@ export const useTextField = (props: TextFieldProps) => {
       return activated ? -28 : digit==undefined || digit==null || digit=='' ? 0 : -28
     }
 
-    function handlerPlaceHolder() {
+    const handlerPlaceHolder = () => {
         return activated ? props.placeHolder : ''
     }
   
@@ -74,7 +74,7 @@ export const useTextField = (props: TextFieldProps) => {
       }
     };
   
-    function handlerColorLabel() {
+    const handlerColorLabel = () => {
       if (props.messageError != '' && props.messageError != null) {
         return props.colorBorderError;
       } else {
@@ -83,7 +83,7 @@ export const useTextField = (props: TextFieldProps) => {
       }
     }
   
-    function helperBorderColor(props: TextFieldProps) {
+    const helperBorderColor = (props: TextFieldProps) => {
       if (props.messageError != '' && props.messageError != null) {
         return props.colorBorderError;
       } else {
@@ -92,8 +92,16 @@ export const useTextField = (props: TextFieldProps) => {
       }
     }
 
-    function handlerEyeToggle() {
-        return !eyeToggle ? 'visibility' : 'visibility-off'
+    const handlerEyeToggle = () => {
+        return !eyeToggle ? 'visibility' : 'visibility-off';
+    }
+
+    const handlerMessageError = () => {
+      return props.messageError != '' && props.messageError != null;
+    }
+
+    const handlerSecretPassword = () => {
+      return props.isPassword && eyeToggle;
     }
     
     return {
@@ -110,6 +118,8 @@ export const useTextField = (props: TextFieldProps) => {
         zindex,
         digit,
         activated,
-        handlerEyeToggle
+        handlerEyeToggle,
+        handlerMessageError,
+        handlerSecretPassword
     }
 }
