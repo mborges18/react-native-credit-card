@@ -1,7 +1,12 @@
 import { useRef, useState } from "react";
 
+interface InputState {
+    errorData: string,
+    isValidData: boolean,
+    isVisibleField: boolean,
+}
 
-export default function InputDateHook() {
+const useInputDate = () => {
     const [state] = useState<InputState>({
         errorData: "",
         isValidData: false,
@@ -58,8 +63,4 @@ export default function InputDateHook() {
     }
 }
 
-interface InputState {
-    errorData: string,
-    isValidData: boolean,
-    isVisibleField: boolean,
-}
+export default useInputDate;

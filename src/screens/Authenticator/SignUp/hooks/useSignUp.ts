@@ -1,12 +1,12 @@
 import { useState, useRef, useContext } from "react";
-import SignUpState from "./SignUpState";
-import SignUpModel from "./model/SignUpModel"
-import Validation from "../../../utils/Validation";
-import { Exists, ResultRequest, Success } from "../../../api/ResultRequest";
-import SignUpRespository from "./data/SignUpRepository";
-import AuthenticatorContextApi from "../AuthenticatorContextApi";
+import SignUpState from "../screens/SignUpState";
+import SignUpModel from "../model/SignUpModel"
+import Validation from "utils/Validation";
+import { Exists, ResultRequest, Success } from "api/ResultRequest";
+import SignUpRespository from "../data/SignUpRepository";
+import AuthenticatorContextApi from "../../AuthenticatorContextApi";
 
-export default function  SignUpViewModel() {
+const useSignUp = () => {
     const { setSignUp } = useContext(AuthenticatorContextApi)
     const respository = SignUpRespository();
 
@@ -200,8 +200,13 @@ export default function  SignUpViewModel() {
         setState({...state})
     }
 
+    const handlerDisabledButton = () => {
+        return state.isDisabledButton || state.isLoading
+    }
+
     return {
         state,
+        handlerDisabledButton,
         onName,
         onBirthDate,
         onPhone,
@@ -212,3 +217,5 @@ export default function  SignUpViewModel() {
         onCloseErrorService
     }
 }
+
+export default useSignUp;

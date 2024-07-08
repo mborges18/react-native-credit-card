@@ -1,11 +1,11 @@
-import { ActivityIndicator, DimensionValue } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import Theme from 'utils/AppTheme';
 import * as S from "./styles";
 import React from 'react';
 
 type ButtonDefaultProps = {
   text: string,
-  width?: DimensionValue,
+  width?: number,
   isLoading: boolean,
   isDisabled: boolean,
   colorContainer?: string,
@@ -13,9 +13,7 @@ type ButtonDefaultProps = {
   clickListener: (() => void);
 }
 
-export default function ButtonDefault(
-  props: ButtonDefaultProps
-) {
+const ButtonDefault = (props: ButtonDefaultProps) => {
   const HandlerLoading = () => {
     return(
       props.isLoading
@@ -25,11 +23,15 @@ export default function ButtonDefault(
   }
 
   return(
-    <S.Button  
+    <S.Button 
+      width={props.width}
       disabled={props.isDisabled || props.isLoading}
       onPress={()=>{ props.clickListener() }}
+      colorContainer={props.colorContainer}
       activeOpacity={.7}>
         <HandlerLoading />
     </S.Button>
   );
 }
+
+export default ButtonDefault;

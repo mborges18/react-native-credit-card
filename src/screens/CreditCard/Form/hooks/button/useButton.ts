@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-export default function ButtonHook() {
+const useButton = () => {
     const [state, setState] = useState<InputState>({
         isDisabledButtonPrev: true,
         isDisabledButtonNext: true,
@@ -117,3 +117,5 @@ interface InputState {
     isDisabledButtonPrev: boolean,
     isDisabledButtonNext: boolean,
 }
+
+export default useButton;

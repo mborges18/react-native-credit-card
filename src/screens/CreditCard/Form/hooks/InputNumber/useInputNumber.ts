@@ -2,7 +2,13 @@ import { useRef, useState } from "react";
 import StyleCard, { CreditCardDefault } from "screens/creditcard/list/model/StyleCard";
 import Validation from "utils/Validation";
 
-export default function InputNumberHook() {
+interface InputState {
+    errorData: string,
+    isValidData: boolean,
+    isVisibleField: boolean,
+}
+
+const useInputNumber = () => {
     const [state, setState] = useState<InputState>({
         errorData: "",
         isValidData: false,
@@ -57,8 +63,4 @@ export default function InputNumberHook() {
     }
 }
 
-interface InputState {
-    errorData: string,
-    isValidData: boolean,
-    isVisibleField: boolean,
-}
+export default useInputNumber;

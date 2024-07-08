@@ -4,7 +4,7 @@ import TextFieldDefault from 'components/textfield/TextFieldDefault';
 import ButtonDefault from 'components/button/ButtonDefault';
 import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler';
 import SwitchButton from 'components/switch/SwitchButton';
-import useSignIn from 'screens/authenticator/signin/useSignIn';
+import useSignIn from 'screens/authenticator/signin/hooks/useSignIn';
 import ButtonOutline from 'components/button/ButtonOutline';
 import HeaderWellCome from 'components/header/HeaderWellCome';
 import DialogError from 'components/dialog/DialogError';
@@ -13,13 +13,13 @@ import SignUpModel from 'screens/authenticator/signup/model/SignUpModel';
 const SignInScreen = () => {
 
   const {
+    state,
+    signUp,
     onCloseErrorService,
     onEmail,
     onPassword,
     onKeepConnected,
     onSubmit,
-    state,
-    signUp,
   } = useSignIn()
 
   return (

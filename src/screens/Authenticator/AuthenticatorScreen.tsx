@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import PagerView from 'react-native-pager-view';
 import { View } from 'react-native';
 import TabTopComponent from 'screens/authenticator/TabTopComponent';
-import SignInScreen from 'screens/authenticator/signin/SignInScreen';
-import SignUpScreen from 'screens/authenticator/signup/SignUpScreen';
+import SignInScreen from 'screens/authenticator/signin/screens/SignInScreen';
+import SignUpScreen from 'screens/authenticator/signup/screens/SignUpScreen';
 import Theme from 'utils/AppTheme';
 
 const AuthenticatorScreen = () => {

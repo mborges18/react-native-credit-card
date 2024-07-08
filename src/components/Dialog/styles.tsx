@@ -6,16 +6,16 @@ type DialogProps = {
 }
 
 export const OverLayModal = styled.View`
-  flex: 1px;
+  flex: 1;
   justify-content: center; 
-  align-items:'center'; 
+  align-items: center; 
   background-color: ${() => overlay};
 `;
 
 export const ModalDialog = styled.View`
-  background-color: ${() => Theme().colors.background }; 
-  border-radius: 8px;
   width: 85%;
+  border-radius: 8px;
+  background-color: ${() => Theme().colors.background }; 
 `;
 
 export const HeaderDialog = styled.View<DialogProps>`
