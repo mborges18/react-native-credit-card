@@ -1,7 +1,6 @@
 import MaskType from "components/textfield/MaskType";
 import TextFieldDefault from "components/textfield/TextFieldDefault";
 import ButtonDefault from "components/button/ButtonDefault";
-import Theme from "utils/AppTheme";
 import useCreditCardForm from "screens/creditcard/form/hooks/useCreditCardForm";
 import Itemcard from "screens/creditcard/list/screens/ItemCard";
 import DialogError from "components/dialog/DialogError";
@@ -14,7 +13,6 @@ import * as S from "./styles"
 import StatusBarApp from "components/statusbar/StatusBar";
 
 const CreditCardFormScreen = () => {
-const ThemeApp = Theme()
 
 const {
   state,
@@ -62,9 +60,9 @@ return (
       />
 
       <Itemcard 
-          number={inputNumber.valueData}
-          name={inputName.valueData}
-          date={inputDate.valueData}
+          number={inputNumber.valueDataMasked}
+          name={inputName.valueDataMask}
+          date={inputDate.valueDataMasked}
           cvv={inputCvv.valueData}
           creditCardType={inputNumber.typeCardData}
           isOpen={true}
@@ -89,7 +87,7 @@ return (
           isVisible={inputNumber.state.isVisibleField}
       />
       <TextFieldDefault 
-          label={'Nome do titular'} 
+          label={'Seu nome como está no cartão'} 
           placeHolder={'Ex: JOSÉ ROBERTO'} 
           value={inputName.valueData}
           inputMode={'text'}
@@ -140,9 +138,7 @@ return (
               width={50}
               isLoading={false}
               isDisabled={buttons.state.isDisabledButtonPrev}
-              clickListener={() => {
-                  onPrev()
-              }} 
+              clickListener={onPrev} 
           />
           <S.Space />
           <ButtonDefault
@@ -150,9 +146,7 @@ return (
               width={50}
               isLoading={state.isLoading}
               isDisabled={buttons.state.isDisabledButtonNext}
-              clickListener={() => {
-                  onNext()
-              }} 
+              clickListener={onNext} 
           />
       </S.RowForm>
       </S.RowInputs>

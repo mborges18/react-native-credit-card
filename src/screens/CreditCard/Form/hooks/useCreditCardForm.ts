@@ -140,6 +140,7 @@ const useCreditCardForm = () => {
   }
 
   return {
+    model,
     state,
     inputNumber,
     inputName,

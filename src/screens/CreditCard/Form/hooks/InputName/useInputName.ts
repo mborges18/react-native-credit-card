@@ -13,11 +13,16 @@ const useInputName = () => {
         isVisibleField: false,
     });
     const maskName = "SEU NOME"
-    const valueRef = useRef<any>(maskName);
+
+    const valueRefMasked = useRef<any>(maskName);
+    const valueDataMask  = valueRefMasked.current
+
+    const valueRef = useRef<any>("");
     const valueData  = valueRef.current
 
     const onValue = (value: string) => {
         valueRef.current = value
+        valueRefMasked.current = value
         if(state.errorData != ""){
             state.errorData = ""
         }
@@ -45,6 +50,7 @@ const useInputName = () => {
         state,
         handlerVisibility,
         onValue,
+        valueDataMask,
         valueData
     }
 }

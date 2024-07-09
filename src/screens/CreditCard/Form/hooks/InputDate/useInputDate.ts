@@ -13,11 +13,16 @@ const useInputDate = () => {
         isVisibleField: false,
     });
     const maskDate = "00/0000"
-    const valueRef = useRef<any>(maskDate);
+
+    const valueRefMasked = useRef<any>(maskDate);
+    const valueDataMasked  = valueRefMasked.current
+
+    const valueRef = useRef<any>("");
     const valueData  = valueRef.current
 
     const onValue = (value: string) => {
         valueRef.current = value
+        valueRefMasked.current = value
         if(state.errorData != ""){
             state.errorData = ""
         }
@@ -59,6 +64,7 @@ const useInputDate = () => {
         state,
         handlerVisibility,
         onValue,
+        valueDataMasked,
         valueData
     }
 }
