@@ -1,12 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Animated, Easing, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+import React, { useEffect} from "react";
+import { Animated, Pressable, View } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Theme from 'utils/AppTheme';
 import { CreditCardDefault } from "../model/StyleCard";
 import * as S from "./styles"
+import useItemCard from "../hooks/useItemCard";
+import GradientCard from "components/cardgradient/GradientCard";
 
-type CreditCardItemProps = {
+export type CreditCardItemProps = {
   number: string,
   name: string,
   date: string,
@@ -21,51 +22,20 @@ type CreditCardItemProps = {
 }
 
 export default function Itemcard(props: CreditCardItemProps) {
-  const [heightAnimation] = useState(new Animated.Value(60));
-  const [isOpentState, setIsOpentState] = useState(props.isOpen);
+  const ThemeApp = Theme();
 
-  const flipAnim = useRef(new Animated.Value(0)).current;
-  const [isFront, setIsFront] = useState(true);
-
-  const ThemeApp = Theme()
-  const style = styles()
-
-  const showContent = () => {
-    setIsOpentState(!isOpentState)
-
-    Animated.timing(heightAnimation, {
-      toValue: isOpentState ? 60 : 210,
-      duration: 200,
-      easing: Easing.linear,
-      useNativeDriver: false 
-    }).start();
-  };
-
-  const flip = () => {
-    Animated.timing(flipAnim, {
-        toValue: props.isFront ? 0 : 1,
-        duration: 500,
-        easing: Easing.linear,
-        useNativeDriver: false 
-    }).start();
-
-    setTimeout(() => {
-        setIsFront(props.isFront ?? false)
-    }, 250)
-  };
-
-  const rotateCard = flipAnim.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['0deg', '180deg'],
-  });
+  const {
+    flip,
+    showContent,
+    isFront,
+    isOpentState,
+    rotateCard,
+    heightAnimation,
+  } = useItemCard(props);
 
     useEffect(() => {
       flip()
     }, [props]);
-
-  const IconCard = () : JSX.Element => {
-      return props.creditCardType.icon
-  }
 
   const DataFront = () => {
     if(isFront) {
@@ -73,7 +43,7 @@ export default function Itemcard(props: CreditCardItemProps) {
         <Animated.View>
           <S.TopCard>
             <S.TextCard textSize={18} marginTop={8}>{props.creditCardType.name}</S.TextCard>
-            <IconCard />
+            {props.creditCardType.icon}
           </S.TopCard>
 
           { isOpentState ? (
@@ -130,73 +100,42 @@ export default function Itemcard(props: CreditCardItemProps) {
     }}>
 
     <Animated.View style={{
-        transform: [
-            {rotateY:  rotateCard},
-        ],
-        height: heightAnimation, 
-        marginTop: 3,
-        }}>
+      transform: [
+          {rotateY:  rotateCard},
+      ],
+      height: heightAnimation, 
+      marginTop: 3,
+      }}>
 
-    <LinearGradient
-    useAngle={true} angle={75} angleCenter={{x:0.3,y:0.5}}
-    colors={[props.creditCardType.colorLight, props.creditCardType.colorDark]}>
-      <S.Card isOpen>
+      <S.CardOutter isOpen={props.isOpen} borderColor={props.creditCardType.colorDark}>
+      <GradientCard angleX2={"0%"} fromColor={props.creditCardType.colorLight} toColor={props.creditCardType.colorDark} >
+
+      <S.CardInner>
         <DataFront />
         <DataBack />
-      </S.Card>
-    </LinearGradient>
+      </S.CardInner>
+
+      </GradientCard>
+      </S.CardOutter>
 
     </Animated.View>
 
     { isOpentState && props.isClickable && !props.isFlipable ? (
       <S.BottomCard>
-        <TouchableOpacity 
+        <S.ButtonAction 
           onPress={() => { props.delete?.() }} 
-          activeOpacity={0.8} 
-          style={style.buttonAction}>
+          activeOpacity={0.8}>
           <Icon name={'delete'} size={24} color={ThemeApp.colors.onText} />
-        </TouchableOpacity>
+        </S.ButtonAction>
 
-        <TouchableOpacity 
+        <S.ButtonAction 
           onPress={() => { props.edit?.() }} 
-          activeOpacity={0.8} 
-          style={style.buttonAction}>
+          activeOpacity={0.8}>
           <Icon name={'edit'} size={24} color={ThemeApp.colors.onText} />
-        </TouchableOpacity>
+        </S.ButtonAction>
       </S.BottomCard>
     ) : null }
 
     </Pressable>
 );
-}
-
-const styles = () => { 
-  const ThemeApp = Theme()
-  return StyleSheet.create({
-
-  text18: {
-      color: ThemeApp.colors.onText, 
-      fontSize: 18, 
-      fontWeight: 'bold',
-      textShadowColor:  ThemeApp.colors.onBackground,
-      textShadowOffset: { height: 1, width: 1 },
-      textShadowRadius: 1
-  },
-  text16: {
-      color: ThemeApp.colors.onText, 
-      fontSize: 16, 
-      fontWeight: 'bold',
-      textShadowColor:  ThemeApp.colors.onBackground,
-      textShadowOffset: { height: 1, width: 1 },
-      textShadowRadius: 1
-  },
-  buttonAction: {
-      height: 45, 
-      width: 45, 
-      borderRadius: 100, 
-      alignItems: 'center', 
-      justifyContent: 'center', 
-      backgroundColor: ThemeApp.colors.primary
-  }
-})
 }

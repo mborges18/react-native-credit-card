@@ -32,7 +32,7 @@ const DialogConfirm = (props: DialogProps) => {
         isLoading={false}
         isDisabled={false}
         colorContainer={Theme().colors.onText}
-        colorText={Theme().colors.onBackground}
+        colorText={Theme().colors.text}
         clickListener={
           props.onClickConfirm
         } 

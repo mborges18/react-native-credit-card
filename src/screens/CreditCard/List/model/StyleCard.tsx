@@ -51,6 +51,6 @@ const HipperCard: CreditCardDefault = { name: 'HiperCard', icon: <IconHiper fill
 const Discover: CreditCardDefault = { name: 'Discover', icon: <IconDiscover fill='#000' width={width} height={height} />, colorLight: '#EA8524', colorDark: '#8D4701' }
 const Elo: CreditCardDefault = { name: 'Elo', icon: <IconElo fill='#000' width={width} height={height} />, colorLight: '#01398D', colorDark: '#011738' }
 const Jcb: CreditCardDefault = { name: 'Jcb', icon: <IconJcb fill='#000' width={width} height={height} />, colorLight: '#01398D', colorDark: '#011738' }
-const Undefined: CreditCardDefault = { name: 'Credit Card', icon: <IconUndefined fill='#000' width={width} height={height} />, colorLight: '#D0D0D0', colorDark: '#252424' }
+const Undefined: CreditCardDefault = { name: 'Credit Card', icon: <IconUndefined fill='#000' width={width} height={height} />, colorLight: '#D0D0D0', colorDark: '#5a5959' }
 
 export default StyleCard

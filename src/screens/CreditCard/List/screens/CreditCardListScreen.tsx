@@ -1,11 +1,4 @@
 import React, { useEffect } from 'react';
-import {
-View,
-FlatList,
-SafeAreaView,
-TouchableOpacity,
-StyleSheet,
-} from 'react-native';
 import useCreditCardList from 'screens/creditcard/list/hooks/useCreditCardList';
 import Theme from 'utils/AppTheme';
 import Itemcard from 'screens/creditcard/list/screens/ItemCard';
@@ -45,7 +38,7 @@ useEffect(() => {
 return (
   <S.SafeAreaView>
   <StatusBarApp />
-    <S.Wrapper>
+
       <DialogConfirm 
         isVisible={state.confirmDelete} 
         title={'Informação'} 
@@ -53,7 +46,7 @@ return (
         onClickConfirm={() => { onDeleteDataConfirm() }} 
         onClickCancel={() => { onDeleteDataCancel() } } 
       />
-      <FlatList style={{marginStart: 16, marginEnd: 16}}
+      <S.ListCards
         data={state.listCards}
         renderItem={({item}) => 
         <Itemcard 
@@ -73,7 +66,7 @@ return (
           } } 
           />}
       />
-    </S.Wrapper>
+ 
     <S.FloatButton 
       activeOpacity={0.8} 
       onPress={() => {

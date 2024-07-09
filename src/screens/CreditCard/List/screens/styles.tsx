@@ -1,19 +1,26 @@
 import styled from "styled-components/native";
 import Theme from 'utils/AppTheme';
+import CreditCardListModel from "../model/CreditCardListModel";
+import { FlatListProps } from "react-native";
 
 type CreditCardListStyleProps = {
   isOpen?: boolean;
   textSize?: number;
   letterSpacing?: number;
   marginTop?: number;
+  borderColor?: string;
+}
+
+interface CreditcardListProps extends FlatListProps<CreditCardListModel> {
+  data: CreditCardListModel[];
 }
 
 export const SafeAreaView = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const Wrapper = styled.SafeAreaView`
-  margin-vertical: 16px;
+export const ListCards = styled.FlatList<CreditcardListProps>`
+  margin: 16px;
 `;
 
 export const FloatButton = styled.TouchableOpacity`
@@ -26,14 +33,19 @@ export const FloatButton = styled.TouchableOpacity`
   background-color: ${()=> Theme().colors.primary};
 `;
 
-export const Card = styled.View<CreditCardListStyleProps>`
-  padding: 16px; 
+export const CardOutter = styled.View<CreditCardListStyleProps>`
   height: 210px;
   width: 100%;
+  border-width: 2px;
+  border-color: ${({borderColor})=> borderColor};
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   border-bottom-left-radius: ${({isOpen}) => isOpen ? 8 : 0}px;
   border-bottom-right-radius: ${({isOpen}) => isOpen ? 8 : 0}px;
+`;
+
+export const CardInner = styled.View`
+  padding: 16px; 
 `;
 
 export const TopCard = styled.View`
@@ -69,12 +81,20 @@ export const CardWhiteTrace = styled.View`
 `;
 
 export const TextCard = styled.Text<CreditCardListStyleProps>`
-    margin-top: ${({marginTop}) => marginTop ?? 0};
-    color: ${()=> Theme().colors.onText }; 
-    font-size: ${({textSize})=> textSize }px; 
-    font-weight: bold;
-    text-shadow: 1px 1px 2px ${()=> Theme().colors.onBackground };
-    letter-spacing: ${({letterSpacing})=> letterSpacing ?? 0 }px;
+  margin-top: ${({marginTop}) => marginTop ?? 0}px;
+  color: ${()=> Theme().colors.onText }; 
+  font-size: ${({textSize})=> textSize }px; 
+  font-weight: bold;
+  text-shadow: 1px 1px 2px ${()=> Theme().colors.onBackground };
+  letter-spacing: ${({letterSpacing})=> letterSpacing ?? 0 }px;
+`;
 
+export const ButtonAction = styled.TouchableOpacity`
+  height: 45px; 
+  width: 45px; 
+  border-radius: 100px; 
+  align-items: center; 
+  justify-content: center; 
+  background-color:  ${()=> Theme().colors.primary };
 `;
 

@@ -32,6 +32,7 @@ export const ContainerDialog = styled.View`
   border-bottom-right-radius: 8px;
   justify-content: center; 
   align-items: center; 
+  padding: 16px;
   background-color: ${() => Theme().colors.surface };
 `;
 

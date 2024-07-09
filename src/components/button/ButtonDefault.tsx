@@ -18,7 +18,7 @@ const ButtonDefault = (props: ButtonDefaultProps) => {
     return(
       props.isLoading
       ? <ActivityIndicator size="large" color={ Theme().colors.onPrimary } /> 
-      : <S.TextButton>{ props.text }</S.TextButton>
+      : <S.TextButton colorText={props.colorText}>{ props.text }</S.TextButton>
     );
   }
 
