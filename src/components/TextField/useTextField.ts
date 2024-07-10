@@ -3,22 +3,32 @@ import { TextFieldProps } from "./TextFieldProps";
 import { Animated } from "react-native";
 import Mask from "./mask";
 
-export const useTextField = (props: TextFieldProps) => {
+export const useTextField = ({
+  value, 
+  placeHolder, 
+  maskType, 
+  colorBorderDisabled,
+  colorBorderError,
+  colorBorderEnabled,
+  messageError,
+  isPassword,
+  listenerChangeText
+}: TextFieldProps) => {
 
     const [borderOn, setBorderOn] = useState(false);
     const [zindex, setZindex] = useState(-1);
-    const [digit, setDigit] = useState(props.value);
+    const [digit, setDigit] = useState(value);
     const [activated, setActivated] = useState(false);
     const [eyeToggle, setEyeToggle] = useState(true);
     const [upperAnimation] = useState(new Animated.Value(0));
   
     useEffect(() => {
-      if(props.value!=undefined && props.value!=null && props.value!='') {
+      if(value!=undefined && value!=null && value!='') {
         setZindex(2);
       }
-      setDigit(props.value);
+      setDigit(value);
       startAnimation();
-    }, [props.value])
+    }, [value])
   
     const handlerFocusInput = () => {
       setBorderOn(true);
@@ -41,7 +51,7 @@ export const useTextField = (props: TextFieldProps) => {
     }
 
     const handlerPlaceHolder = () => {
-        return !activated ? props.placeHolder : ''
+        return !activated ? placeHolder : ''
     }
   
     const startAnimation = () => {
@@ -64,31 +74,31 @@ export const useTextField = (props: TextFieldProps) => {
     };
   
     const handlerMaskType = (text: string) => {
-      if(props.maskType!=null) {
-        text = Mask.maskCustom(props.maskType, text);
-        props.listenerChangeText(text);
+      if(maskType!=null) {
+        text = Mask.maskCustom(maskType, text);
+        listenerChangeText(text);
         setDigit(text)
       } else {
-        props.listenerChangeText(text);
+        listenerChangeText(text);
         setDigit(text);
       }
     };
   
     const handlerColorLabel = () => {
-      if (props.messageError != '' && props.messageError != null) {
-        return props.colorBorderError;
+      if (messageError != '' && messageError != null) {
+        return colorBorderError;
       } else {
-        if (borderOn) return props.colorBorderEnabled;
-        else return props.colorBorderDisabled;
+        if (borderOn) return colorBorderEnabled;
+        else return colorBorderDisabled;
       }
     }
   
-    const helperBorderColor = (props: TextFieldProps) => {
-      if (props.messageError != '' && props.messageError != null) {
-        return props.colorBorderError;
+    const helperBorderColor = () => {
+      if (messageError != '' && messageError != null) {
+        return colorBorderError;
       } else {
-        if (borderOn) return props.colorBorderEnabled;
-        else return props.colorBorderDisabled;
+        if (borderOn) return colorBorderEnabled;
+        else return colorBorderDisabled;
       }
     }
 
@@ -97,11 +107,11 @@ export const useTextField = (props: TextFieldProps) => {
     }
 
     const handlerMessageError = () => {
-      return props.messageError != '' && props.messageError != null;
+      return messageError != '' && messageError != null;
     }
 
     const handlerSecretPassword = () => {
-      return props.isPassword && eyeToggle;
+      return isPassword && eyeToggle;
     }
 
     const handlerEyeToggle = () => {

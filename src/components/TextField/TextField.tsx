@@ -4,34 +4,61 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as S from "./styles";
 import { TextFieldProps } from 'components/textfield/TextFieldProps';
 import { useTextField } from './useTextField';
+import Theme from 'utils/AppTheme';
 
-const TextField = (props: TextFieldProps) => {
-  const textFieldHook = useTextField(props);
+const TextField: React.FC<TextFieldProps> = ({
+  label,
+  placeHolder,
+  value,
+  inputMode,
+  maxLength=55,
+  messageError,
+  colorBorderEnabled=Theme().colors.primary,
+  colorBorderDisabled=Theme().colors.border,
+  colorBorderError=Theme().colors.error,
+  colorContent=Theme().colors.background,
+  colorText=Theme().colors.text,
+  maskType,
+  iconStart,
+  isPassword,
+  isVisible,
+  listenerChangeText
+}) => {
+  const textFieldHook = useTextField({
+    value,
+    placeHolder,
+    maskType,
+    colorBorderEnabled,
+    colorBorderDisabled,
+    colorBorderError,
+    listenerChangeText
+  } as TextFieldProps);
 
   return (
-  <>{props.isVisible ? 
-    <S.Wrapper>
+  <>{isVisible ? 
+    <S.Wrapper colorContent={colorContent}>
       <S.InputText
-        style={[{borderColor: textFieldHook.helperBorderColor(props)}]}
+        borderColor={textFieldHook.helperBorderColor()}
         onBlur={textFieldHook.handlerBlurInput}
         onFocus={textFieldHook.handlerFocusInput}
         onChangeText={textFieldHook.handlerMaskType}
         value={textFieldHook.digit}
         placeholder={textFieldHook.handlerPlaceHolder()}
-        inputMode={props.inputMode}
+        inputMode={inputMode}
         secureTextEntry={textFieldHook.handlerSecretPassword()}
-        maxLength={props.maxLength}
+        maxLength={maxLength}
+        colorText={colorText}
       />
 
       <S.IconWrapper>
         <Icon 
-          name={props.iconStart} 
+          name={iconStart} 
           size={22} 
           color={textFieldHook.handlerColorLabel()} 
         />
       </S.IconWrapper>
 
-      {props.isPassword &&
+      {isPassword &&
         <S.IconButton 
           activeOpacity={.7} 
           onPress={textFieldHook.handlerEyeToggle}> 
@@ -47,11 +74,11 @@ const TextField = (props: TextFieldProps) => {
         style={textFieldHook.animatedStyles.animeLabel}  
         zIndex={textFieldHook.zindex} 
         colorText={textFieldHook.handlerColorLabel()}>
-        {props.label}
+        {label}
       </S.LabelAnimate>
 
       {textFieldHook.handlerMessageError() && 
-      <Text style={{color: props.colorBorderError}}>{props.messageError}</Text>}
+      <Text style={{color: colorBorderError}}>{messageError}</Text>}
     
     </S.Wrapper>
   : null}

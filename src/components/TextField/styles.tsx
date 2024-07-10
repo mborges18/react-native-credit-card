@@ -5,6 +5,7 @@ import  Theme   from 'utils/AppTheme';
 type InputTextProps = {
   colorContent?: string;
   colorText?: string;
+  borderColor?: string;
   zIndex?: number;
   positionLabel?: any
 }
@@ -16,14 +17,16 @@ export const Wrapper = styled.View<InputTextProps>`
   background-color: ${({colorContent}) => colorContent ?? Theme().colors.background};
 `;
 
-export const InputText = styled.TextInput`
+export const InputText = styled.TextInput<InputTextProps>`
   height: 60px; 
   width: '100%'; 
-  border-radius: 6px; 
   padding-left: 36px; 
   padding-right: 36px;
+  border-radius: 6px; 
+  border-color: ${({borderColor}) => borderColor};
   border-width: 1px;
   z-index: 1;
+  color: ${({colorText}) => colorText ?? Theme().colors.text};
 `;
 
 export const Label = styled.Text<InputTextProps>`

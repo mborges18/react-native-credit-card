@@ -1,6 +1,6 @@
 import React from "react";   
 import { View } from "react-native";
-import TextFieldDefault from "components/textfield/TextFieldDefault";
+import TextField from "components/textfield/TextField";
 import ButtonDefault from "components/button/ButtonDefault";
 import { ScrollView, GestureHandlerRootView } from "react-native-gesture-handler";
 import useSignUp from "screens/authenticator/signup/hooks/useSignUp";
@@ -45,7 +45,7 @@ const SignUpScreen = () => {
 
       <S.TitleSection>Dados de pessoais</S.TitleSection>
 
-      <TextFieldDefault 
+      <TextField 
         label={'Nome e sobrenome'} 
         placeHolder={'Ex: José Roberto'} 
         inputMode={'text'} 
@@ -56,7 +56,7 @@ const SignUpScreen = () => {
         listenerChangeText={onName}
       />
 
-      <TextFieldDefault 
+      <TextField 
         label={'Data de nascimento'} 
         placeHolder={'Ex: 00/00/0000'} 
         inputMode={'numeric'} 
@@ -68,7 +68,7 @@ const SignUpScreen = () => {
         listenerChangeText={onBirthDate}
       />
 
-      <TextFieldDefault 
+      <TextField 
         label={'Celular'} 
         placeHolder={'Ex: (00) 00000-0000'} 
         inputMode={'numeric'} 
@@ -80,7 +80,7 @@ const SignUpScreen = () => {
         listenerChangeText={onPhone}
       />
 
-      <TextFieldDefault 
+      <TextField 
         label={'E-mail'} 
         placeHolder={'Ex: nome@dominio.com'} 
         inputMode={'email'} 
@@ -93,7 +93,7 @@ const SignUpScreen = () => {
 
       <S.TitleSection>Dados de acesso</S.TitleSection>
 
-      <TextFieldDefault 
+      <TextField 
         label={'Senha'} 
         placeHolder={'Ex: A@123'} 
         inputMode={'text'} 
@@ -104,7 +104,7 @@ const SignUpScreen = () => {
         listenerChangeText={onPassword}
       />
 
-      <TextFieldDefault 
+      <TextField 
         label={'Confirme a senha'} 
         placeHolder={'Ex: A@123'} 
         inputMode={'text'} 

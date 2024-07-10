@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import TextFieldDefault from 'components/textfield/TextFieldDefault';
+import TextField from 'components/textfield/TextField';
 import ButtonDefault from 'components/button/ButtonDefault';
 import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler';
 import SwitchButton from 'components/switch/SwitchButton';
@@ -43,7 +43,7 @@ const SignInScreen = () => {
       description={'Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.'}
     />
 
-    <TextFieldDefault 
+    <TextField 
       label={'E-mail'}
       placeHolder={'Ex: nome@dominio.com'}
       value={(signUp.data as SignUpModel)?.email}
@@ -55,7 +55,7 @@ const SignInScreen = () => {
       listenerChangeText={onEmail} 
     />
 
-    <TextFieldDefault 
+    <TextField 
       label={'Senha'} 
       placeHolder={'Ex: A@123'} 
       inputMode={'text'} 

@@ -1,5 +1,5 @@
 import MaskType from "components/textfield/MaskType";
-import TextFieldDefault from "components/textfield/TextFieldDefault";
+import TextField from "components/textfield/TextField";
 import ButtonDefault from "components/button/ButtonDefault";
 import useCreditCardForm from "screens/creditcard/form/hooks/useCreditCardForm";
 import Itemcard from "screens/creditcard/list/screens/ItemCard";
@@ -71,7 +71,7 @@ return (
       />
 
       <S.RowInputs>
-      <TextFieldDefault 
+      <TextField 
           label={'Número do cartão'} 
           placeHolder={'Ex: 0000 0000 0000 0000'} 
           value={inputNumber.valueData}
@@ -86,7 +86,7 @@ return (
           } }
           isVisible={inputNumber.state.isVisibleField}
       />
-      <TextFieldDefault 
+      <TextField 
           label={'Seu nome como está no cartão'} 
           placeHolder={'Ex: JOSÉ ROBERTO'} 
           value={inputName.valueData}
@@ -101,7 +101,7 @@ return (
           } }
           isVisible={inputName.state.isVisibleField}
       />
-      <TextFieldDefault 
+      <TextField 
           label={'Data de vencimento'} 
           placeHolder={'Ex: 00/0000'} 
           value={inputDate.valueData}
@@ -116,7 +116,7 @@ return (
           } }
           isVisible={inputDate.state.isVisibleField}
       />
-      <TextFieldDefault 
+      <TextField 
           label={'Código de seguraça'} 
           placeHolder={'Ex: 000'} 
           value={inputCvv.valueData}

@@ -5,17 +5,17 @@ export type TextFieldProps = {
     label: string,
     placeHolder: string,
     value?: string,
-    inputMode: InputModeOptions,
-    maxLength: number,
-    messageError: string,
-    colorBorderEnabled: string,
-    colorBorderDisabled: string,
-    colorBorderError: string,
+    inputMode?: InputModeOptions,
+    maxLength?: number,
+    messageError?: string,
+    colorBorderEnabled?: string,
+    colorBorderDisabled?: string,
+    colorBorderError?: string,
     maskType?: MaskType,
-    listenerChangeText: ((text: string) => void);
-    colorContent: string,
-    colorText: string,
+    colorContent?: string,
+    colorText?: string,
     iconStart: string,
-    isPassword: boolean,
-    isVisible: boolean
+    isPassword?: boolean,
+    isVisible?: boolean,
+    listenerChangeText: ((text: string) => void);
 }
