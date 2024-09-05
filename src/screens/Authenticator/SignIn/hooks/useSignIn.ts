@@ -1,14 +1,14 @@
 import { useContext, useRef, useState } from 'react';
-import SignInState from 'screens/authenticator/signin/SignInState';
+import SignInState from 'screens/authenticator/signin/screens/SignInState';
 import SignInModel from 'screens/authenticator/signin/model/SignInModel';
 import SignInRespository from 'screens/authenticator/signin/data/SignInRepository';
 import { Success, Error, Unauthorized, ResultRequest } from 'api/ResultRequest';
 import Validation from 'utils/Validation';
 import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 import { NavigationUrl } from 'navigation/NavigationUrl';
-import AuthenticatorContextApi from '../AuthenticatorContextApi';
+import AuthenticatorContextApi from '../../AuthenticatorContextApi';
 
-export default function SignInViewModel() {
+const useSignIn = () => {
     const navigation: NavigationProp<ParamListBase> = useNavigation();
     const { signUp , setSignIn } = useContext(AuthenticatorContextApi)
     const respository = SignInRespository();
@@ -125,3 +125,5 @@ export default function SignInViewModel() {
         signUp,
     }
 }
+
+export default useSignIn;

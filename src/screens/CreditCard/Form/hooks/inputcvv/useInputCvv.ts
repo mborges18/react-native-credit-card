@@ -1,7 +1,12 @@
 import { useRef, useState } from "react";
 
+interface InputState {
+    errorData: string,
+    isValidData: boolean,
+    isVisibleField: boolean,
+}
 
-export default function InputCvvHook() {
+const useInputCvv = () => {
     const [state, setState] = useState<InputState>({
         errorData: "",
         isValidData: false,
@@ -51,8 +56,4 @@ export default function InputCvvHook() {
     }
 }
 
-interface InputState {
-    errorData: string,
-    isValidData: boolean,
-    isVisibleField: boolean,
-}
+export default useInputCvv;

@@ -1,166 +1,158 @@
-import { SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
 import MaskType from "components/textfield/MaskType";
-import TextFieldDefault from "components/textfield/TextFieldDefault";
+import TextField from "components/textfield/TextField";
 import ButtonDefault from "components/button/ButtonDefault";
-import Theme from "utils/AppTheme";
-import CreditCardFormHook from "screens/creditcard/form/hooks/CreditCardFormHook";
-import Itemcard from "screens/creditcard/list/ItemCard";
+import useCreditCardForm from "screens/creditcard/form/hooks/useCreditCardForm";
+import Itemcard from "screens/creditcard/list/screens/ItemCard";
 import DialogError from "components/dialog/DialogError";
 import { ParamListBase, RouteProp, useRoute } from "@react-navigation/native";
 import { useEffect } from "react";
 import LogApp from "utils/LogApp";
 import CreditCardFormModel from "../model/CreditCardFormModel";
 import DialogSuccess from "components/dialog/DialogSuccess";
+import * as S from "./styles"
+import StatusBarApp from "components/statusbar/StatusBar";
 
 const CreditCardFormScreen = () => {
-    const ThemeApp = Theme()
-    const FormHook = CreditCardFormHook()
-    const route = useRoute<RouteProp<ParamListBase>>();
 
-    useEffect(() => {
-        LogApp("UPDATE ITEM", route.params as [0])
-        FormHook.onEdit((route.params as CreditCardFormModel))
-    }, [route.params])
+const {
+  state,
+  inputNumber,
+  inputName,
+  inputDate,
+  inputCvv,
+  buttons,
+  onPrev,
+  onNext,
+  onCloseErrorService,
+  onCloseSuccessService,
+  onEdit,
+  handlerEnabledButton,
+} = useCreditCardForm()
 
-    return (
-        <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar barStyle="light-content" backgroundColor={ ThemeApp.colors.primary } />
-        <View style={styles.container}>
+const route = useRoute<RouteProp<ParamListBase>>();
 
-            <DialogError 
-                title={"Informação"}
-                description={ String(FormHook.state.resultRequest?.data) }
-                onClickOk={() => {
-                    FormHook.onCloseErrorService()
-                } } 
-                isVisible={FormHook.state.errorService}
-            />
+useEffect(() => {
+  LogApp("UPDATE ITEM", route.params as [0])
+  onEdit((route.params as CreditCardFormModel))
+}, [route.params])
 
-            <DialogSuccess 
-                title={"Informação"} 
-                description={String(FormHook.state.resultRequest?.data)} 
-                onClickOk={() => {
-                    FormHook.onCloseSuccessService()
-                } } 
-                isVisible={FormHook.state.successService} 
-            />
+return (
+  <S.SafeAreaView>
+  <StatusBarApp />
+    <S.WrapperForm>
 
-            <Itemcard 
-                number={FormHook.inputNumber.valueData}
-                name={FormHook.inputName.valueData}
-                date={FormHook.inputDate.valueData}
-                cvv={FormHook.inputCvv.valueData}
-                creditCardType={FormHook.inputNumber.typeCardData}
-                isOpen={true}
-                isFront={!FormHook.inputCvv.state.isVisibleField} 
-                isFlipable={true}
-            />
+      <DialogError 
+          title={"Informação"}
+          description={ String(state.resultRequest?.data) }
+          onClickConfirm={() => {
+              onCloseErrorService()
+          } } 
+          isVisible={state.errorService}
+      />
 
-            <View style={{ width: '100%' }}>
-            <TextFieldDefault 
-                label={'Número do cartão'} 
-                placeHolder={'Ex: 0000 0000 0000 0000'} 
-                value={FormHook.inputNumber.valueData}
-                inputMode={'numeric'} 
-                iconStart={'credit-card'} 
-                maskType={MaskType.NUMBER_CARD}
-                messageError={FormHook.inputNumber.state.errorData} 
-                isPassword={false} 
-                listenerChangeText={(text) => {
-                    FormHook.inputNumber.onValue(text)
-                    FormHook.handlerEnabledButton()
-                } }
-                isVisible={FormHook.inputNumber.state.isVisibleField}
-            />
-            <TextFieldDefault 
-                label={'Nome do titular'} 
-                placeHolder={'Ex: JOSÉ ROBERTO'} 
-                value={FormHook.inputName.valueData}
-                inputMode={'text'}
-                maxLength={25}
-                iconStart={'person'} 
-                messageError={FormHook.inputName.state.errorData} 
-                isPassword={false} 
-                listenerChangeText={(text) => {
-                    FormHook.inputName.onValue(text.toUpperCase())
-                    FormHook.handlerEnabledButton()
-                } }
-                isVisible={FormHook.inputName.state.isVisibleField}
-            />
-            <TextFieldDefault 
-                label={'Data de vencimento'} 
-                placeHolder={'Ex: 00/0000'} 
-                value={FormHook.inputDate.valueData}
-                inputMode={'numeric'} 
-                iconStart={'calendar-month'} 
-                maskType={MaskType.DATE_CARD}
-                messageError={FormHook.inputDate.state.errorData} 
-                isPassword={false} 
-                listenerChangeText={(text) => {
-                    FormHook.inputDate.onValue(text)
-                    FormHook.handlerEnabledButton()
-                } }
-                isVisible={FormHook.inputDate.state.isVisibleField}
-            />
-            <TextFieldDefault 
-                label={'Código de seguraça'} 
-                placeHolder={'Ex: 000'} 
-                value={FormHook.inputCvv.valueData}
-                inputMode={'numeric'} 
-                maxLength={4}
-                iconStart={'security'} 
-                messageError={FormHook.inputCvv.state.errorData} 
-                isPassword={false} 
-                listenerChangeText={(text) => {
-                    FormHook.inputCvv.onValue(text)
-                    FormHook.handlerEnabledButton()
-                } }
-                isVisible={FormHook.inputCvv.state.isVisibleField}
-            />
+      <DialogSuccess 
+          title={"Informação"} 
+          description={String(state.resultRequest?.data)} 
+          onClickConfirm={() => {
+              onCloseSuccessService()
+          } } 
+          isVisible={state.successService} 
+      />
 
-            <View style={styles.rowActions}>
-                <ButtonDefault
-                    text={'Anterior'}
-                    width='50%'
-                    isLoading={false}
-                    isDisabled={FormHook.buttons.state.isDisabledButtonPrev}
-                    clickListener={() => {
-                        FormHook.onPrev()
-                    }} 
-                />
-                <View style={{width: 8}} />
-                <ButtonDefault
-                    text={FormHook.state.step!= 4 ? 'Próximo' : 'Salvar'}
-                    width='50%'
-                    isLoading={FormHook.state.isLoading}
-                    isDisabled={FormHook.buttons.state.isDisabledButtonNext}
-                    clickListener={() => {
-                        FormHook.onNext()
-                    }} 
-                />
-            </View>
-            </View>
-            </View>
-        </SafeAreaView>
-    );
+      <Itemcard 
+          number={inputNumber.valueDataMasked}
+          name={inputName.valueDataMask}
+          date={inputDate.valueDataMasked}
+          cvv={inputCvv.valueData}
+          creditCardType={inputNumber.typeCardData}
+          isOpen={true}
+          isFront={!inputCvv.state.isVisibleField} 
+          isFlipable={true}
+      />
+
+      <S.RowInputs>
+      <TextField 
+          label={'Número do cartão'} 
+          placeHolder={'Ex: 0000 0000 0000 0000'} 
+          value={inputNumber.valueData}
+          inputMode={'numeric'} 
+          iconStart={'credit-card'} 
+          maskType={MaskType.NUMBER_CARD}
+          messageError={inputNumber.state.errorData} 
+          isPassword={false} 
+          listenerChangeText={(text) => {
+              inputNumber.onValue(text)
+              handlerEnabledButton()
+          } }
+          isVisible={inputNumber.state.isVisibleField}
+      />
+      <TextField 
+          label={'Seu nome como está no cartão'} 
+          placeHolder={'Ex: JOSÉ ROBERTO'} 
+          value={inputName.valueData}
+          inputMode={'text'}
+          maxLength={25}
+          iconStart={'person'} 
+          messageError={inputName.state.errorData} 
+          isPassword={false} 
+          listenerChangeText={(text) => {
+              inputName.onValue(text.toUpperCase())
+              handlerEnabledButton()
+          } }
+          isVisible={inputName.state.isVisibleField}
+      />
+      <TextField 
+          label={'Data de vencimento'} 
+          placeHolder={'Ex: 00/0000'} 
+          value={inputDate.valueData}
+          inputMode={'numeric'} 
+          iconStart={'calendar-month'} 
+          maskType={MaskType.DATE_CARD}
+          messageError={inputDate.state.errorData} 
+          isPassword={false} 
+          listenerChangeText={(text) => {
+              inputDate.onValue(text)
+              handlerEnabledButton()
+          } }
+          isVisible={inputDate.state.isVisibleField}
+      />
+      <TextField 
+          label={'Código de seguraça'} 
+          placeHolder={'Ex: 000'} 
+          value={inputCvv.valueData}
+          inputMode={'numeric'} 
+          maxLength={4}
+          iconStart={'security'} 
+          messageError={inputCvv.state.errorData} 
+          isPassword={false} 
+          listenerChangeText={(text) => {
+              inputCvv.onValue(text)
+              handlerEnabledButton()
+          } }
+          isVisible={inputCvv.state.isVisibleField}
+      />
+
+      <S.RowForm>
+          <ButtonDefault
+              text={'Anterior'}
+              width={50}
+              isLoading={false}
+              isDisabled={buttons.state.isDisabledButtonPrev}
+              clickListener={onPrev} 
+          />
+          <S.Space />
+          <ButtonDefault
+              text={state.step!= 4 ? 'Próximo' : 'Salvar'}
+              width={50}
+              isLoading={state.isLoading}
+              isDisabled={buttons.state.isDisabledButtonNext}
+              clickListener={onNext} 
+          />
+      </S.RowForm>
+      </S.RowInputs>
+    </S.WrapperForm>
+  </S.SafeAreaView>
+);
 }
 
 export default CreditCardFormScreen;
-
-const styles = StyleSheet.create({
-    container : { 
-        flex: 1 , 
-        flexDirection: 'column', 
-        padding: 16, 
-        justifyContent: 'space-between', 
-        alignContent:'center', 
-        alignItems: 'center'
-    },
-    rowActions: { 
-        flexDirection:'row', 
-        width: '100%', 
-        justifyContent: 'center', 
-        alignContent: 'center', 
-        alignItems:'center'
-    }
-})

@@ -1,18 +1,28 @@
 import { useRef, useState } from "react";
 
+interface InputState {
+    errorData: string,
+    isValidData: boolean,
+    isVisibleField: boolean,
+}
 
-export default function InputDateHook() {
+const useInputDate = () => {
     const [state] = useState<InputState>({
         errorData: "",
         isValidData: false,
         isVisibleField: false,
     });
     const maskDate = "00/0000"
-    const valueRef = useRef<any>(maskDate);
+
+    const valueRefMasked = useRef<any>(maskDate);
+    const valueDataMasked  = valueRefMasked.current
+
+    const valueRef = useRef<any>("");
     const valueData  = valueRef.current
 
     const onValue = (value: string) => {
         valueRef.current = value
+        valueRefMasked.current = value
         if(state.errorData != ""){
             state.errorData = ""
         }
@@ -54,12 +64,9 @@ export default function InputDateHook() {
         state,
         handlerVisibility,
         onValue,
+        valueDataMasked,
         valueData
     }
 }
 
-interface InputState {
-    errorData: string,
-    isValidData: boolean,
-    isVisibleField: boolean,
-}
+export default useInputDate;

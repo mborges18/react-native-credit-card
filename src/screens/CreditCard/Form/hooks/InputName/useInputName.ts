@@ -1,18 +1,28 @@
 import { useRef, useState } from "react";
 
+interface InputState {
+    errorData: string,
+    isValidData: boolean,
+    isVisibleField: boolean,
+}
 
-export default function InputNameHook() {
+const useInputName = () => {
     const [state] = useState<InputState>({
         errorData: "",
         isValidData: false,
         isVisibleField: false,
     });
     const maskName = "SEU NOME"
-    const valueRef = useRef<any>(maskName);
+
+    const valueRefMasked = useRef<any>(maskName);
+    const valueDataMask  = valueRefMasked.current
+
+    const valueRef = useRef<any>("");
     const valueData  = valueRef.current
 
     const onValue = (value: string) => {
         valueRef.current = value
+        valueRefMasked.current = value
         if(state.errorData != ""){
             state.errorData = ""
         }
@@ -40,12 +50,9 @@ export default function InputNameHook() {
         state,
         handlerVisibility,
         onValue,
+        valueDataMask,
         valueData
     }
 }
 
-interface InputState {
-    errorData: string,
-    isValidData: boolean,
-    isVisibleField: boolean,
-}
+export default useInputName;

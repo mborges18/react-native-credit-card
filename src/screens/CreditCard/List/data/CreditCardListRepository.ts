@@ -1,24 +1,22 @@
-import { Api } from "api/Api";
+import apiService from "api/Api";
 import { Error, Failure, Success } from "api/ResultRequest";
+import CreditCardListModel from "../model/CreditCardListModel";
 
 export default function CreditCardListRespository() {
-    const Servise = Api()
+  const getData = async () => {
+    return apiService.Get<CreditCardListModel[]>('cards').then((response) => {
+      if (response.code === 200) {
+        return new Success(response.body, "SUCCESS")
+      } else {
+        return new Error(response, "ERROR")
+      }
+    })
+      .catch((error) => {
+        return new Failure(error, "ERROR")
+      })
+  }
 
-    const getData = async () => {
-        return Servise.Get('cards')
-        .then((response) => {
-            if (response.code===200) {
-                return new Success(response.body)
-            }else {
-                return new Error(response)
-            }
-        })
-        .catch((error) => {
-            return new Failure(error)
-        })
-    }
-
-    return {
-        getData
-    }
+  return {
+    getData
+  }
 }

@@ -1,58 +1,69 @@
 
-export const Api = () => {
-    const baseUrl = 'https://api-credit-card-792613245.development.catalystserverless.com/server/'
-
-const Post = async (endPoint: string, data: Object) => {
-    return DoRequest(Method.POST, endPoint, data)
+const Post = async <T>(endPoint: string, data: any): Promise<Response<T>> => {
+  return DoRequest(Method.POST, endPoint, data)
 }
 
-const Put = async (data: Object, endPoint: string) => {
-    return DoRequest(Method.PUT, endPoint, data)
+const Put = async <T>(data: any, endPoint: string): Promise<Response<T>> => {
+  return DoRequest(Method.PUT, endPoint, data)
 }
 
-const Get = async (endPoint: string) => {
-    return DoRequest(Method.GET, endPoint)
+const Get = async <T>(endPoint: string): Promise<Response<T>> => {
+  return DoRequest(Method.GET, endPoint)
 }
 
-const DoRequest = async (method: Method, endPoint: string, data?: Object,) => {
-    const response = await fetch(baseUrl+endPoint, {
+const Delete = async <T>(endPoint: string): Promise<Response<T>> => {
+  return DoRequest(Method.DELETE, endPoint)
+}
+
+const DoRequest = async <T>(method: Method, endPoint: string, data?: any): Promise<Response<T>> => {
+  const baseUrl = 'https://api-credit-card-792613245.development.catalystserverless.com/server/'
+
+  const response = await fetch(baseUrl + endPoint, {
     method: method,
     headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'X-Auth-Token': 'xhjXi2YSrWVQ03c2johE3er4U3Cud24k5AzFUljrfm9LYC2YhykbJdGepiDIZwzJ.creditcard',
-    'X-User-Id': '10205000000176097'
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'X-Auth-Token': 'xhjXi2YSrWVQ03c2johE3er4U3Cud24k5AzFUljrfm9LYC2YhykbJdGepiDIZwzJ.creditcard',
+      'X-User-Id': '10205000000176097'
     },
     body: JSON.stringify(data),
-    });
+  });
 
-    var res = await response.json()
+  var res = await response.json()
 
-    console.log('REQUEST =>')
-    console.log('POST => '+baseUrl+endPoint)
-    console.log('BODY => '+JSON.stringify(data))
-    console.log('\n\n ')
-    console.log('RESULT =>')
-    console.log('POST =>'+baseUrl+endPoint)
-    console.log('CODE => '+response.status)
-    console.log('RESPONSE => '+JSON.stringify(res, null, 2))
-    
-    return {
+  console.log('REQUEST => ')
+  console.log(`${method} => ` + baseUrl + endPoint)
+  console.log('BODY => ' + JSON.stringify(data))
+  console.log('\n\n ')
+  console.log('RESULT =>')
+  console.log('POST =>' + baseUrl + endPoint)
+  console.log('CODE => ' + response.status)
+  console.log('RESPONSE => ' + JSON.stringify(res, null, 2))
+
+  return {
     code: response.status,
-    body: res
-    };
-}
+    body: res as T,
+  };
+};
 
 enum Method {
-    POST = 'POST',
-    PUT = 'PUT',
-    DELETE = 'DELETE',
-    GET = 'GET'
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
+  GET = 'GET'
 }
 
-return {
-    Post,
-    Put,
-    Get
-  }
+const apiService = {
+  Post,
+  Put,
+  Get,
+  Delete,
 };
+
+
+export default apiService;
+
+export interface Response<T> {
+  code: number;
+  body: T;
+}
