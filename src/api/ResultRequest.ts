@@ -1,18 +1,18 @@
-export abstract class ResultRequest {
-    data: Object;
-    message: String;
-    constructor(data: Object, message: String) {
-        this.data = data;
-        this.message = message;
-    }
+export abstract class ResultRequest<T> {
+  data?: T;
+  message?: String;
+  constructor(data?: T, message?: String) {
+    this.data = data;
+    this.message = message;
+  }
 }
 
-export class Success extends ResultRequest{}
+export class Success<T> extends ResultRequest<T> { }
 
-export class Error extends ResultRequest{}
+export class Error<T> extends ResultRequest<T> { }
 
-export class Failure extends ResultRequest{}
+export class Failure<T> extends ResultRequest<T> { }
 
-export class Unauthorized extends ResultRequest{}
+export class Unauthorized<T> extends ResultRequest<T> { }
 
-export class Exists extends ResultRequest{}
+export class Exists<T> extends ResultRequest<T> { }

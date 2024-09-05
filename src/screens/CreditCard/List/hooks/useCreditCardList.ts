@@ -27,8 +27,8 @@ export default function CreditCardListViewModel() {
       var response = await respository.getData()
 
       if(response instanceof Success) {
-          var data = (response.data as Array<CreditCardListModel>)
-          data.flatMap((element) => 
+          var data = (response.data as CreditCardListModel[])
+          data?.flatMap((element) => 
               (element.styleCard = find(element.flag) ?? creditCard.Undefined)
           )
           state.listCards = data

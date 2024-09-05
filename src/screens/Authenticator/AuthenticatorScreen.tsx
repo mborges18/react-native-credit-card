@@ -7,26 +7,26 @@ import SignUpScreen from 'screens/authenticator/signup/screens/SignUpScreen';
 import Theme from 'utils/AppTheme';
 
 const AuthenticatorScreen = () => {
-    return <ViewPagerComponent />;
+  return <ViewPagerComponent />;
 }
-  
+
 const ViewPagerComponent = () => {
   const pageRef = useRef<PagerView>(null)
   const ThemeApp = Theme()
 
-    return (
-      <View style={{ backgroundColor: ThemeApp.colors.background, flex: 1,}}>
-      <TabTopComponent onClick={ (page: number) => {
+  return (
+    <View style={{ backgroundColor: ThemeApp.colors.background, flex: 1, }}>
+      <TabTopComponent onClick={(page: number) => {
         pageRef.current?.setPage(page)
-        } } />
-      <View style={{flex: 1}}>
-      <PagerView style={{flex: 1}} initialPage={0} ref={pageRef}>
-        <SignInScreen />
-        <SignUpScreen />
-      </PagerView>
+      }} />
+      <View style={{ flex: 1 }}>
+        <PagerView style={{ flex: 1 }} initialPage={0} ref={pageRef}>
+          <SignInScreen />
+          <SignUpScreen />
+        </PagerView>
       </View>
-      </View>
-    );
+    </View>
+  );
 }
 
 export default AuthenticatorScreen;

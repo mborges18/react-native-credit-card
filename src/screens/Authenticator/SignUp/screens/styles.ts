@@ -2,8 +2,8 @@ import styled from "styled-components/native";
 import Theme from 'utils/AppTheme';
 
 export const TitleSection = styled.Text`
-margin-top: 16px; 
-font-weight: bold; 
-font-size: 20px; 
-color: ${() => Theme().colors.text }
+  margin-top: 16px; 
+  font-weight: bold; 
+  font-size: 20px; 
+  color: ${() => Theme().colors.text}
 `;

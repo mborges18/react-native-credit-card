@@ -1,29 +1,27 @@
-import {Api} from 'api/Api'
-import {Failure, Error, Success, Exists } from 'api/ResultRequest'
+import { Failure, Error, Success, Exists } from 'api/ResultRequest'
 import SignUpModel from 'screens/authenticator/signup/model/SignUpModel'
 import { ToRequest } from 'screens/authenticator/signup/data/SignUpMapper'
+import apiService from 'api/Api'
 
 export default function SignUpRespository() {
-    const Servise = Api()
 
-    const signUp = async (model: SignUpModel) => {
-        var body = ToRequest(model)
-        return Servise.Post('signup', body)
-        .then((response) => {
-            if (response.code===201) {
-                return new Success(response.body)
-            } else if(response.code===409){
-                return new Exists
-            } else {
-                return new Error(response)
-            }
-        })
-        .catch((error) => {
-            return new Failure(error)
-        })
+  const signUp = async (model: SignUpModel) => {
+    var body = ToRequest(model)
+    return apiService.Post<SignUpModel>('signup', body).then((response) => {
+      if (response.code === 201) {
+        return new Success(response.body)
+      } else if (response.code === 409) {
+        return new Exists
+      } else {
+        return new Error(response)
       }
+    })
+      .catch((error) => {
+        return new Failure(error)
+      })
+  }
 
-      return {
-        signUp
-      }
+  return {
+    signUp
+  }
 }
