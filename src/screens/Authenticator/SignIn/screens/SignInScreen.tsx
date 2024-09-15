@@ -9,6 +9,8 @@ import ButtonOutline from 'components/button/ButtonOutline';
 import HeaderWellCome from 'components/header/HeaderWellCome';
 import DialogError from 'components/dialog/DialogError';
 import SignUpModel from 'screens/authenticator/signup/model/SignUpModel';
+import { LockKeyOpen } from 'phosphor-react-native';
+import Theme from 'utils/AppTheme';
 
 const SignInScreen = () => {
 
@@ -38,7 +40,7 @@ const SignInScreen = () => {
         
     <HeaderWellCome 
       title={'Acesso'} 
-      iconName={'lock'} 
+      icon={<LockKeyOpen size={24} weight="fill" color={Theme().colors.text}/>} 
       subTitle={'Seja bem vindo!'} 
       description={'Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.'}
     />
