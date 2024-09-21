@@ -9,6 +9,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import LogApp from 'utils/LogApp';
 import StatusBarApp from 'components/StatusBar/StatusBar';
 import * as S from "./styles"
+import StyleCard, { find, getFlagCard } from '../model/StyleCard';
+import CreditCardListModel from '../model/CreditCardListModel';
 
 const CreditCardListScreen = () => {
 
@@ -27,7 +29,7 @@ const route = useRoute<RouteProp<ParamListBase>>();
 
 useEffect(() => {
   LogApp("onDataCreated")
-  onDataCreated(route.params as Object) 
+  onDataCreated(route.params as CreditCardListModel) 
 }, [route.params])
 
 useEffect(() => {
@@ -57,7 +59,7 @@ return (
           isFront={true}
           isClickable={true} 
           isFlipable={false}
-          creditCardType={item.styleCard}
+          creditCardType={getFlagCard(item.flag)}
           delete={() => {
               onDeleteData(item);
           } }

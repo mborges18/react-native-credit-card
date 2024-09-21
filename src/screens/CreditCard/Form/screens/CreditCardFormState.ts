@@ -5,5 +5,5 @@ export default interface CreditCardFormState {
     errorService: boolean,
     successService: boolean,
     isLoading: boolean,
-    resultRequest: ResultRequest | null
+    resultRequest: ResultRequest<any> | null
 }

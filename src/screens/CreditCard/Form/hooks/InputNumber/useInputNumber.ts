@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { flagCard } from "screens/CreditCard/List/model/CreditCardListModel";
 import StyleCard, { CreditCardDefault } from "screens/CreditCard/List/model/StyleCard";
 import Validation from "utils/Validation";
 
@@ -20,7 +21,7 @@ const useInputNumber = () => {
     const valueRefMasked = useRef<any>(maskNumber);
     const valueDataMasked  = valueRefMasked.current
 
-    const typeCardRef = useRef<CreditCardDefault>(styleCard.Undefined);
+    const typeCardRef = useRef<flagCard>("Undefined");
     const typeCardData  = typeCardRef.current
 
     const valueRef = useRef<any>("");
@@ -39,7 +40,7 @@ const useInputNumber = () => {
 
     const onValidateData = (value: string) => {
         if(value.length==19){
-            if(typeCardRef.current==styleCard.Undefined){
+            if(typeCardRef.current == "Undefined"){
                 state.isValidData = false
                 state.errorData = "Cartão desconhecido"
             } else {

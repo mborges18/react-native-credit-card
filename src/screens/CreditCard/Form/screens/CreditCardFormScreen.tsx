@@ -11,6 +11,7 @@ import CreditCardFormModel from "screens/CreditCard/Form/model/CreditCardFormMod
 import DialogSuccess from "components/Dialog/DialogSuccess";
 import * as S from "./styles"
 import StatusBarApp from "components/StatusBar/StatusBar";
+import { getFlagCard } from "screens/CreditCard/List/model/StyleCard";
 
 const CreditCardFormScreen = () => {
 
@@ -64,7 +65,7 @@ return (
           name={inputName.valueDataMask}
           date={inputDate.valueDataMasked}
           cvv={inputCvv.valueData}
-          creditCardType={inputNumber.typeCardData}
+          creditCardType={getFlagCard(inputNumber.typeCardData)}
           isOpen={true}
           isFront={!inputCvv.state.isVisibleField} 
           isFlipable={true}

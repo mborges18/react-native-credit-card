@@ -40,8 +40,7 @@ const useCreditCardForm = () => {
     nameUser: inputName.valueData,
     dateExpire: inputDate.valueData,
     cvv: inputCvv.valueData,
-    flag: inputNumber.typeCardData.name,
-    styleCard: inputNumber.typeCardData,
+    flag: inputNumber.typeCardData,
     status: "ENABLED",
   })
 
@@ -60,8 +59,7 @@ const useCreditCardForm = () => {
     model.nameUser = inputName.valueData
     model.dateExpire = inputDate.valueData
     model.cvv = inputCvv.valueData
-    model.flag = inputNumber.typeCardData.name
-    model.styleCard = inputNumber.typeCardData
+    model.flag = inputNumber.typeCardData
     setModel(model)
   },[inputNumber, inputName, inputDate, inputCvv])
 

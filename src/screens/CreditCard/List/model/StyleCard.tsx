@@ -8,6 +8,7 @@ import IconDiscover from "assets/images/ic_discover.svg";
 import IconJcb from "assets/images/ic_jcb.svg";
 import IconMaster from "assets/images/ic_mastercard.svg";
 import IconUndefined from "assets/images/ic_credit_card.svg";
+import { flagCard } from "./CreditCardListModel";
 
 export const StyleCard = () => {
 
@@ -36,9 +37,13 @@ export const find = (name: string) => {
         if(element.name.toLowerCase() == name.toLowerCase()) {
             console.log("find => "+element.name.toLowerCase() +" === "+ name.toLowerCase())
             return element
+        } else {
+            StyleCard().Undefined
         }
     })
 }
+
+export const getFlagCard = (flag: flagCard) => find(flag) ?? StyleCard().Undefined
 
 const height = 50
 const width = 70

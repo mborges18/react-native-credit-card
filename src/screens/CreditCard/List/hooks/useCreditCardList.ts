@@ -28,9 +28,6 @@ export default function CreditCardListViewModel() {
 
       if(response instanceof Success) {
           var data = (response.data as CreditCardListModel[])
-          data?.flatMap((element) => 
-              (element.styleCard = find(element.flag) ?? creditCard.Undefined)
-          )
           state.listCards = data
       } else {
           state.errorService = true
@@ -64,12 +61,11 @@ export default function CreditCardListViewModel() {
     LogApp("onDeleteDataCancel ", state.itemDelete)
   }
 
-  const onDataCreated = (data: Object) => {
+  const onDataCreated = (data: CreditCardListModel) => {
     if(data != undefined &&  data != null) {
-      var model = data as CreditCardListModel
-      (model.styleCard = find(model.flag) ?? creditCard.Undefined)
-      state.listCards.unshift(model)
-      LogApp("onDataCreated ", model)
+      //(model.styleCard = find(model.flag) ?? creditCard.Undefined)
+      state.listCards.unshift(data)
+      LogApp("onDataCreated ", data)
       setState({...state})
     }
   }
