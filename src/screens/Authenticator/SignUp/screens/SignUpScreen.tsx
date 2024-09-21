@@ -8,6 +8,8 @@ import MaskType from "components/textfield/MaskType";
 import HeaderWellCome from "components/header/HeaderWellCome";
 import DialogError from "components/dialog/DialogError";
 import * as S from "./styles"
+import { ClipboardText } from 'phosphor-react-native';
+import Theme from 'utils/AppTheme';
 
 const SignUpScreen = () => {
 
@@ -38,7 +40,7 @@ const SignUpScreen = () => {
 
           <HeaderWellCome
             title={'Cadastro'}
-            iconName={'clipboard-account'}
+            icon={<ClipboardText size={24} weight="fill" color={Theme().colors.text}/>} 
             subTitle={'Seja bem vindo!'}
             description={'Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.'}
           />
