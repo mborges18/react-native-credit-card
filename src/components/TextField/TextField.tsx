@@ -77,7 +77,7 @@ const TextField: React.FC<TextFieldProps> = ({
         {label}
       </S.LabelAnimate>
 
-      {textFieldHook.handlerMessageError() && 
+      {messageError && 
       <Text style={{color: colorBorderError}}>{messageError}</Text>}
     
     </S.Wrapper>

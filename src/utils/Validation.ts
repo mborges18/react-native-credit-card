@@ -1,4 +1,4 @@
-import StyleCard, { CreditCardDefault } from "screens/creditcard/list/model/StyleCard";
+import StyleCard, { CreditCardDefault } from "screens/CreditCard/List/model/StyleCard";
 
 export default function Validation() {
 

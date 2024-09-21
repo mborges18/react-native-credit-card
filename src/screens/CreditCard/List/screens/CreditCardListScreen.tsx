@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import useCreditCardList from 'screens/creditcard/list/hooks/useCreditCardList';
+import useCreditCardList from 'screens/CreditCard/List/hooks/useCreditCardList';
 import Theme from 'utils/AppTheme';
-import Itemcard from 'screens/creditcard/list/screens/ItemCard';
+import Itemcard from 'screens/CreditCard/List/screens/ItemCard';
 import { useNavigation, ParamListBase,  NavigationProp, useRoute, RouteProp } from '@react-navigation/native';
 import { NavigationUrl } from 'navigation/NavigationUrl';
-import DialogConfirm from 'components/dialog/DialogConfirm';
+import DialogConfirm from 'components/Dialog/DialogConfirm';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LogApp from 'utils/LogApp';
-import StatusBarApp from 'components/statusbar/StatusBar';
+import StatusBarApp from 'components/StatusBar/StatusBar';
 import * as S from "./styles"
 
 const CreditCardListScreen = () => {

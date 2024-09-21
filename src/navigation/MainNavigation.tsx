@@ -1,12 +1,12 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import AuthenticatorScreen from 'screens/authenticator/AuthenticatorScreen';
-import CreditCardListScreen from 'screens/creditcard/list/screens/CreditCardListScreen'
-import CreditCardFormScreen from 'screens/creditcard/form/screens/CreditCardFormScreen';
+import AuthenticatorScreen from 'screens/Authenticator/AuthenticatorScreen';
+import CreditCardListScreen from 'screens/CreditCard/List/screens/CreditCardListScreen'
+import CreditCardFormScreen from 'screens/CreditCard/Form/screens/CreditCardFormScreen';
 import { SafeAreaView, StatusBar } from 'react-native';
 import Theme from 'utils/AppTheme';
-import { AuthenticatorProvider } from 'screens/authenticator/AuthenticatorContextApi';
+import { AuthenticatorProvider } from 'screens/Authenticator/AuthenticatorContextApi';
 import { NavigationUrl } from 'navigation/NavigationUrl';
 import { LogBox } from 'react-native';
 

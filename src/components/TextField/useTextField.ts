@@ -85,7 +85,7 @@ export const useTextField = ({
     };
   
     const handlerColorLabel = () => {
-      if (messageError != '' && messageError != null) {
+      if (messageError != '' && messageError != null && messageError != undefined) {
         return colorBorderError;
       } else {
         if (borderOn) return colorBorderEnabled;
@@ -106,10 +106,6 @@ export const useTextField = ({
         return !eyeToggle ? 'visibility' : 'visibility-off';
     }
 
-    const handlerMessageError = () => {
-      return messageError != '' && messageError != null;
-    }
-
     const handlerSecretPassword = () => {
       return isPassword && eyeToggle;
     }
@@ -128,7 +124,6 @@ export const useTextField = ({
         helperBorderColor,
         handlerEyeToggle,
         handlerIconEyeToggle,
-        handlerMessageError,
         handlerSecretPassword,
         animatedStyles,
         zindex,

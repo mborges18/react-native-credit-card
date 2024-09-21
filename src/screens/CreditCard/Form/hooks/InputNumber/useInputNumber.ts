@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import StyleCard, { CreditCardDefault } from "screens/creditcard/list/model/StyleCard";
+import StyleCard, { CreditCardDefault } from "screens/CreditCard/List/model/StyleCard";
 import Validation from "utils/Validation";
 
 interface InputState {

@@ -1,9 +1,9 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Theme, { colorError } from 'utils/AppTheme';
-import ButtonDefault from 'components/button/ButtonDefault';
-import ModalDefault from 'components/dialog/ModalDefault';
-import * as S from 'components/dialog/styles';
+import ButtonDefault from 'components/Button/ButtonDefault';
+import ModalDefault from 'components/Dialog/ModalDefault';
+import * as S from './styles';
 import { DialogProps } from './DialogProps';
 
 const DialogError = (props: DialogProps) => {

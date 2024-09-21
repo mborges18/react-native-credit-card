@@ -1,16 +1,16 @@
-import MaskType from "components/textfield/MaskType";
-import TextField from "components/textfield/TextField";
-import ButtonDefault from "components/button/ButtonDefault";
-import useCreditCardForm from "screens/creditcard/form/hooks/useCreditCardForm";
-import Itemcard from "screens/creditcard/list/screens/ItemCard";
-import DialogError from "components/dialog/DialogError";
+import MaskType from "components/TextField/MaskType";
+import TextField from "components/TextField/TextField";
+import ButtonDefault from "components/Button/ButtonDefault";
+import useCreditCardForm from "screens/CreditCard/Form/hooks/useCreditCardForm";
+import Itemcard from "screens/CreditCard/List/screens/ItemCard";
+import DialogError from "components/Dialog/DialogError";
 import { ParamListBase, RouteProp, useRoute } from "@react-navigation/native";
 import { useEffect } from "react";
 import LogApp from "utils/LogApp";
-import CreditCardFormModel from "../model/CreditCardFormModel";
-import DialogSuccess from "components/dialog/DialogSuccess";
+import CreditCardFormModel from "screens/CreditCard/Form/model/CreditCardFormModel";
+import DialogSuccess from "components/Dialog/DialogSuccess";
 import * as S from "./styles"
-import StatusBarApp from "components/statusbar/StatusBar";
+import StatusBarApp from "components/StatusBar/StatusBar";
 
 const CreditCardFormScreen = () => {
 

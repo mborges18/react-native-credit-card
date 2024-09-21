@@ -2,24 +2,24 @@ import { createContext, useState } from "react";
 import { ResultRequest } from 'api/ResultRequest'
 
 interface AuthDate {
-  setSignIn: (result: ResultRequest) => void,
-  signIn: ResultRequest
-  setSignUp: (result: ResultRequest) => void,
-  signUp: ResultRequest
+  setSignIn: (result: ResultRequest<any>) => void,
+  signIn: ResultRequest<any>
+  setSignUp: (result: ResultRequest<any>) => void,
+  signUp: ResultRequest<any>
 }
 
 const AuthenticatorContextApi = createContext<AuthDate>({} as AuthDate);
 
 export const AuthenticatorProvider = (props: AuthProps) => {
-  const [signIn, setStateSignIn] = useState({} as ResultRequest)
-  const [signUp, setStateSignUp] = useState({} as ResultRequest)
+  const [signIn, setStateSignIn] = useState({} as ResultRequest<any>)
+  const [signUp, setStateSignUp] = useState({} as ResultRequest<any>)
 
-  async function setSignIn(result: ResultRequest) {
+  async function setSignIn(result: ResultRequest<any>) {
     console.log("CONTEXT API => setSignIn = " + JSON.stringify(result))
     setStateSignIn(result)
   }
 
-  async function setSignUp(result: ResultRequest) {
+  async function setSignUp(result: ResultRequest<any>) {
     console.log("CONTEXT API => setSignUp = " + JSON.stringify(result))
     setStateSignUp(result)
   }
