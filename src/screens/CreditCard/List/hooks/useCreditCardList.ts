@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreditCardListRepository from "screens/CreditCard/List/data/CreditCardListRepository"
 import CreditCardListState from "screens/CreditCard/List/screens/CreditCardListState";
 import { Success } from "api/ResultRequest";
 import CreditCardListModel from "screens/CreditCard/List/model/CreditCardListModel";
 import CreditCardDefault, { find } from "screens/CreditCard/List/model/StyleCard";
 import LogApp from "utils/LogApp";
+import { NavigationProp, ParamListBase, RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { NavigationUrl } from "navigation/NavigationUrl";
 
 export default function CreditCardListViewModel() {
   const respository = CreditCardListRepository()
   const creditCard = CreditCardDefault()
+  const navigation: NavigationProp<ParamListBase> = useNavigation();
+  const route = useRoute<RouteProp<ParamListBase>>();
 
   const [state, setState] = useState<CreditCardListState>({
     listCards: [],
@@ -18,6 +22,16 @@ export default function CreditCardListViewModel() {
     confirmDelete: false,
     successDeleteService: false,
   });
+
+  useEffect(() => {
+    LogApp("onDataCreated")
+    onDataCreated(route.params as CreditCardListModel) 
+  }, [route.params])
+  
+  useEffect(() => {
+    LogApp("onGetData")
+    onGetData()
+  }, [])
 
   const onGetData = async () => {
     try {
@@ -70,12 +84,17 @@ export default function CreditCardListViewModel() {
     }
   }
 
+  const gotoForm = (item?: CreditCardListModel) => {
+    navigation.navigate(NavigationUrl.CreditCardFormScreen, item);
+  }
+
   return {
     state,
     onGetData,
     onDeleteData,
     onDeleteDataConfirm,
     onDeleteDataCancel,
-    onDataCreated
+    onDataCreated,
+    gotoForm,
   }
 }

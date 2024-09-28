@@ -5,7 +5,7 @@ import Theme from 'utils/AppTheme';
 import { CreditCardDefault } from "../model/StyleCard";
 import * as S from "./styles"
 import useItemCard from "../hooks/useItemCard";
-import GradientCard from "components/cardgradient/GradientCard";
+import GradientCard from "components/CardGradient/GradientCard";
 
 export type CreditCardItemProps = {
   number: string,

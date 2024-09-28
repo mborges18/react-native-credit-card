@@ -1,18 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useCreditCardList from 'screens/CreditCard/List/hooks/useCreditCardList';
 import Theme from 'utils/AppTheme';
 import Itemcard from 'screens/CreditCard/List/screens/ItemCard';
-import { useNavigation, ParamListBase,  NavigationProp, useRoute, RouteProp } from '@react-navigation/native';
-import { NavigationUrl } from 'navigation/NavigationUrl';
 import DialogConfirm from 'components/Dialog/DialogConfirm';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import LogApp from 'utils/LogApp';
+import { Plus } from 'phosphor-react-native';
 import StatusBarApp from 'components/StatusBar/StatusBar';
 import * as S from "./styles"
-import StyleCard, { find, getFlagCard } from '../model/StyleCard';
-import CreditCardListModel from '../model/CreditCardListModel';
+import { getFlagCard } from '../model/StyleCard';
 
-const CreditCardListScreen = () => {
+const CreditCardListScreen: React.FC = () => {
 
 const {
   state,
@@ -20,22 +16,10 @@ const {
   onDeleteData,
   onDeleteDataConfirm,
   onDeleteDataCancel,
-  onDataCreated
+  gotoForm,
 } = useCreditCardList()
 
 const ThemeApp = Theme()
-const navigation: NavigationProp<ParamListBase> = useNavigation();
-const route = useRoute<RouteProp<ParamListBase>>();
-
-useEffect(() => {
-  LogApp("onDataCreated")
-  onDataCreated(route.params as CreditCardListModel) 
-}, [route.params])
-
-useEffect(() => {
-  LogApp("onGetData")
-  onGetData()
-}, [])
 
 return (
   <S.SafeAreaView>
@@ -64,7 +48,7 @@ return (
               onDeleteData(item);
           } }
           edit={() => {
-              navigation.navigate(NavigationUrl.CreditCardFormScreen, item);
+            gotoForm(item);
           } } 
           />}
       />
@@ -72,9 +56,9 @@ return (
     <S.FloatButton 
       activeOpacity={0.8} 
       onPress={() => {
-          navigation.navigate(NavigationUrl.CreditCardFormScreen);
+        gotoForm();
       }}>
-      <Icon name={'add'} size={24} color={ThemeApp.colors.onText} />
+      <Plus size={24} weight='bold' color={ThemeApp.colors.onText} />
     </S.FloatButton>
   </S.SafeAreaView>
 );
