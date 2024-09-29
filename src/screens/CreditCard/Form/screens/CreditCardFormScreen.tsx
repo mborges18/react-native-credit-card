@@ -10,7 +10,6 @@ import LogApp from "utils/LogApp";
 import CreditCardFormModel from "screens/CreditCard/Form/model/CreditCardFormModel";
 import DialogSuccess from "components/Dialog/DialogSuccess";
 import * as S from "./styles"
-import StatusBarApp from "components/StatusBar/StatusBar";
 import { getFlagCard } from "screens/CreditCard/List/model/StyleCard";
 
 const CreditCardFormScreen = () => {

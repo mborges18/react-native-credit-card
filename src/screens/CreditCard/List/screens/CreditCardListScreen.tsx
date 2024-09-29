@@ -7,6 +7,7 @@ import { Plus } from 'phosphor-react-native';
 import StatusBarApp from 'components/StatusBar/StatusBar';
 import * as S from "./styles"
 import { getFlagCard } from '../model/StyleCard';
+import Toolbar from 'components/Toolbar/Toolbar';
 
 const CreditCardListScreen: React.FC = () => {
 
@@ -20,8 +21,6 @@ const {
 
 return (
   <S.Wrapper>
-  <StatusBarApp />
-
       <DialogConfirm 
         isVisible={state.confirmDelete} 
         title={'Informação'} 
@@ -29,6 +28,7 @@ return (
         onClickConfirm={() => { onDeleteDataConfirm() }} 
         onClickCancel={() => { onDeleteDataCancel() } } 
       />
+      <Toolbar />
       <S.ListCards
         data={state.listCards}
         renderItem={({item}) => 
