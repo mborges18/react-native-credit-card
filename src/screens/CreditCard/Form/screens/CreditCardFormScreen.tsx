@@ -38,8 +38,7 @@ useEffect(() => {
 }, [route.params])
 
 return (
-  <S.SafeAreaView>
-  <StatusBarApp />
+  <S.Wrapper>
     <S.WrapperForm>
 
       <DialogError 
@@ -152,7 +151,7 @@ return (
       </S.RowForm>
       </S.RowInputs>
     </S.WrapperForm>
-  </S.SafeAreaView>
+  </S.Wrapper>
 );
 }
 

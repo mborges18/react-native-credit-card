@@ -10,7 +10,7 @@ import { Exists, Success } from "api/ResultRequest";
 import CreditCardFormModel from "screens/CreditCard/Form/model/CreditCardFormModel";
 import { NavigationProp, ParamListBase, useNavigation } from "@react-navigation/native";
 import { NavigationUrl } from "navigation/NavigationUrl";
-import AuthenticatorContextApi from "screens/Authenticator/AuthenticatorContextApi";
+import AuthenticatorContextApi from "context/AuthenticatorContextApi";
 import LogApp from "utils/LogApp";
 
 const useCreditCardForm = () => {

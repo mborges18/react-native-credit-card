@@ -1,6 +1,6 @@
 import { Animated } from "react-native";
 import styled from "styled-components/native";
-import Theme from 'utils/AppTheme'
+import { ThemeDefaultApp } from "utils/AppTheme";
 
 type SwitchPros = {
     isChecked: boolean
@@ -18,13 +18,13 @@ export const TrackerSwitch = styled.View<SwitchPros>`
     height: 27px;
     border-radius: 100px;
     justify-content: center;
-    background-color: ${({isChecked})=> isChecked ? Theme().colors.primary : Theme().colors.onSurfaceVariant};
+    background-color: ${({isChecked})=> isChecked ? ThemeDefaultApp.colors.primary : ThemeDefaultApp.colors.onSurfaceVariant};
 `;
 
 export const ThumbSwitch = styled.View<SwitchPros>`
     width: 25px;
     height: 25px;
-    background-color: ${()=> Theme().colors.onPrimary};
+    background-color: ${()=> ThemeDefaultApp.colors.onPrimary};
     border-radius: 12px;
     margin-left: ${({marginLeft})=> marginLeft }px;
 `;
@@ -35,5 +35,5 @@ export const TextSwitch = styled.Text<SwitchPros>`
     margin-left: 8px;
     font-size: 16px;
     font-weight: bold;
-    color: ${({isChecked})=> isChecked ? Theme().colors.text : Theme().colors.onSurfaceVariant};
+    color: ${({isChecked})=> isChecked ? ThemeDefaultApp.colors.text : ThemeDefaultApp.colors.onSurfaceVariant};
 `;

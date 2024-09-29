@@ -17,6 +17,7 @@
       "hooks": ["hooks/*"],
       "navigation": ["navigation/*"],
       "screens": ["screens/*"],
+      "context": ["context/*"],
       "utils": ["utils/*"],
     }
   }

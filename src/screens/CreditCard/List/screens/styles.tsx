@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
-import Theme from 'utils/AppTheme';
 import CreditCardListModel from "../model/CreditCardListModel";
 import { FlatListProps } from "react-native";
+import { ThemeDefaultApp } from "utils/AppTheme";
 
 type CreditCardListStyleProps = {
   isOpen?: boolean;
@@ -15,7 +15,7 @@ interface CreditcardListProps extends FlatListProps<CreditCardListModel> {
   data: CreditCardListModel[];
 }
 
-export const SafeAreaView = styled.SafeAreaView`
+export const Wrapper = styled.View`
   flex: 1;
 `;
 
@@ -30,7 +30,7 @@ export const FloatButton = styled.TouchableOpacity`
   z-index: 10; 
   padding: 16px;; 
   border-radius: 16px;
-  background-color: ${()=> Theme().colors.primary};
+  background-color: ${()=> ThemeDefaultApp.colors.primary};
 `;
 
 export const CardOutter = styled.View<CreditCardListStyleProps>`
@@ -82,10 +82,10 @@ export const CardWhiteTrace = styled.View`
 
 export const TextCard = styled.Text<CreditCardListStyleProps>`
   margin-top: ${({marginTop}) => marginTop ?? 0}px;
-  color: ${()=> Theme().colors.onText }; 
+  color: ${()=> ThemeDefaultApp.colors.onText }; 
   font-size: ${({textSize})=> textSize }px; 
   font-weight: bold;
-  text-shadow: 1px 1px 2px ${()=> Theme().colors.onBackground };
+  text-shadow: 1px 1px 2px ${()=> ThemeDefaultApp.colors.onBackground };
   letter-spacing: ${({letterSpacing})=> letterSpacing ?? 0 }px;
 `;
 
@@ -95,6 +95,6 @@ export const ButtonAction = styled.TouchableOpacity`
   border-radius: 100px; 
   align-items: center; 
   justify-content: center; 
-  background-color:  ${()=> Theme().colors.primary };
+  background-color:  ${()=> ThemeDefaultApp.colors.primary };
 `;
 

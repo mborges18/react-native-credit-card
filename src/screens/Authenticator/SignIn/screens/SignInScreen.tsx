@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { LockKeyOpen } from 'phosphor-react-native';
-import Theme from 'utils/AppTheme';
+import { ThemeDefaultApp } from 'utils/AppTheme';
 import TextField from 'components/TextField/TextField';
 import ButtonDefault from 'components/Button/ButtonDefault';
 import SwitchButton from 'components/Switch/SwitchButton';
@@ -40,7 +40,7 @@ const SignInScreen = () => {
         
     <HeaderWellCome 
       title={'Acesso'} 
-      icon={<LockKeyOpen size={24} weight="fill" color={Theme().colors.text}/>} 
+      icon={<LockKeyOpen size={24} weight="fill" color={ThemeDefaultApp.colors.text}/>} 
       subTitle={'Seja bem vindo!'} 
       description={'Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.'}
     />

@@ -1,11 +1,11 @@
 import React, { useEffect} from "react";
 import { Animated, Pressable, View } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Theme from 'utils/AppTheme';
 import { CreditCardDefault } from "../model/StyleCard";
 import * as S from "./styles"
 import useItemCard from "../hooks/useItemCard";
 import GradientCard from "components/CardGradient/GradientCard";
+import { ThemeDefaultApp } from "utils/AppTheme";
 
 export type CreditCardItemProps = {
   number: string,
@@ -22,7 +22,6 @@ export type CreditCardItemProps = {
 }
 
 export default function Itemcard(props: CreditCardItemProps) {
-  const ThemeApp = Theme();
 
   const {
     flip,
@@ -93,7 +92,7 @@ export default function Itemcard(props: CreditCardItemProps) {
   }
 
   return (
-    <Pressable style={{ width: "100%", backgroundColor: ThemeApp.colors.background}} onPress={() => {
+    <Pressable style={{ width: "100%", backgroundColor: ThemeDefaultApp.colors.background}} onPress={() => {
       if(props.isClickable) {
           showContent()
       }
@@ -125,13 +124,13 @@ export default function Itemcard(props: CreditCardItemProps) {
         <S.ButtonAction 
           onPress={() => { props.delete?.() }} 
           activeOpacity={0.8}>
-          <Icon name={'delete'} size={24} color={ThemeApp.colors.onText} />
+          <Icon name={'delete'} size={24} color={ThemeDefaultApp.colors.onText} />
         </S.ButtonAction>
 
         <S.ButtonAction 
           onPress={() => { props.edit?.() }} 
           activeOpacity={0.8}>
-          <Icon name={'edit'} size={24} color={ThemeApp.colors.onText} />
+          <Icon name={'edit'} size={24} color={ThemeDefaultApp.colors.onText} />
         </S.ButtonAction>
       </S.BottomCard>
     ) : null }

@@ -1,12 +1,11 @@
 import React from 'react';
-import Theme from 'utils/AppTheme';
 import { StatusBar } from 'react-native';
+import { ThemeDefaultApp } from 'utils/AppTheme';
 
 const StatusBarApp = () => {
-    const ThemeApp = Theme()
     return (
-        <StatusBar animated={true} barStyle={ ThemeApp.dark ? "light-content" : "dark-content" } backgroundColor={
-            ThemeApp.dark ? ThemeApp.colors.onBackground : ThemeApp.colors.background 
+        <StatusBar animated={true} barStyle={ ThemeDefaultApp.dark ? "light-content" : "dark-content" } backgroundColor={
+            ThemeDefaultApp.dark ? ThemeDefaultApp.colors.onBackground : ThemeDefaultApp.colors.background 
             } />
     );
 }

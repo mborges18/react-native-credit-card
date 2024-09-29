@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as S from "./styles";
 import { TextFieldProps } from 'components/textfield/TextFieldProps';
 import { useTextField } from './useTextField';
-import Theme from 'utils/AppTheme';
+import { ThemeDefaultApp } from 'utils/AppTheme';
 
 const TextField: React.FC<TextFieldProps> = ({
   label,
@@ -13,11 +13,11 @@ const TextField: React.FC<TextFieldProps> = ({
   inputMode,
   maxLength=55,
   messageError,
-  colorBorderEnabled=Theme().colors.primary,
-  colorBorderDisabled=Theme().colors.border,
-  colorBorderError=Theme().colors.error,
-  colorContent=Theme().colors.background,
-  colorText=Theme().colors.text,
+  colorBorderEnabled=ThemeDefaultApp.colors.primary,
+  colorBorderDisabled=ThemeDefaultApp.colors.border,
+  colorBorderError=ThemeDefaultApp.colors.error,
+  colorContent=ThemeDefaultApp.colors.background,
+  colorText=ThemeDefaultApp.colors.text,
   maskType,
   iconStart,
   isPassword,

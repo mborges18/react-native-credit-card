@@ -1,6 +1,6 @@
 import React from 'react';
 import useCreditCardList from 'screens/CreditCard/List/hooks/useCreditCardList';
-import Theme from 'utils/AppTheme';
+import { ThemeDefaultApp } from 'utils/AppTheme';
 import Itemcard from 'screens/CreditCard/List/screens/ItemCard';
 import DialogConfirm from 'components/Dialog/DialogConfirm';
 import { Plus } from 'phosphor-react-native';
@@ -12,17 +12,14 @@ const CreditCardListScreen: React.FC = () => {
 
 const {
   state,
-  onGetData,
   onDeleteData,
   onDeleteDataConfirm,
   onDeleteDataCancel,
   gotoForm,
 } = useCreditCardList()
 
-const ThemeApp = Theme()
-
 return (
-  <S.SafeAreaView>
+  <S.Wrapper>
   <StatusBarApp />
 
       <DialogConfirm 
@@ -58,9 +55,9 @@ return (
       onPress={() => {
         gotoForm();
       }}>
-      <Plus size={24} weight='bold' color={ThemeApp.colors.onText} />
+      <Plus size={24} weight='bold' color={ThemeDefaultApp.colors.onText} />
     </S.FloatButton>
-  </S.SafeAreaView>
+  </S.Wrapper>
 );
 };
 

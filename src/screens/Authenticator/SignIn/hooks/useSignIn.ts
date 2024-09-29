@@ -6,7 +6,7 @@ import { Success, Error, Unauthorized, ResultRequest } from 'api/ResultRequest';
 import Validation from 'utils/Validation';
 import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 import { NavigationUrl } from 'navigation/NavigationUrl';
-import AuthenticatorContextApi from 'screens/Authenticator/AuthenticatorContextApi';
+import AuthenticatorContextApi from "context/AuthenticatorContextApi";
 
 const useSignIn = () => {
     const navigation: NavigationProp<ParamListBase> = useNavigation();

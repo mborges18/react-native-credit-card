@@ -5,15 +5,13 @@ import AuthenticatorScreen from 'screens/Authenticator/AuthenticatorScreen';
 import CreditCardListScreen from 'screens/CreditCard/List/screens/CreditCardListScreen'
 import CreditCardFormScreen from 'screens/CreditCard/Form/screens/CreditCardFormScreen';
 import { SafeAreaView } from 'react-native';
-import Theme from 'utils/AppTheme';
-import { AuthenticatorProvider } from 'screens/Authenticator/AuthenticatorContextApi';
+import { AuthenticatorProvider } from 'context/AuthenticatorContextApi';
 import { NavigationUrl } from 'navigation/NavigationUrl';
 import StatusBarApp from 'components/StatusBar/StatusBar';
 
 const Stack = createNativeStackNavigator();
 
 const MainNavigation = () => {
-  const ThemeApp = Theme()
 
   return (
     <>

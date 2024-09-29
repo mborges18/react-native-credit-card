@@ -10,6 +10,7 @@ module.exports = {
         "hooks": "./src/hooks",
         "navigation": "./src/navigation",
         "screens": "./src/screens",
+        "context": "./src/context",
         "utils": "./src/utils",
       }
     }]
