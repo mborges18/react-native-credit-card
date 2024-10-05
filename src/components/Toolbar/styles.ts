@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { ThemeDefaultApp } from "utils/AppTheme";
+import { ThemeDefaultApp, transparent } from "utils/AppTheme";
 
 export const Wrapper = styled.View`
   height: 60px;
@@ -13,5 +13,9 @@ export const Title = styled.Text`
   font-weight: bold; 
   padding-left: 16px;
   font-size: 20px; 
-  color: ${ThemeDefaultApp.colors.background}
+  color: ${ThemeDefaultApp.colors.background};
+`;
+
+export const ActionButton = styled.TouchableOpacity`
+  padding: 8px;
 `;

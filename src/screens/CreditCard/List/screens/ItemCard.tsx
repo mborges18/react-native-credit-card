@@ -28,8 +28,7 @@ export default function Itemcard(props: CreditCardItemProps) {
     showContent,
     isFront,
     isOpentState,
-    rotateCard,
-    heightAnimation,
+    styleRotate,
   } = useItemCard(props);
 
     useEffect(() => {
@@ -92,19 +91,11 @@ export default function Itemcard(props: CreditCardItemProps) {
   }
 
   return (
-    <Pressable style={{ width: "100%", backgroundColor: ThemeDefaultApp.colors.background}} onPress={() => {
-      if(props.isClickable) {
-          showContent()
-      }
+    <S.Pressable onPress={() => {
+      props.isClickable && showContent()
     }}>
 
-    <Animated.View style={{
-      transform: [
-          {rotateY:  rotateCard},
-      ],
-      height: heightAnimation, 
-      marginTop: 3,
-      }}>
+    <Animated.View style={styleRotate}>
 
       <S.CardOutter isOpen={props.isOpen} borderColor={props.creditCardType.colorDark}>
       <GradientCard angleX2={"0%"} fromColor={props.creditCardType.colorLight} toColor={props.creditCardType.colorDark} >
@@ -135,6 +126,6 @@ export default function Itemcard(props: CreditCardItemProps) {
       </S.BottomCard>
     ) : null }
 
-    </Pressable>
+    </S.Pressable>
 );
 }

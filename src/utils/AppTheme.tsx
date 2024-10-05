@@ -23,7 +23,7 @@ export const ThemeDefaultApp = {
     onSurfaceVariant: isDark ?  "#a6a6a6" : "#a6a6a6",
     card: isDark ?  "#a6a6a6" : "#a6a6a6",
     text: isDark ?  "#a6a6a6" : "#1f1e1d",
-    onText: isDark ?  "#FFFFFF" : "#1f1e1d",
+    onText: isDark ?  "#1f1e1d" : "#FFFFFF",
     border: isDark ?  "#a6a6a6" : "#1b1b1b",
     notification: isDark ?  "#a6a6a6" : "#a6a6a6",
   }
@@ -34,5 +34,6 @@ export const colorSuccess = '#499865';
 export const colorInfo = '#5c89b6';
 export const colorWarning = '#b2a065';
 export const overlay = '#00000087';
+export const transparent = '#0000000';
 
 export default AppTheme;

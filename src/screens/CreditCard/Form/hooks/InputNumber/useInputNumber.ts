@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { flagCard } from "screens/CreditCard/List/model/CreditCardListModel";
-import StyleCard, { CreditCardDefault } from "screens/CreditCard/List/model/StyleCard";
 import Validation from "utils/Validation";
 
 interface InputState {
@@ -15,7 +14,6 @@ const useInputNumber = () => {
         isValidData: false,
         isVisibleField: true,
     });
-    const styleCard = StyleCard()
     const maskNumber = "XXXX XXXX XXXX XXXX"
 
     const valueRefMasked = useRef<any>(maskNumber);
@@ -28,7 +26,7 @@ const useInputNumber = () => {
     const valueData = valueRef.current
 
     const onValue = (value: string) => {
-        valueData.current = value
+        valueRef.current = value
         let text = value + maskNumber.substring(0 + value.length)
         valueRefMasked.current = text
         typeCardRef.current = Validation().validateCCNum(value)

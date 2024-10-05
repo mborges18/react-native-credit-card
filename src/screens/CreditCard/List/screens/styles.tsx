@@ -23,6 +23,11 @@ export const ListCards = styled.FlatList<CreditcardListProps>`
   margin: 16px;
 `;
 
+export const Pressable = styled.Pressable`
+  width: 100%;
+  background-color: ${ThemeDefaultApp.colors.background};
+`;
+
 export const FloatButton = styled.TouchableOpacity`
   position: absolute;
   bottom: 16px; 

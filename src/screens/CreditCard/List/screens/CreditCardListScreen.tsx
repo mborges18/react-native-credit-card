@@ -28,7 +28,7 @@ return (
         onClickConfirm={() => { onDeleteDataConfirm() }} 
         onClickCancel={() => { onDeleteDataCancel() } } 
       />
-      <Toolbar />
+      <Toolbar title="Cartões de crédito" />
       <S.ListCards
         data={state.listCards}
         renderItem={({item}) => 
