@@ -4,7 +4,7 @@ import SignUpModel from "../model/SignUpModel"
 import Validation from "utils/Validation";
 import { Exists, ResultRequest, Success } from "api/ResultRequest";
 import SignUpRespository from "../data/SignUpRepository";
-import AuthenticatorContextApi from "../../AuthenticatorContextApi";
+import AuthenticatorContextApi from "context/AuthenticatorContextApi";
 
 const useSignUp = () => {
   const { setSignUp } = useContext(AuthenticatorContextApi)

@@ -1,44 +1,26 @@
-import React, { useEffect } from 'react';
-import useCreditCardList from 'screens/creditcard/list/hooks/useCreditCardList';
-import Theme from 'utils/AppTheme';
-import Itemcard from 'screens/creditcard/list/screens/ItemCard';
-import { useNavigation, ParamListBase,  NavigationProp, useRoute, RouteProp } from '@react-navigation/native';
-import { NavigationUrl } from 'navigation/NavigationUrl';
-import DialogConfirm from 'components/dialog/DialogConfirm';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import LogApp from 'utils/LogApp';
-import StatusBarApp from 'components/statusbar/StatusBar';
+import React from 'react';
+import useCreditCardList from 'screens/CreditCard/List/hooks/useCreditCardList';
+import { ThemeDefaultApp } from 'utils/AppTheme';
+import Itemcard from 'screens/CreditCard/List/screens/ItemCard';
+import DialogConfirm from 'components/Dialog/DialogConfirm';
+import { Plus } from 'phosphor-react-native';
+import StatusBarApp from 'components/StatusBar/StatusBar';
 import * as S from "./styles"
+import { getFlagCard } from '../model/StyleCard';
+import Toolbar from 'components/Toolbar/Toolbar';
 
-const CreditCardListScreen = () => {
+const CreditCardListScreen: React.FC = () => {
 
 const {
   state,
-  onGetData,
   onDeleteData,
   onDeleteDataConfirm,
   onDeleteDataCancel,
-  onDataCreated
+  gotoForm,
 } = useCreditCardList()
 
-const ThemeApp = Theme()
-const navigation: NavigationProp<ParamListBase> = useNavigation();
-const route = useRoute<RouteProp<ParamListBase>>();
-
-useEffect(() => {
-  LogApp("onDataCreated")
-  onDataCreated(route.params as Object) 
-}, [route.params])
-
-useEffect(() => {
-  LogApp("onGetData")
-  onGetData()
-}, [])
-
 return (
-  <S.SafeAreaView>
-  <StatusBarApp />
-
+  <S.Wrapper>
       <DialogConfirm 
         isVisible={state.confirmDelete} 
         title={'Informação'} 
@@ -46,6 +28,7 @@ return (
         onClickConfirm={() => { onDeleteDataConfirm() }} 
         onClickCancel={() => { onDeleteDataCancel() } } 
       />
+      <Toolbar title="Cartões de crédito" />
       <S.ListCards
         data={state.listCards}
         renderItem={({item}) => 
@@ -57,12 +40,12 @@ return (
           isFront={true}
           isClickable={true} 
           isFlipable={false}
-          creditCardType={item.styleCard}
+          creditCardType={getFlagCard(item.flag)}
           delete={() => {
               onDeleteData(item);
           } }
           edit={() => {
-              navigation.navigate(NavigationUrl.CreditCardFormScreen, item);
+            gotoForm(item);
           } } 
           />}
       />
@@ -70,11 +53,11 @@ return (
     <S.FloatButton 
       activeOpacity={0.8} 
       onPress={() => {
-          navigation.navigate(NavigationUrl.CreditCardFormScreen);
+        gotoForm();
       }}>
-      <Icon name={'add'} size={24} color={ThemeApp.colors.onText} />
+      <Plus size={24} weight='bold' color={ThemeDefaultApp.colors.onText} />
     </S.FloatButton>
-  </S.SafeAreaView>
+  </S.Wrapper>
 );
 };
 

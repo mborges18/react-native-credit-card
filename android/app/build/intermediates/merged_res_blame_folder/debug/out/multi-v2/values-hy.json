@@ -4,7 +4,7 @@
             "outputFile": "com.creditcard.app-mergeDebugResources-34:/values-hy/values-hy.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\marcio.borges\\.gradle\\caches\\transforms-3\\13659b94c66de92d98d7f8af61234b95\\transformed\\core-1.9.0\\res\\values-hy\\values-hy.xml",
+                    "source": "/Users/mborges/.gradle/caches/transforms-3/13659b94c66de92d98d7f8af61234b95/transformed/core-1.9.0/res/values-hy/values-hy.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\marcio.borges\\.gradle\\caches\\transforms-3\\b3627ca143232ec2ceb6e319eb18971d\\transformed\\appcompat-1.6.1\\res\\values-hy\\values-hy.xml",
+                    "source": "/Users/mborges/.gradle/caches/transforms-3/b3627ca143232ec2ceb6e319eb18971d/transformed/appcompat-1.6.1/res/values-hy/values-hy.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +38,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\marcio.borges\\.gradle\\caches\\transforms-3\\d3a8a24834f295d8078f18b8298041f7\\transformed\\material-1.9.0\\res\\values-hy\\values-hy.xml",
+                    "source": "/Users/mborges/.gradle/caches/transforms-3/65f520f887f0d0f390437980af8cd371/transformed/jetified-react-android-0.73.1-debug/res/values-hy/values-hy.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,132,200,281,349,421,496",
+                        "endColumns": "76,67,80,67,71,74,73",
+                        "endOffsets": "127,195,276,344,416,491,565"
+                    },
+                    "to": {
+                        "startLines": "41,45,46,48,62,101,102",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "3742,4065,4133,4276,5309,8441,8516",
+                        "endColumns": "76,67,80,67,71,74,73",
+                        "endOffsets": "3814,4128,4209,4339,5376,8511,8585"
+                    }
+                },
+                {
+                    "source": "/Users/mborges/.gradle/caches/transforms-3/d3a8a24834f295d8078f18b8298041f7/transformed/material-1.9.0/res/values-hy/values-hy.xml",
                     "from": {
                         "startLines": "2,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -54,23 +71,6 @@
                         "endLines": "5,33,34,35,36,37,38,39,40,42,43,44,47,49,50,51,52,53,54,55,56,57,58,59,60,61,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99",
                         "endColumns": "12,75,75,79,91,87,94,129,80,63,96,84,61,86,61,63,60,66,60,53,121,56,59,53,80,134,83,84,135,74,74,94,55,52,65,73,79,85,70,75,75,76,87,79,95,95,73,77,99,50,68,86,90,61,63,62,104,100,99,104,59,56,84",
                         "endOffsets": "310,3095,3171,3251,3343,3431,3526,3656,3737,3878,3975,4060,4271,4426,4488,4552,4613,4680,4741,4795,4917,4974,5034,5088,5169,5304,5460,5545,5681,5756,5831,5926,5982,6035,6101,6175,6255,6341,6412,6488,6564,6641,6729,6809,6905,7001,7075,7153,7253,7304,7373,7460,7551,7613,7677,7740,7845,7946,8046,8151,8211,8268,8353"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\marcio.borges\\.gradle\\caches\\transforms-3\\65f520f887f0d0f390437980af8cd371\\transformed\\jetified-react-android-0.73.1-debug\\res\\values-hy\\values-hy.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,132,200,281,349,421,496",
-                        "endColumns": "76,67,80,67,71,74,73",
-                        "endOffsets": "127,195,276,344,416,491,565"
-                    },
-                    "to": {
-                        "startLines": "41,45,46,48,62,101,102",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "3742,4065,4133,4276,5309,8441,8516",
-                        "endColumns": "76,67,80,67,71,74,73",
-                        "endOffsets": "3814,4128,4209,4339,5376,8511,8585"
                     }
                 }
             ]

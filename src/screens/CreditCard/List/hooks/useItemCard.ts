@@ -39,14 +39,20 @@ const useItemCard = (props: CreditCardItemProps) => {
         outputRange: ['0deg', '180deg'],
     });
 
+    const styleRotate = {
+      transform: [
+          {rotateY:  rotateCard},
+      ],
+      height: heightAnimation, 
+      marginTop: 3,
+    };
 
     return {
         flip,
         showContent,
         isFront,
         isOpentState,
-        rotateCard,
-        heightAnimation,
+        styleRotate,
     }
 }
 

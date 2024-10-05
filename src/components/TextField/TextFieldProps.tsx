@@ -1,5 +1,5 @@
 import {InputModeOptions} from 'react-native';
-import MaskType from 'components/textfield/MaskType';
+import MaskType from 'components/TextField/MaskType';
 
 export type TextFieldProps = {
   label: string,

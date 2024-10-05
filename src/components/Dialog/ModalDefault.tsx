@@ -1,6 +1,6 @@
 import React from 'react'
 import { Modal } from 'react-native'
-import * as S from 'components/dialog/styles';
+import * as S from './styles';
 
 type DialogProps = {
   isVisible: boolean,

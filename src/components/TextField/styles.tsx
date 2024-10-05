@@ -1,6 +1,6 @@
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
-import  Theme   from 'utils/AppTheme';
+import { ThemeDefaultApp } from 'utils/AppTheme';
 
 type InputTextProps = {
   colorContent?: string;
@@ -14,7 +14,7 @@ export const Wrapper = styled.View<InputTextProps>`
   margin-top: 20px;
   position: relative;
   width: '100%';
-  background-color: ${({colorContent}) => colorContent ?? Theme().colors.background};
+  background-color: ${({colorContent}) => colorContent ?? ThemeDefaultApp.colors.background};
 `;
 
 export const InputText = styled.TextInput<InputTextProps>`
@@ -26,7 +26,7 @@ export const InputText = styled.TextInput<InputTextProps>`
   border-color: ${({borderColor}) => borderColor};
   border-width: 1px;
   z-index: 1;
-  color: ${({colorText}) => colorText ?? Theme().colors.text};
+  color: ${({colorText}) => colorText ?? ThemeDefaultApp.colors.text};
 `;
 
 export const Label = styled.Text<InputTextProps>`
@@ -38,7 +38,7 @@ export const Label = styled.Text<InputTextProps>`
   padding-right: 5px;
   z-index: ${({zIndex}) => zIndex };
   color: ${({colorText}) => colorText };
-  background-color: ${({colorContent}) => colorContent ?? Theme().colors.background};
+  background-color: ${({colorContent}) => colorContent ?? ThemeDefaultApp.colors.background};
 `;
 
 export const LabelAnimate = Animated.createAnimatedComponent(Label);

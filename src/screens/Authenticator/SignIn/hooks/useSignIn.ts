@@ -1,12 +1,12 @@
 import { useContext, useRef, useState } from 'react';
-import SignInState from 'screens/authenticator/signin/screens/SignInState';
-import SignInModel from 'screens/authenticator/signin/model/SignInModel';
-import SignInRespository from 'screens/authenticator/signin/data/SignInRepository';
+import SignInState from 'screens/Authenticator/SignIn/screens/SignInState';
+import SignInModel from 'screens/Authenticator/SignIn/model/SignInModel';
+import SignInRespository from 'screens/Authenticator/SignIn/data/SignInRepository';
 import { Success, Error, Unauthorized, ResultRequest } from 'api/ResultRequest';
 import Validation from 'utils/Validation';
 import { NavigationProp, ParamListBase, useNavigation } from '@react-navigation/native';
 import { NavigationUrl } from 'navigation/NavigationUrl';
-import AuthenticatorContextApi from '../../AuthenticatorContextApi';
+import AuthenticatorContextApi from "context/AuthenticatorContextApi";
 
 const useSignIn = () => {
     const navigation: NavigationProp<ParamListBase> = useNavigation();
@@ -88,11 +88,11 @@ const useSignIn = () => {
             if(response instanceof Success) {
                 state.successService = true
                 console.log('Success ', response.data)
-                setSignIn(response.data as ResultRequest)
+                setSignIn(response.data as ResultRequest<any>)
                 navigation.navigate(NavigationUrl.CreditCardListScreen)
             } else if(response instanceof Unauthorized) {
                 state.errorEmail = "Por favor, verifique seu e-mail"
-                state.errorPassword= "Por favor, verifique sua senha"
+                state.errorPassword = "Por favor, verifique sua senha"
                 console.log('Unauthorized ', response)
             } else if(response instanceof Error) {
                 state.errorService = true

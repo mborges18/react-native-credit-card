@@ -1,6 +1,5 @@
-import { DimensionValue } from 'react-native';
 import styled from 'styled-components/native';
-import Theme from 'utils/AppTheme';
+import { ThemeDefaultApp } from 'utils/AppTheme';
 
 type ButtonDefaultStylesProps = {
   width?: number,
@@ -10,18 +9,18 @@ type ButtonDefaultStylesProps = {
 }
 
 const handlerColor = (props: ButtonDefaultStylesProps) => {
-  var color = Theme().colors.primary
+  var color = ThemeDefaultApp.colors.primary
   if(props.colorContainer!=null) {
     if(props.isDisabled) {
-      color = Theme().colors.onSurfaceVariant
+      color = ThemeDefaultApp.colors.onSurfaceVariant
     } else {
       color = props.colorContainer
     }
   } else {
     if(props.isDisabled) {
-      color = Theme().colors.onSurfaceVariant
+      color = ThemeDefaultApp.colors.onSurfaceVariant
     } else {
-      color = Theme().colors.primary
+      color = ThemeDefaultApp.colors.primary
     }
   }
   return color;
@@ -38,7 +37,7 @@ export const Button = styled.TouchableOpacity<ButtonDefaultStylesProps>`
 
 export const TextButton = styled.Text<ButtonDefaultStylesProps>`
   text-align: center; 
-  color:  ${({ colorText }) => colorText ?? Theme().colors.onPrimary };
+  color:  ${({ colorText }) => colorText ?? ThemeDefaultApp.colors.onPrimary };
   font-weight: bold;
 `;
 
@@ -49,12 +48,12 @@ export const ButtonOutline = styled.TouchableOpacity<ButtonDefaultStylesProps>`
   justify-content: center;
   border-radius: 8px;
   border-width: 1px;
-  border-color: ${(disabled) => disabled ? Theme().colors.primary : Theme().colors.onSurfaceVariant };
+  border-color: ${(disabled) => disabled ? ThemeDefaultApp.colors.primary : ThemeDefaultApp.colors.onSurfaceVariant };
   background-color: transparent;
 `;
 
 export const TextButtonOutline = styled.Text<ButtonDefaultStylesProps>`
   text-align: center; 
-  color: ${(disabled) => disabled ? Theme().colors.primary : Theme().colors.onSurfaceVariant };
+  color: ${(disabled) => disabled ? ThemeDefaultApp.colors.primary : ThemeDefaultApp.colors.onSurfaceVariant };
   font-weight: bold;
 `;

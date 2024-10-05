@@ -1,4 +1,5 @@
-import StyleCard, { CreditCardDefault } from "screens/creditcard/list/model/StyleCard";
+import { flagCard, flagCards } from "screens/CreditCard/List/model/CreditCardListModel";
+import StyleCard, { CreditCardDefault } from "screens/CreditCard/List/model/StyleCard";
 
 export default function Validation() {
 
@@ -48,54 +49,53 @@ export default function Validation() {
   const validateCCNum = (number: string) => {
   const ccCheckRegExp = new RegExp(/[^\d\s-]/);
   let isValid = !ccCheckRegExp.test(number);
-  const typeCreditCard = StyleCard()
 
   if (isValid) {
     const cardNumbersOnly = number.replace(/[\s-]/g, '');
     const cardNumberLength = cardNumbersOnly.length;
 
-    for (const item of Object.values(typeCreditCard)) {
+    for (const item of flagCards) {
       let lengthIsValid = false;
       let prefixIsValid = false;
       let prefixRegExp: RegExp;
 
-      switch (item) {
-        case typeCreditCard.MasterCard:
+      switch (item.name) {
+        case "MasterCard":
           lengthIsValid = cardNumberLength === 16;
           prefixRegExp = /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/;
           break;
 
-        case typeCreditCard.Visa:
+        case "Visa":
           lengthIsValid = cardNumberLength === 16;
           prefixRegExp = /^4[0-9]{15}?/;
           break;
 
-        case typeCreditCard.Amex:
+        case "Amex":
           lengthIsValid = cardNumberLength === 15;
           prefixRegExp = /^3[47][0-9]{13}$/;
           break;
 
-        case typeCreditCard.Discover:
+        case "Discover":
           lengthIsValid = cardNumberLength === 15 || cardNumberLength === 16;
           prefixRegExp = /^6(?:011|5[0-9]{2})[0-9]{12}$/;
           break;
 
-        case typeCreditCard.Diners:
+        case "Diners":
           lengthIsValid = cardNumberLength === 14;
           prefixRegExp = /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/;
           break;
 
-        case typeCreditCard.Jcb:
+        case "Jcb":
           lengthIsValid = cardNumberLength === 15 || cardNumberLength === 16;
           prefixRegExp = /^35[0-9]{14}$/;
           break;
 
-        case typeCreditCard.HipperCard:
+        case "HipperCard":
           lengthIsValid = cardNumberLength === 16;
           prefixRegExp = /^(606282\d{10}(\d{3})?)|(3841\d{12})|(637\d{13})$/;
           break;
 
-        case typeCreditCard.Elo:
+        case "Elo":
           lengthIsValid = cardNumberLength === 16;
           prefixRegExp = /^(4011|431274|438935|451416|457393|4576|457631|457632|504175|627780|636297|636368|636369|(6503[1-3])|(6500(3[5-9]|4[0-9]|5[0-1]))|(6504(0[5-9]|1[0-9]|2[0-9]|3[0-9]))|(650(48[5-9]|49[0-9]|50[0-9]|51[1-9]|52[0-9]|53[0-7]))|(6505(4[0-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-8]))|(6507(0[0-9]|1[0-8]))|(6507(2[0-7]))|(650(90[1-9]|91[0-9]|920))|(6516(5[2-9]|6[0-9]|7[0-9]))|(6550(0[0-9]|1[1-9]))|(6550(2[1-9]|3[0-9]|4[0-9]|5[0-8]))|(506(699|77[0-8]|7[1-6][0-9))|(509([0-9][0-9][0-9])))$/;
           break;
@@ -109,16 +109,16 @@ export default function Validation() {
 
       // Check if we found a correct one
       if (isValid) {
-        return item;
+        return item.name;
       }
     }
   }
 
   if (!isValid) {
-    return typeCreditCard.Undefined;
+    return "Undefined";
   }
 
-  return typeCreditCard.Undefined;
+  return "Undefined";
 }
 
   return {

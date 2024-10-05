@@ -17,12 +17,16 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import org.reactnative.maskedview.RNCMaskedViewPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.RNGestureHandlerPackage;
+// react-native-linear-gradient
+import com.BV.LinearGradient.LinearGradientPackage;
 // react-native-pager-view
 import com.reactnativepagerview.PagerViewPackage;
 // react-native-safe-area-context
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 // react-native-screens
 import com.swmansion.rnscreens.RNScreensPackage;
+// react-native-svg
+import com.horcrux.svg.SvgPackage;
 
 public class PackageList {
   private Application application;
@@ -71,9 +75,11 @@ public class PackageList {
       new VectorIconsPackage(),
       new RNCMaskedViewPackage(),
       new RNGestureHandlerPackage(),
+      new LinearGradientPackage(),
       new PagerViewPackage(),
       new SafeAreaContextPackage(),
-      new RNScreensPackage()
+      new RNScreensPackage(),
+      new SvgPackage()
     ));
   }
 }

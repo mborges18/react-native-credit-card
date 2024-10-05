@@ -1,16 +1,16 @@
 import React from 'react';
 import { View } from 'react-native';
-import TextField from 'components/textfield/TextField';
-import ButtonDefault from 'components/button/ButtonDefault';
 import { ScrollView, GestureHandlerRootView } from 'react-native-gesture-handler';
-import SwitchButton from 'components/switch/SwitchButton';
-import useSignIn from 'screens/authenticator/signin/hooks/useSignIn';
-import ButtonOutline from 'components/button/ButtonOutline';
-import HeaderWellCome from 'components/header/HeaderWellCome';
-import DialogError from 'components/dialog/DialogError';
-import SignUpModel from 'screens/authenticator/signup/model/SignUpModel';
 import { LockKeyOpen } from 'phosphor-react-native';
-import Theme from 'utils/AppTheme';
+import { ThemeDefaultApp } from 'utils/AppTheme';
+import TextField from 'components/TextField/TextField';
+import ButtonDefault from 'components/Button/ButtonDefault';
+import SwitchButton from 'components/Switch/SwitchButton';
+import ButtonOutline from 'components/Button/ButtonOutline';
+import HeaderWellCome from 'components/Header/HeaderWellCome';
+import DialogError from 'components/Dialog/DialogError';
+import useSignIn from 'screens/Authenticator/SignIn/hooks/useSignIn';
+import SignUpModel from 'screens/Authenticator/SignUp/model/SignUpModel';
 
 const SignInScreen = () => {
 
@@ -40,7 +40,7 @@ const SignInScreen = () => {
         
     <HeaderWellCome 
       title={'Acesso'} 
-      icon={<LockKeyOpen size={24} weight="fill" color={Theme().colors.text}/>} 
+      icon={<LockKeyOpen size={24} weight="fill" color={ThemeDefaultApp.colors.text}/>} 
       subTitle={'Seja bem vindo!'} 
       description={'Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.'}
     />
