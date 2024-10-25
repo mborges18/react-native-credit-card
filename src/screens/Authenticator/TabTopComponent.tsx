@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, Animated, TouchableOpacity, StyleSheet, useWindowDimensions } from 'react-native';
-import Theme from 'utils/AppTheme';
-import { AuthenticatorProps } from 'screens/authenticator/AuthenticatorProps';
+import { ThemeDefaultApp } from 'utils/AppTheme';
+
+export type AuthenticatorProps = {
+  onClick: (page: number) => void
+}
 
 export default function TabTopComponent(props: AuthenticatorProps) {
   const [isKeepConnected, setIsKeepConnected] = useState(false);
@@ -24,19 +27,18 @@ export default function TabTopComponent(props: AuthenticatorProps) {
     },
   };
 
-  const ThemeApp = Theme()
   return (
-    <View style={[styles.tab, { backgroundColor: ThemeApp.colors.primary }]}>
+    <View style={[styles.tab, { backgroundColor: ThemeDefaultApp.colors.primary }]}>
 
-      <Animated.View style={[styles.lamp, animatedStyles.lamp, { backgroundColor: ThemeApp.colors.background, }]} />
+      <Animated.View style={[styles.lamp, animatedStyles.lamp, { backgroundColor: ThemeDefaultApp.colors.background, }]} />
 
       <View style={{ flexDirection: 'row', height: 70, }}>
         <TouchableOpacity style={{ flex: 1, justifyContent: "center", }} onPress={() => { startAnimation(0) }}>
-          <Text style={{ textAlign: 'center', color: isKeepConnected ? ThemeApp.colors.background : ThemeApp.colors.onBackground }}>ACESSAR</Text>
+          <Text style={{ textAlign: 'center', color: isKeepConnected ? ThemeDefaultApp.colors.background : ThemeDefaultApp.colors.onBackground }}>ACESSAR</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={{ flex: 1, justifyContent: "center", }} onPress={() => { startAnimation(1) }}>
-          <Text style={{ textAlign: 'center', color: isKeepConnected ? ThemeApp.colors.onBackground : ThemeApp.colors.background }}>CADASTRAR</Text>
+          <Text style={{ textAlign: 'center', color: isKeepConnected ? ThemeDefaultApp.colors.onBackground : ThemeDefaultApp.colors.background }}>CADASTRAR</Text>
         </TouchableOpacity>
       </View>
     </View>

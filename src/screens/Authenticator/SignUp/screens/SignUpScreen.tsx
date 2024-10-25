@@ -1,15 +1,15 @@
 import React from "react";
 import { View } from "react-native";
-import TextField from "components/textfield/TextField";
-import ButtonDefault from "components/button/ButtonDefault";
+import TextField from "components/TextField/TextField";
+import ButtonDefault from "components/Button/ButtonDefault";
 import { ScrollView, GestureHandlerRootView } from "react-native-gesture-handler";
-import useSignUp from "screens/authenticator/signup/hooks/useSignUp";
-import MaskType from "components/textfield/MaskType";
-import HeaderWellCome from "components/header/HeaderWellCome";
-import DialogError from "components/dialog/DialogError";
+import useSignUp from "screens/Authenticator/SignUp/hooks/useSignUp";
+import MaskType from "components/TextField/MaskType";
+import HeaderWellCome from "components/Header/HeaderWellCome";
+import DialogError from "components/Dialog/DialogError";
 import * as S from "./styles"
 import { ClipboardText } from 'phosphor-react-native';
-import Theme from 'utils/AppTheme';
+import { ThemeDefaultApp } from "utils/AppTheme";
 
 const SignUpScreen = () => {
 
@@ -40,7 +40,7 @@ const SignUpScreen = () => {
 
           <HeaderWellCome
             title={'Cadastro'}
-            icon={<ClipboardText size={24} weight="fill" color={Theme().colors.text}/>} 
+            icon={<ClipboardText size={24} weight="fill" color={ThemeDefaultApp.colors.text}/>} 
             subTitle={'Seja bem vindo!'}
             description={'Com a sua carteira de cartões de crádito você pode fazer suas transações de qualque lugar.'}
           />

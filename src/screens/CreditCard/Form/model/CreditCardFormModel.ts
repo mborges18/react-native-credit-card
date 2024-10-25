@@ -1,4 +1,4 @@
-import { CreditCardDefault } from "screens/creditcard/list/model/StyleCard";
+import { flagCard } from "screens/CreditCard/List/model/CreditCardListModel";
 
 export default interface CreditCardFormModel {
     ROWID: string,
@@ -7,7 +7,6 @@ export default interface CreditCardFormModel {
     nameUser: string,
     dateExpire: string,
     cvv: string,
-    flag: string,
+    flag: flagCard,
     status: string,
-    styleCard: CreditCardDefault
 }

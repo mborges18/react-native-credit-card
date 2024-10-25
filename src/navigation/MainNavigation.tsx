@@ -1,29 +1,22 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-import AuthenticatorScreen from 'screens/authenticator/AuthenticatorScreen';
-import CreditCardListScreen from 'screens/creditcard/list/screens/CreditCardListScreen'
-import CreditCardFormScreen from 'screens/creditcard/form/screens/CreditCardFormScreen';
-import { SafeAreaView, StatusBar } from 'react-native';
-import Theme from 'utils/AppTheme';
-import { AuthenticatorProvider } from 'screens/authenticator/AuthenticatorContextApi';
+import AuthenticatorScreen from 'screens/Authenticator/AuthenticatorScreen';
+import CreditCardListScreen from 'screens/CreditCard/List/screens/CreditCardListScreen'
+import CreditCardFormScreen from 'screens/CreditCard/Form/screens/CreditCardFormScreen';
+import { SafeAreaView } from 'react-native';
+import { AuthenticatorProvider } from 'context/AuthenticatorContextApi';
 import { NavigationUrl } from 'navigation/NavigationUrl';
-import { LogBox } from 'react-native';
+import StatusBarApp from 'components/StatusBar/StatusBar';
 
 const Stack = createNativeStackNavigator();
 
 const MainNavigation = () => {
-  LogBox.ignoreLogs([
-    'Non-serializable values were found in the navigation state',
-  ]);
-  const ThemeApp = Theme()
 
   return (
     <>
     <SafeAreaView style={{ flex: 1 }}>
-    <StatusBar animated={true} barStyle={ ThemeApp.dark ? "light-content" : "dark-content" } backgroundColor={
-      ThemeApp.dark ? ThemeApp.colors.onBackground : ThemeApp.colors.background 
-      } />
+    <StatusBarApp />
       <NavigationContainer>
         <AuthenticatorProvider>
           <Stack.Navigator initialRouteName={NavigationUrl.AuthenticationScreen}>
@@ -34,20 +27,12 @@ const MainNavigation = () => {
             />
             <Stack.Screen
                 name={NavigationUrl.CreditCardListScreen}
-                options={{
-                    title: 'CreditCard',
-                    headerTitleStyle: { color: ThemeApp.colors.background }, 
-                    headerStyle: { backgroundColor: ThemeApp.colors.primary },
-                }}
+                options={{ headerShown: false }}
                 component={CreditCardListScreen}
             />
             <Stack.Screen
                 name={NavigationUrl.CreditCardFormScreen}
-                options={{
-                    title: 'CreditCard',
-                    headerTitleStyle: { color: ThemeApp.colors.background }, 
-                    headerStyle: { backgroundColor: ThemeApp.colors.primary },
-                }}
+                options={{ headerShown: false }}
                 component={CreditCardFormScreen}
             />
           </Stack.Navigator>

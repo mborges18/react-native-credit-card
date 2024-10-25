@@ -1,5 +1,5 @@
 import { ActivityIndicator } from 'react-native';
-import Theme from 'utils/AppTheme';
+import { ThemeDefaultApp } from 'utils/AppTheme';
 import * as S from "./styles";
 
 type ButtonOutlineProps = {
@@ -15,7 +15,7 @@ export default function ButtonOutline(
   const HandlerLoading = () => {
     return(
       props.isLoading
-      ? <ActivityIndicator size="large" color={ Theme().colors.onPrimary } /> 
+      ? <ActivityIndicator size="large" color={ThemeDefaultApp.colors.onPrimary} /> 
       : <S.TextButtonOutline>{ props.text }</S.TextButtonOutline>
     );
   }

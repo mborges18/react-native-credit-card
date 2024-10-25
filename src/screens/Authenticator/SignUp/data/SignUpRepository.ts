@@ -1,6 +1,6 @@
 import { Failure, Error, Success, Exists } from 'api/ResultRequest'
-import SignUpModel from 'screens/authenticator/signup/model/SignUpModel'
-import { ToRequest } from 'screens/authenticator/signup/data/SignUpMapper'
+import SignUpModel from 'screens/Authenticator/SignUp/model/SignUpModel'
+import { ToRequest } from 'screens/Authenticator/SignUp/data/SignUpMapper'
 import apiService from 'api/Api'
 
 export default function SignUpRespository() {

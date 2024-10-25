@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import PagerView from 'react-native-pager-view';
 import { View } from 'react-native';
-import TabTopComponent from 'screens/authenticator/TabTopComponent';
-import SignInScreen from 'screens/authenticator/signin/screens/SignInScreen';
-import SignUpScreen from 'screens/authenticator/signup/screens/SignUpScreen';
-import Theme from 'utils/AppTheme';
+import TabTopComponent from 'screens/Authenticator/TabTopComponent';
+import SignInScreen from 'screens/Authenticator/SignIn/screens/SignInScreen';
+import SignUpScreen from 'screens/Authenticator/SignUp/screens/SignUpScreen';
+import { ThemeDefaultApp } from 'utils/AppTheme';
 
 const AuthenticatorScreen = () => {
   return <ViewPagerComponent />;
@@ -12,10 +12,8 @@ const AuthenticatorScreen = () => {
 
 const ViewPagerComponent = () => {
   const pageRef = useRef<PagerView>(null)
-  const ThemeApp = Theme()
-
   return (
-    <View style={{ backgroundColor: ThemeApp.colors.background, flex: 1, }}>
+    <View style={{ backgroundColor: ThemeDefaultApp.colors.background, flex: 1, }}>
       <TabTopComponent onClick={(page: number) => {
         pageRef.current?.setPage(page)
       }} />

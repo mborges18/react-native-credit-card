@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import StyleCard, { CreditCardDefault } from "screens/creditcard/list/model/StyleCard";
+import { flagCard } from "screens/CreditCard/List/model/CreditCardListModel";
 import Validation from "utils/Validation";
 
 interface InputState {
@@ -14,20 +14,19 @@ const useInputNumber = () => {
         isValidData: false,
         isVisibleField: true,
     });
-    const styleCard = StyleCard()
     const maskNumber = "XXXX XXXX XXXX XXXX"
 
     const valueRefMasked = useRef<any>(maskNumber);
     const valueDataMasked  = valueRefMasked.current
 
-    const typeCardRef = useRef<CreditCardDefault>(styleCard.Undefined);
+    const typeCardRef = useRef<flagCard>("Undefined");
     const typeCardData  = typeCardRef.current
 
     const valueRef = useRef<any>("");
     const valueData = valueRef.current
 
     const onValue = (value: string) => {
-        valueData.current = value
+        valueRef.current = value
         let text = value + maskNumber.substring(0 + value.length)
         valueRefMasked.current = text
         typeCardRef.current = Validation().validateCCNum(value)
@@ -39,7 +38,7 @@ const useInputNumber = () => {
 
     const onValidateData = (value: string) => {
         if(value.length==19){
-            if(typeCardRef.current==styleCard.Undefined){
+            if(typeCardRef.current == "Undefined"){
                 state.isValidData = false
                 state.errorData = "Cartão desconhecido"
             } else {

@@ -1,9 +1,9 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign'
-import Theme, { colorInfo } from 'utils/AppTheme';
-import ButtonDefault from 'components/button/ButtonDefault';
-import ModalDefault from 'components/dialog/ModalDefault';
-import * as S from 'components/dialog/styles';
+import { ThemeDefaultApp, colorInfo } from 'utils/AppTheme';
+import ButtonDefault from 'components/Button/ButtonDefault';
+import ModalDefault from 'components/Dialog/ModalDefault';
+import * as S from './styles';
 import { DialogProps } from './DialogProps';
 
 const DialogConfirm = (props: DialogProps) => {
@@ -11,7 +11,7 @@ const DialogConfirm = (props: DialogProps) => {
   return (
   <ModalDefault dialog={<>
     <S.HeaderDialog colorContainer={colorInfo}>
-        <Icon name='questioncircleo' size={38} color={Theme().colors.background} />
+        <Icon name='questioncircleo' size={38} color={ThemeDefaultApp.colors.background} />
     </S.HeaderDialog>
     <S.ContainerDialog>
       <S.TitleDialog>{props.title}</S.TitleDialog>
@@ -31,8 +31,8 @@ const DialogConfirm = (props: DialogProps) => {
         text={'Confirmar'}
         isLoading={false}
         isDisabled={false}
-        colorContainer={Theme().colors.onText}
-        colorText={Theme().colors.text}
+        colorContainer={ThemeDefaultApp.colors.onText}
+        colorText={ThemeDefaultApp.colors.text}
         clickListener={
           props.onClickConfirm
         } 

@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-export const SafeAreaView = styled.SafeAreaView`
+export const Wrapper = styled.View`
   flex: 1;
 `;
 
